@@ -14,7 +14,7 @@ class MessageRole(str, enum.Enum):
 class ConversationHistory(Base):
     __tablename__ = "conversation_history"
 
-    id         = Column(Integer, primary_key=True, autoincrement=True, unsigned=True)
+    id         = Column(Integer, primary_key=True, autoincrement=True)
     user_id    = Column(Integer, nullable=False, index=True)
     session_id = Column(String(64), nullable=False, index=True)  # UUID
     role       = Column(Enum(MessageRole), nullable=False)

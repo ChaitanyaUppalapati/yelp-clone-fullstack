@@ -10,7 +10,7 @@ from app.database import Base
 class Restaurant(Base):
     __tablename__ = "restaurants"
 
-    id                  = Column(Integer, primary_key=True, autoincrement=True, unsigned=True)
+    id                  = Column(Integer, primary_key=True, autoincrement=True)
     owner_id            = Column(Integer, nullable=False, index=True)
     added_by            = Column(Integer, nullable=False)
     name                = Column(String(255), nullable=False)

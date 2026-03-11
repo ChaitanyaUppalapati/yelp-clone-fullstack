@@ -7,7 +7,7 @@ from app.database import Base
 class Review(Base):
     __tablename__ = "reviews"
 
-    id            = Column(Integer, primary_key=True, autoincrement=True, unsigned=True)
+    id            = Column(Integer, primary_key=True, autoincrement=True)
     user_id       = Column(Integer, nullable=False, index=True)
     restaurant_id = Column(Integer, nullable=False, index=True)
     rating        = Column(SmallInteger, nullable=False)   # 1-5

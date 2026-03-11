@@ -16,7 +16,7 @@ class UserRole(str, enum.Enum):
 class User(Base):
     __tablename__ = "users"
 
-    id              = Column(Integer, primary_key=True, autoincrement=True, unsigned=True)
+    id              = Column(Integer, primary_key=True, autoincrement=True)
     role            = Column(Enum(UserRole), nullable=False, default=UserRole.user)
     name            = Column(String(120), nullable=False)
     email           = Column(String(255), nullable=False, unique=True, index=True)
@@ -59,7 +59,7 @@ class SortPreference(str, enum.Enum):
 class UserPreferences(Base):
     __tablename__ = "user_preferences"
 
-    id                    = Column(Integer, primary_key=True, autoincrement=True, unsigned=True)
+    id                    = Column(Integer, primary_key=True, autoincrement=True)
     user_id               = Column(Integer, nullable=False, unique=True, index=True)
     cuisine_preferences   = Column(JSON,    nullable=True)
     price_range           = Column(Integer, nullable=True)   # 1-4
