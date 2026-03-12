@@ -1,6 +1,6 @@
 from sqlalchemy import (
     Column, Integer, String, Text, JSON, Numeric,
-    TIMESTAMP, SmallInteger, Boolean, func
+    TIMESTAMP, SmallInteger, Boolean, func, ForeignKey
 )
 from sqlalchemy.orm import relationship
 
@@ -11,8 +11,8 @@ class Restaurant(Base):
     __tablename__ = "restaurants"
 
     id                  = Column(Integer, primary_key=True, autoincrement=True)
-    owner_id            = Column(Integer, nullable=False, index=True)
-    added_by            = Column(Integer, nullable=False)
+    owner_id            = Column(Integer, ForeignKey("users.id"), nullable=False, index=True)
+    added_by            = Column(Integer, ForeignKey("users.id"), nullable=False)
     name                = Column(String(255), nullable=False)
     cuisine_type        = Column(String(100), nullable=True, index=True)
     description         = Column(Text,        nullable=True)

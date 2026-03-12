@@ -1,7 +1,7 @@
 import enum
 from sqlalchemy import (
     Column, Integer, String, Text, Enum, JSON,
-    TIMESTAMP, func
+    TIMESTAMP, func, ForeignKey
 )
 from sqlalchemy.orm import relationship
 
@@ -60,7 +60,7 @@ class UserPreferences(Base):
     __tablename__ = "user_preferences"
 
     id                    = Column(Integer, primary_key=True, autoincrement=True)
-    user_id               = Column(Integer, nullable=False, unique=True, index=True)
+    user_id               = Column(Integer, ForeignKey("users.id"), nullable=False, unique=True, index=True)
     cuisine_preferences   = Column(JSON,    nullable=True)
     price_range           = Column(Integer, nullable=True)   # 1-4
     preferred_locations   = Column(JSON,    nullable=True)

@@ -1,5 +1,5 @@
 import enum
-from sqlalchemy import Column, Integer, String, Text, Enum, TIMESTAMP, func
+from sqlalchemy import Column, Integer, String, Text, Enum, TIMESTAMP, func, ForeignKey
 from sqlalchemy.orm import relationship
 
 from app.database import Base
@@ -15,7 +15,7 @@ class ConversationHistory(Base):
     __tablename__ = "conversation_history"
 
     id         = Column(Integer, primary_key=True, autoincrement=True)
-    user_id    = Column(Integer, nullable=False, index=True)
+    user_id    = Column(Integer, ForeignKey("users.id"), nullable=False, index=True)
     session_id = Column(String(64), nullable=False, index=True)  # UUID
     role       = Column(Enum(MessageRole), nullable=False)
     message    = Column(Text, nullable=False)

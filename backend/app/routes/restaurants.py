@@ -1,5 +1,6 @@
 from fastapi import APIRouter, Depends, HTTPException, Query, status
 from sqlalchemy.orm import Session
+from sqlalchemy import or_
 from typing import Optional
 
 from app.database import get_db
@@ -12,6 +13,7 @@ router = APIRouter()
 
 @router.get("/", response_model=list[RestaurantListOut])
 def list_restaurants(
+    search:      Optional[str] = Query(None),
     city:        Optional[str] = Query(None),
     cuisine:     Optional[str] = Query(None),
     pricing_tier: Optional[int] = Query(None, ge=1, le=4),
@@ -21,6 +23,13 @@ def list_restaurants(
 ):
     """List restaurants with optional filters."""
     q = db.query(Restaurant).filter(Restaurant.is_active == True)
+    if search:
+        q = q.filter(
+            or_(
+                Restaurant.name.ilike(f"%{search}%"),
+                Restaurant.description.ilike(f"%{search}%")
+            )
+        )
     if city:
         q = q.filter(Restaurant.city.ilike(f"%{city}%"))
     if cuisine:
