@@ -1,6 +1,6 @@
 from __future__ import annotations
 from datetime import datetime
-from typing import Any
+from typing import Any, Literal
 from pydantic import BaseModel, EmailStr, Field
 
 
@@ -8,10 +8,10 @@ from pydantic import BaseModel, EmailStr, Field
 # Auth
 # ---------------------------------------------------------------------------
 class UserCreate(BaseModel):
-    name:     str       = Field(..., min_length=1, max_length=120)
+    name:     str                    = Field(..., min_length=1, max_length=120)
     email:    EmailStr
-    password: str       = Field(..., min_length=8)
-    role:     str       = "user"  # "user" | "owner"
+    password: str                    = Field(..., min_length=8)
+    role:     Literal["user", "owner"] = "user"
     phone:    str | None = None
     city:     str | None = None
     state:    str | None = None

@@ -1,8 +1,8 @@
 from __future__ import annotations
 from datetime import datetime
 from decimal import Decimal
-from typing import Any
 from pydantic import BaseModel, Field
+from app.schemas.review import ReviewOut
 
 
 class RestaurantCreate(BaseModel):
@@ -72,6 +72,7 @@ class RestaurantOut(BaseModel):
     is_active:           bool
     created_at:          datetime
     updated_at:          datetime
+    reviews:             list[ReviewOut] = []
 
     model_config = {"from_attributes": True}
 
