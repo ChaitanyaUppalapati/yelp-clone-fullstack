@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import api from '../services/api';
 import SearchBar from '../components/SearchBar';
 import RestaurantCard from '../components/RestaurantCard';
+import { UtensilsCrossed } from 'lucide-react';
 
 export default function ExplorePage() {
   const [restaurants, setRestaurants] = useState([]);
@@ -14,6 +15,7 @@ export default function ExplorePage() {
     setError('');
     try {
       const params = {};
+      if (filters.keyword) params.q = filters.keyword;
       if (filters.cuisine) params.cuisine = filters.cuisine;
       if (filters.city) params.city = filters.city;
       if (filters.pricing_tier) params.pricing_tier = filters.pricing_tier;
@@ -53,7 +55,7 @@ export default function ExplorePage() {
           </div>
         ) : restaurants.length === 0 ? (
           <div className="empty-state">
-            <div className="empty-state-icon">🍽️</div>
+            <div className="empty-state-icon"><UtensilsCrossed size={48} /></div>
             <h3>No restaurants found</h3>
             <p>Try adjusting your search filters</p>
           </div>

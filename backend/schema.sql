@@ -293,3 +293,199 @@ VALUES
  '(415) 826-7000', 'https://flourandwater.com',
  '{"mon":"17:30-22:00","tue":"17:30-22:00","wed":"17:30-22:00","thu":"17:30-22:00","fri":"17:30-23:00","sat":"17:00-23:00","sun":"17:00-22:00"}',
  3, '["reservations","bar","outdoor_seating"]', 4.60, 3300);
+
+-- =============================================================
+-- SAMPLE DATA — Restaurants from across the US
+-- =============================================================
+INSERT INTO restaurants
+    (owner_id, added_by, name, cuisine_type, description,
+     address_line, city, state, zip_code, latitude, longitude,
+     phone, website,
+     hours_of_operation, pricing_tier, amenities,
+     avg_rating, review_count)
+VALUES
+-- New York, NY
+(1, 1, 'Carbone', 'Italian', 'Old-school Italian-American red-sauce joint with a modern fine-dining twist in Greenwich Village.',
+ '181 Thompson St', 'New York', 'NY', '10012', 40.7275, -74.0005,
+ '(212) 254-3000', 'https://carbonenewyork.com',
+ '{"mon":"17:30-23:00","tue":"17:30-23:00","wed":"17:30-23:00","thu":"17:30-23:00","fri":"17:30-23:30","sat":"17:30-23:30","sun":"17:30-22:00"}',
+ 4, '["reservations","bar","wheelchair_accessible"]', 4.60, 0),
+
+(1, 1, 'Katz''s Delicatessen', 'American', 'Legendary Lower East Side deli serving pastrami and corned beef sandwiches since 1888.',
+ '205 E Houston St', 'New York', 'NY', '10002', 40.7223, -73.9873,
+ '(212) 254-2246', 'https://katzsdelicatessen.com',
+ '{"mon":"08:00-22:45","tue":"08:00-22:45","wed":"08:00-22:45","thu":"08:00-22:45","fri":"08:00-02:45","sat":"08:00-02:45","sun":"08:00-22:45"}',
+ 2, '["takeout","wheelchair_accessible"]', 4.50, 0),
+
+(1, 1, 'Le Bernardin', 'French', 'Michelin three-star seafood temple from chef Éric Ripert in Midtown Manhattan.',
+ '155 W 51st St', 'New York', 'NY', '10019', 40.7617, -73.9814,
+ '(212) 554-1515', 'https://le-bernardin.com',
+ '{"mon":"12:00-14:30","tue":"12:00-14:30","wed":"12:00-14:30","thu":"12:00-14:30","fri":"12:00-14:30","sat":"17:00-22:30","sun":"closed"}',
+ 4, '["reservations","bar","private_dining"]', 4.80, 0),
+
+(1, 1, 'Joe''s Pizza', 'American', 'Iconic Greenwich Village slice shop serving classic New York thin-crust pizza since 1975.',
+ '7 Carmine St', 'New York', 'NY', '10014', 40.7303, -74.0025,
+ '(212) 366-1182', 'https://joespizzanyc.com',
+ '{"mon":"10:00-04:00","tue":"10:00-04:00","wed":"10:00-04:00","thu":"10:00-04:00","fri":"10:00-05:00","sat":"10:00-05:00","sun":"10:00-04:00"}',
+ 1, '["takeout","wheelchair_accessible"]', 4.40, 0),
+
+-- Chicago, IL
+(1, 1, 'Alinea', 'American', 'Grant Achatz''s avant-garde tasting menu experience — consistently rated among the world''s best.',
+ '1723 N Halsted St', 'Chicago', 'IL', '60614', 41.9148, -87.6487,
+ '(312) 867-0110', 'https://alinearestaurant.com',
+ '{"mon":"closed","tue":"closed","wed":"17:00-21:00","thu":"17:00-21:00","fri":"17:00-21:00","sat":"17:00-21:00","sun":"closed"}',
+ 4, '["reservations"]', 4.90, 0),
+
+(1, 1, 'Lou Malnati''s Pizzeria', 'American', 'Chicago''s beloved deep-dish institution, serving buttery crusts and chunky tomato sauce since 1971.',
+ '439 N Wells St', 'Chicago', 'IL', '60654', 41.8899, -87.6340,
+ '(312) 828-9800', 'https://loumalnatis.com',
+ '{"mon":"11:00-22:00","tue":"11:00-22:00","wed":"11:00-22:00","thu":"11:00-22:00","fri":"11:00-23:00","sat":"11:00-23:00","sun":"12:00-22:00"}',
+ 2, '["takeout","delivery","wheelchair_accessible"]', 4.50, 0),
+
+(1, 1, 'Girl & the Goat', 'American', 'Stephanie Izard''s West Loop flagship with bold shared plates and wood-fired flavors.',
+ '800 W Randolph St', 'Chicago', 'IL', '60607', 41.8843, -87.6477,
+ '(312) 492-6262', 'https://girlandthegoat.com',
+ '{"mon":"16:00-22:00","tue":"16:00-22:00","wed":"16:00-22:00","thu":"16:00-22:00","fri":"16:00-23:00","sat":"16:00-23:00","sun":"closed"}',
+ 3, '["reservations","bar","outdoor_seating"]', 4.50, 0),
+
+-- Austin, TX
+(1, 1, 'Franklin Barbecue', 'American', 'James Beard Award-winning pitmaster Aaron Franklin''s legendary smoked brisket.',
+ '900 E 11th St', 'Austin', 'TX', '78702', 30.2678, -97.7298,
+ '(512) 653-1187', 'https://franklinbbq.com',
+ '{"mon":"closed","tue":"11:00-15:00","wed":"11:00-15:00","thu":"11:00-15:00","fri":"11:00-15:00","sat":"11:00-15:00","sun":"11:00-15:00"}',
+ 2, '["outdoor_seating","takeout"]', 4.80, 0),
+
+(1, 1, 'Uchi', 'Japanese', 'James Beard-winning sushi and Japanese small plates with creative Austin flair.',
+ '801 S Lamar Blvd', 'Austin', 'TX', '78704', 30.2537, -97.7682,
+ '(512) 916-4808', 'https://uchiaustin.com',
+ '{"mon":"17:00-22:00","tue":"17:00-22:00","wed":"17:00-22:00","thu":"17:00-22:00","fri":"17:00-23:00","sat":"17:00-23:00","sun":"17:00-22:00"}',
+ 3, '["reservations","bar"]', 4.60, 0),
+
+-- Seattle, WA
+(1, 1, 'Canlis', 'American', 'Seattle''s storied fine-dining landmark with sweeping Lake Union views since 1950.',
+ '2576 Aurora Ave N', 'Seattle', 'WA', '98109', 47.6418, -122.3466,
+ '(206) 283-3313', 'https://canlis.com',
+ '{"mon":"closed","tue":"17:30-22:00","wed":"17:30-22:00","thu":"17:30-22:00","fri":"17:30-22:00","sat":"17:00-22:00","sun":"closed"}',
+ 4, '["reservations","bar","valet_parking"]', 4.70, 0),
+
+(1, 1, 'Pike Place Chowder', 'American', 'Award-winning chowders steps from the famous Pike Place Market.',
+ '1530 Post Alley', 'Seattle', 'WA', '98101', 47.6093, -122.3421,
+ '(206) 267-2537', 'https://pikeplacebowl.com',
+ '{"mon":"10:00-17:00","tue":"10:00-17:00","wed":"10:00-17:00","thu":"10:00-17:00","fri":"10:00-17:00","sat":"09:00-17:00","sun":"09:00-17:00"}',
+ 1, '["takeout","outdoor_seating"]', 4.50, 0),
+
+(1, 1, 'Nue', 'Mediterranean', 'Globally inspired small plates highlighting street foods from over 100 countries.',
+ '1519 14th Ave', 'Seattle', 'WA', '98122', 47.6136, -122.3175,
+ '(206) 257-0312', 'https://nueseattle.com',
+ '{"mon":"16:00-22:00","tue":"16:00-22:00","wed":"16:00-22:00","thu":"16:00-22:00","fri":"16:00-23:00","sat":"16:00-23:00","sun":"16:00-21:00"}',
+ 2, '["bar","outdoor_seating","reservations"]', 4.30, 0),
+
+-- Miami, FL
+(1, 1, 'Versailles Restaurant', 'Cuban', 'Miami''s most famous Cuban restaurant, a Little Havana institution since 1971.',
+ '3555 SW 8th St', 'Miami', 'FL', '33135', 25.7653, -80.2499,
+ '(305) 444-0240', 'https://versaillesrestaurant.com',
+ '{"mon":"08:00-01:00","tue":"08:00-01:00","wed":"08:00-01:00","thu":"08:00-01:00","fri":"08:00-02:30","sat":"08:00-02:30","sun":"09:00-01:00"}',
+ 2, '["outdoor_seating","takeout","wheelchair_accessible"]', 4.40, 0),
+
+(1, 1, 'Zuma Miami', 'Japanese', 'Sleek izakaya-inspired rooftop dining with panoramic Brickell skyline views.',
+ '270 Biscayne Blvd Way', 'Miami', 'FL', '33131', 25.7677, -80.1884,
+ '(305) 577-0277', 'https://zumarestaurant.com',
+ '{"mon":"12:00-15:00","tue":"12:00-15:00","wed":"12:00-15:00","thu":"12:00-15:00","fri":"12:00-16:00","sat":"12:30-16:00","sun":"12:30-15:30"}',
+ 4, '["reservations","bar","outdoor_seating","valet_parking"]', 4.50, 0),
+
+-- New Orleans, LA
+(1, 1, 'Dooky Chase''s Restaurant', 'American', 'Historic Creole institution in the Tremé neighborhood, a civil rights landmark since 1941.',
+ '2301 Orleans Ave', 'New Orleans', 'LA', '70119', 29.9727, -90.0791,
+ '(504) 821-0600', 'https://dookychaserestaurant.com',
+ '{"mon":"closed","tue":"11:00-15:00","wed":"11:00-15:00","thu":"11:00-15:00","fri":"11:00-15:00","sat":"closed","sun":"closed"}',
+ 2, '["reservations","wheelchair_accessible"]', 4.50, 0),
+
+(1, 1, 'Commander''s Palace', 'American', 'Iconic Garden District Creole landmark celebrated for jazz brunch and Creole classics.',
+ '1403 Washington Ave', 'New Orleans', 'LA', '70130', 29.9285, -90.0847,
+ '(504) 899-8221', 'https://commanderspalace.com',
+ '{"mon":"11:30-21:00","tue":"11:30-21:00","wed":"11:30-21:00","thu":"11:30-21:00","fri":"11:30-22:00","sat":"10:00-22:00","sun":"10:00-21:00"}',
+ 4, '["reservations","bar","outdoor_seating","private_dining"]', 4.60, 0),
+
+-- Boston, MA
+(1, 1, 'Neptune Oyster', 'American', 'Tiny North End seafood bar famous for buttery lobster rolls and impeccably fresh oysters.',
+ '63 Salem St', 'Boston', 'MA', '02113', 42.3639, -71.0554,
+ '(617) 742-3474', 'https://neptuneoyster.com',
+ '{"mon":"11:30-22:00","tue":"11:30-22:00","wed":"11:30-22:00","thu":"11:30-22:00","fri":"11:30-23:00","sat":"11:30-23:00","sun":"11:30-22:00"}',
+ 3, '["bar","outdoor_seating"]', 4.60, 0),
+
+(1, 1, 'O Ya', 'Japanese', 'Intimate omakase with Japanese minimalism and New England ingredients in Downtown Boston.',
+ '9 East St', 'Boston', 'MA', '02111', 42.3524, -71.0567,
+ '(617) 654-9900', 'https://oyarestaurantboston.com',
+ '{"mon":"closed","tue":"17:30-21:30","wed":"17:30-21:30","thu":"17:30-21:30","fri":"17:30-22:00","sat":"17:30-22:00","sun":"closed"}',
+ 4, '["reservations","bar"]', 4.70, 0),
+
+-- Portland, OR
+(1, 1, 'Le Pigeon', 'French', 'Gabriel Rucker''s James Beard-winning bistro with inventive French-American cooking.',
+ '738 E Burnside St', 'Portland', 'OR', '97214', 45.5233, -122.6528,
+ '(503) 546-8796', 'https://lepigeon.com',
+ '{"mon":"closed","tue":"17:00-22:00","wed":"17:00-22:00","thu":"17:00-22:00","fri":"17:00-22:00","sat":"17:00-22:00","sun":"17:00-22:00"}',
+ 3, '["bar","reservations"]', 4.60, 0),
+
+(1, 1, 'Pok Pok', 'Thai', 'Andy Ricker''s Northern Thai street-food landmark that sparked a national obsession with Thai cooking.',
+ '3226 SE Division St', 'Portland', 'OR', '97202', 45.5043, -122.6320,
+ '(503) 232-1387', 'https://pokpokpdx.com',
+ '{"mon":"closed","tue":"17:00-22:00","wed":"17:00-22:00","thu":"17:00-22:00","fri":"17:00-22:00","sat":"17:00-22:00","sun":"17:00-22:00"}',
+ 2, '["outdoor_seating","bar"]', 4.40, 0),
+
+-- Nashville, TN
+(1, 1, 'Husk Nashville', 'American', 'Sean Brock''s temple to Southern cooking housed in a stunning Victorian mansion.',
+ '37 Rutledge St', 'Nashville', 'TN', '37210', 36.1544, -86.7743,
+ '(615) 256-6565', 'https://husknashville.com',
+ '{"mon":"17:00-22:00","tue":"17:00-22:00","wed":"17:00-22:00","thu":"17:00-22:00","fri":"11:30-22:30","sat":"10:00-22:30","sun":"10:00-21:00"}',
+ 3, '["reservations","bar","outdoor_seating","wheelchair_accessible"]', 4.50, 0),
+
+(1, 1, 'Prince''s Hot Chicken', 'American', 'The birthplace of Nashville hot chicken — fiery, crispy, iconic since the 1930s.',
+ '123 Ewing Dr', 'Nashville', 'TN', '37207', 36.2009, -86.7621,
+ '(615) 226-9442', 'https://princeshotchicken.com',
+ '{"mon":"closed","tue":"closed","wed":"12:00-22:00","thu":"12:00-22:00","fri":"12:00-04:00","sat":"12:00-04:00","sun":"12:00-22:00"}',
+ 1, '["takeout"]', 4.40, 0),
+
+-- Denver, CO
+(1, 1, 'Snooze, an A.M. Eatery', 'American', 'Wildly creative pancake flights and inventive breakfast cocktails at this beloved Denver brunch spot.',
+ '2262 Larimer St', 'Denver', 'CO', '80205', 39.7545, -104.9836,
+ '(303) 297-0700', 'https://snoozeeatery.com',
+ '{"mon":"06:30-14:30","tue":"06:30-14:30","wed":"06:30-14:30","thu":"06:30-14:30","fri":"06:30-14:30","sat":"06:30-14:30","sun":"06:30-14:30"}',
+ 2, '["outdoor_seating","wheelchair_accessible"]', 4.30, 0),
+
+(1, 1, 'Fruition Restaurant', 'American', 'Chef Alex Seidel''s intimate farm-to-table gem in Denver''s Cherry Creek neighborhood.',
+ '1313 E 6th Ave', 'Denver', 'CO', '80218', 39.7268, -104.9697,
+ '(303) 831-1962', 'https://fruitionrestaurant.com',
+ '{"mon":"closed","tue":"17:00-21:30","wed":"17:00-21:30","thu":"17:00-21:30","fri":"17:00-22:00","sat":"17:00-22:00","sun":"closed"}',
+ 3, '["reservations","bar"]', 4.50, 0),
+
+-- Los Angeles, CA
+(1, 1, 'Nobu Los Angeles', 'Japanese', 'Nobu Matsuhisa''s flagship Japanese-Peruvian fusion — the restaurant that started a global empire.',
+ '903 N La Cienega Blvd', 'Los Angeles', 'CA', '90069', 34.0803, -118.3726,
+ '(310) 657-5711', 'https://nobumatsuhisa.com',
+ '{"mon":"17:45-22:15","tue":"17:45-22:15","wed":"17:45-22:15","thu":"17:45-22:15","fri":"17:45-23:00","sat":"17:45-23:00","sun":"17:45-22:15"}',
+ 4, '["reservations","bar"]', 4.50, 0),
+
+(1, 1, 'Bestia', 'Italian', 'Rustic Italian charcuterie, hand-rolled pasta, and wood-roasted meats in the Arts District.',
+ '2121 E 7th Pl', 'Los Angeles', 'CA', '90021', 34.0361, -118.2258,
+ '(213) 514-5724', 'https://bestiala.com',
+ '{"mon":"17:30-23:00","tue":"17:30-23:00","wed":"17:30-23:00","thu":"17:30-23:00","fri":"17:30-00:00","sat":"17:30-00:00","sun":"17:30-23:00"}',
+ 3, '["reservations","bar","outdoor_seating"]', 4.60, 0),
+
+(1, 1, 'Gjusta', 'Mediterranean', 'All-day Venice Beach deli and bakery with extraordinary house-cured meats and pastries.',
+ '320 Sunset Ave', 'Los Angeles', 'CA', '90291', 33.9974, -118.4716,
+ '(310) 314-0320', 'https://gjusta.com',
+ '{"mon":"07:00-21:00","tue":"07:00-21:00","wed":"07:00-21:00","thu":"07:00-21:00","fri":"07:00-21:00","sat":"07:00-21:00","sun":"07:00-21:00"}',
+ 2, '["outdoor_seating","takeout"]', 4.50, 0),
+
+-- Atlanta, GA
+(1, 1, 'Bacchanalia', 'American', 'Atlanta''s most celebrated fine-dining destination — contemporary American cuisine in a converted warehouse.',
+ '1198 Howell Mill Rd NW', 'Atlanta', 'GA', '30318', 33.7876, -84.4138,
+ '(404) 365-0410', 'https://starprovisions.com',
+ '{"mon":"closed","tue":"closed","wed":"18:00-21:00","thu":"18:00-21:00","fri":"18:00-22:00","sat":"18:00-22:00","sun":"closed"}',
+ 4, '["reservations","bar"]', 4.70, 0),
+
+(1, 1, 'Slutty Vegan', 'American', 'Atlanta''s viral plant-based burger joint with outrageous names and phenomenal flavors.',
+ '1542 Ralph David Abernathy Blvd SW', 'Atlanta', 'GA', '30310', 33.7435, -84.4178,
+ '(678) 500-6002', 'https://sluttyveganatl.com',
+ '{"mon":"12:00-20:00","tue":"12:00-20:00","wed":"12:00-20:00","thu":"12:00-20:00","fri":"12:00-22:00","sat":"12:00-22:00","sun":"12:00-20:00"}',
+ 1, '["takeout","outdoor_seating"]', 4.30, 0);

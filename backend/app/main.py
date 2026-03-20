@@ -1,8 +1,14 @@
+import os
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
 
 from app.routes import auth, users, restaurants, reviews, favorites, owner
 from app.routes import ai_assistant
+
+# Ensure upload directories exist
+os.makedirs("uploads/avatars", exist_ok=True)
+os.makedirs("uploads/reviews", exist_ok=True)
 
 app = FastAPI(
     title="Yelp Clone API",
@@ -36,3 +42,7 @@ app.include_router(ai_assistant.router, prefix="/ai",           tags=["AI Assist
 @app.get("/", tags=["Health"])
 def root():
     return {"status": "ok", "message": "Yelp Clone API is running"}
+
+
+# Serve uploaded files as static assets
+app.mount("/uploads", StaticFiles(directory="uploads"), name="uploads")

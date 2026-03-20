@@ -5,6 +5,7 @@ import api from '../services/api';
 import { useAuth } from '../context/AuthContext';
 import StarRating from '../components/StarRating';
 import ReviewCard from '../components/ReviewCard';
+import { Heart, Store, PenLine, UtensilsCrossed, ArrowLeft, Search } from 'lucide-react';
 
 const PRICE_LABELS = ['', '$', '$$', '$$$', '$$$$'];
 const DAY_ORDER = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
@@ -18,13 +19,15 @@ const PLACEHOLDER_IMAGES = [
 export default function RestaurantDetailPage() {
   const { id } = useParams();
   const navigate = useNavigate();
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated, isOwner, user } = useAuth();
 
   const [restaurant, setRestaurant] = useState(null);
   const [reviews, setReviews] = useState([]);
   const [isFavorited, setIsFavorited] = useState(false);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  const [claiming, setClaiming] = useState(false);
+  const [claimMsg, setClaimMsg] = useState('');
 
   useEffect(() => {
     const fetchData = async () => {
@@ -53,6 +56,20 @@ export default function RestaurantDetailPage() {
     fetchData();
   }, [id, isAuthenticated]);
 
+  const claimRestaurant = async () => {
+    setClaiming(true);
+    setClaimMsg('');
+    try {
+      await api.put(`/owner/claim/${id}`);
+      setClaimMsg('Restaurant claimed! You can now manage it from your dashboard.');
+      setRestaurant((r) => ({ ...r, owner_id: user?.id }));
+    } catch (err) {
+      setClaimMsg(err.response?.data?.detail || 'Failed to claim restaurant.');
+    } finally {
+      setClaiming(false);
+    }
+  };
+
   const toggleFavorite = async () => {
     if (!isAuthenticated) { navigate('/login'); return; }
     try {
@@ -68,7 +85,27 @@ export default function RestaurantDetailPage() {
   };
 
   if (loading) return <div className="page loading-center"><div className="spinner"></div></div>;
-  if (error || !restaurant) return <div className="page container"><div className="alert alert-error">{error}</div></div>;
+  if (error || !restaurant) return (
+    <div className="page" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: '70vh' }}>
+      <div style={{ textAlign: 'center', maxWidth: '480px', padding: '0 var(--sp-lg)' }}>
+        <div style={{ marginBottom: 'var(--sp-lg)', color: 'var(--clr-text-muted)' }}>
+          <UtensilsCrossed size={72} strokeWidth={1.25} />
+        </div>
+        <h2 style={{ fontSize: '1.75rem', marginBottom: 'var(--sp-sm)' }}>Restaurant Not Found</h2>
+        <p className="text-secondary" style={{ marginBottom: 'var(--sp-xl)', lineHeight: 1.6 }}>
+          We couldn&apos;t find this restaurant. It may have been removed or the link might be incorrect.
+        </p>
+        <div style={{ display: 'flex', gap: '12px', justifyContent: 'center', flexWrap: 'wrap' }}>
+          <button className="btn btn-ghost" onClick={() => navigate(-1)}>
+            <ArrowLeft size={15} /> Go Back
+          </button>
+          <Link to="/" className="btn btn-primary">
+            <Search size={15} /> Browse Restaurants
+          </Link>
+        </div>
+      </div>
+    </div>
+  );
 
   const imgSrc = restaurant.photos?.[0] || PLACEHOLDER_IMAGES[restaurant.id % PLACEHOLDER_IMAGES.length];
 
@@ -92,7 +129,7 @@ export default function RestaurantDetailPage() {
                 title={isFavorited ? 'Remove from favorites' : 'Add to favorites'}
                 id="fav-toggle"
               >
-                {isFavorited ? '❤️' : '🤍'}
+                {isFavorited ? <Heart size={20} fill="currentColor" /> : <Heart size={20} />}
               </button>
             </div>
 
@@ -102,6 +139,28 @@ export default function RestaurantDetailPage() {
               {restaurant.cuisine_type && <span className="badge badge-primary">{restaurant.cuisine_type}</span>}
               {restaurant.pricing_tier && <span className="price-tier">{PRICE_LABELS[restaurant.pricing_tier]}</span>}
             </div>
+
+            {/* Claim banner for owners */}
+            {isOwner && restaurant.owner_id !== user?.id && (
+              <div style={{ background: 'var(--clr-bg-elevated)', border: '1px solid var(--clr-border)', borderRadius: '8px', padding: '12px 16px', marginBottom: 'var(--sp-lg)', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '12px' }}>
+                <span style={{ fontSize: '0.9375rem', color: 'var(--clr-text-secondary)' }}>
+                  Is this your restaurant? Claim it to manage its profile.
+                </span>
+                <button
+                  className="btn btn-primary btn-sm"
+                  onClick={claimRestaurant}
+                  disabled={claiming}
+                  style={{ whiteSpace: 'nowrap' }}
+                >
+                  {claiming ? 'Claiming…' : <><Store size={14} /> Claim Restaurant</>}
+                </button>
+              </div>
+            )}
+            {claimMsg && (
+              <div className={`alert ${claimMsg.includes('Failed') ? 'alert-error' : 'alert-success'}`} style={{ marginBottom: 'var(--sp-md)' }}>
+                {claimMsg}
+              </div>
+            )}
 
             {restaurant.description && (
               <p style={{ color: 'var(--clr-text-secondary)', marginBottom: 'var(--sp-xl)', lineHeight: 1.7 }}>
@@ -126,7 +185,7 @@ export default function RestaurantDetailPage() {
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 'var(--sp-md)' }}>
                 <h2 style={{ fontSize: '1.25rem' }}>Reviews ({reviews.length})</h2>
                 <Link to={`/restaurants/${id}/review`} className="btn btn-primary btn-sm">
-                  ✍️ Write a Review
+                  <PenLine size={14} /> Write a Review
                 </Link>
               </div>
 

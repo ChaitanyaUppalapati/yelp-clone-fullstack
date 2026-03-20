@@ -1,8 +1,9 @@
 // pages/WriteReviewPage.jsx
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import api from '../services/api';
 import StarRating from '../components/StarRating';
+import { Camera, X, PenLine } from 'lucide-react';
 
 export default function WriteReviewPage() {
   const { id: restaurantId } = useParams();
@@ -11,14 +12,39 @@ export default function WriteReviewPage() {
   const [restaurant, setRestaurant] = useState(null);
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState('');
+  const [photos, setPhotos] = useState([]);        // File objects
+  const [previews, setPreviews] = useState([]);     // Object URLs for preview
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+  const photoInputRef = useRef(null);
 
   useEffect(() => {
     api.get(`/restaurants/${restaurantId}`)
       .then((res) => setRestaurant(res.data))
       .catch(() => setError('Restaurant not found'));
   }, [restaurantId]);
+
+  // Cleanup preview object URLs on unmount
+  useEffect(() => {
+    return () => previews.forEach((url) => URL.revokeObjectURL(url));
+  }, [previews]);
+
+  const handlePhotoSelect = (e) => {
+    const files = Array.from(e.target.files || []);
+    if (photos.length + files.length > 5) {
+      setError('Maximum 5 photos allowed.');
+      return;
+    }
+    setPhotos((prev) => [...prev, ...files]);
+    setPreviews((prev) => [...prev, ...files.map((f) => URL.createObjectURL(f))]);
+    e.target.value = '';
+  };
+
+  const removePhoto = (index) => {
+    URL.revokeObjectURL(previews[index]);
+    setPhotos((prev) => prev.filter((_, i) => i !== index));
+    setPreviews((prev) => prev.filter((_, i) => i !== index));
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -27,11 +53,22 @@ export default function WriteReviewPage() {
     setLoading(true);
     setError('');
     try {
-      await api.post('/reviews/', {
+      // Step 1: create the review
+      const res = await api.post('/reviews/', {
         restaurant_id: parseInt(restaurantId),
         rating,
         comment: comment.trim() || null,
       });
+
+      // Step 2: upload photos if any
+      if (photos.length > 0) {
+        const formData = new FormData();
+        photos.forEach((photo) => formData.append('files', photo));
+        await api.post(`/reviews/${res.data.id}/photos`, formData, {
+          headers: { 'Content-Type': 'multipart/form-data' },
+        });
+      }
+
       navigate(`/restaurants/${restaurantId}`);
     } catch (err) {
       setError(err.response?.data?.detail || 'Failed to submit review.');
@@ -81,9 +118,53 @@ export default function WriteReviewPage() {
               />
             </div>
 
+            {/* Photo Upload */}
+            <div className="form-group" style={{ marginTop: 'var(--sp-md)' }}>
+              <label className="form-label">Photos (optional, max 5)</label>
+              {previews.length > 0 && (
+                <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', marginBottom: '12px' }}>
+                  {previews.map((src, i) => (
+                    <div key={i} style={{ position: 'relative' }}>
+                      <img
+                        src={src}
+                        alt={`preview ${i + 1}`}
+                        style={{ width: '80px', height: '80px', objectFit: 'cover', borderRadius: '8px', border: '1px solid var(--clr-border)' }}
+                      />
+                      <button
+                        type="button"
+                        onClick={() => removePhoto(i)}
+                        style={{ position: 'absolute', top: '-6px', right: '-6px', background: 'var(--clr-primary)', color: '#fff', border: 'none', borderRadius: '50%', width: '20px', height: '20px', cursor: 'pointer', fontSize: '0.75rem', lineHeight: 1 }}
+                      >
+                        <X size={12} />
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              )}
+              {photos.length < 5 && (
+                <>
+                  <button
+                    type="button"
+                    className="btn btn-ghost btn-sm"
+                    onClick={() => photoInputRef.current?.click()}
+                  >
+                    <Camera size={15} /> Add Photos
+                  </button>
+                  <input
+                    ref={photoInputRef}
+                    type="file"
+                    accept="image/*"
+                    multiple
+                    style={{ display: 'none' }}
+                    onChange={handlePhotoSelect}
+                  />
+                </>
+              )}
+            </div>
+
             <div style={{ display: 'flex', gap: 'var(--sp-md)', marginTop: 'var(--sp-lg)' }}>
               <button type="submit" className="btn btn-primary btn-lg" disabled={loading} id="review-submit">
-                {loading ? 'Submitting…' : '✍️ Submit Review'}
+                {loading ? 'Submitting…' : <><PenLine size={15} /> Submit Review</>}
               </button>
               <button type="button" className="btn btn-ghost btn-lg" onClick={() => navigate(-1)}>
                 Cancel

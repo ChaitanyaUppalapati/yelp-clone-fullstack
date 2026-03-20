@@ -1,10 +1,17 @@
-from fastapi import APIRouter, Depends, HTTPException, status
+import uuid
+import os
+from fastapi import APIRouter, Depends, HTTPException, status, UploadFile, File
 from sqlalchemy.orm import Session
 
 from app.database import get_db
 from app.auth import get_current_user
 from app.models.user import User, UserPreferences
+from app.models.review import Review
+from app.models.restaurant import Restaurant
 from app.schemas.user import UserOut, UserUpdate, UserPreferencesCreate, UserPreferencesOut, UserPreferencesUpdate
+
+ALLOWED_IMAGE_TYPES = {"image/jpeg", "image/png", "image/webp", "image/gif"}
+UPLOAD_DIR = "uploads/avatars"
 
 router = APIRouter()
 
@@ -15,6 +22,34 @@ router = APIRouter()
 @router.get("/me", response_model=UserOut)
 def get_me(current_user: User = Depends(get_current_user)):
     """Return the authenticated user's profile."""
+    return current_user
+
+
+@router.post("/me/avatar", response_model=UserOut)
+async def upload_avatar(
+    file: UploadFile = File(...),
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user),
+):
+    """Upload a profile picture. Accepts JPEG, PNG, WebP, or GIF."""
+    if file.content_type not in ALLOWED_IMAGE_TYPES:
+        raise HTTPException(status_code=400, detail="Only image files are allowed (JPEG, PNG, WebP, GIF)")
+
+    ext = file.filename.rsplit(".", 1)[-1].lower() if "." in file.filename else "jpg"
+    filename = f"{current_user.id}_{uuid.uuid4().hex}.{ext}"
+    save_path = os.path.join(UPLOAD_DIR, filename)
+
+    contents = await file.read()
+    if len(contents) > 5 * 1024 * 1024:
+        raise HTTPException(status_code=400, detail="File too large (max 5MB)")
+
+    os.makedirs(UPLOAD_DIR, exist_ok=True)
+    with open(save_path, "wb") as f:
+        f.write(contents)
+
+    current_user.profile_picture = f"/uploads/avatars/{filename}"
+    db.commit()
+    db.refresh(current_user)
     return current_user
 
 
@@ -75,6 +110,55 @@ def update_preferences(
     db.commit()
     db.refresh(prefs)
     return prefs
+
+
+# ---------------------------------------------------------------------------
+# User history
+# ---------------------------------------------------------------------------
+@router.get("/me/history")
+def get_history(
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user),
+):
+    """Return the user's review history and restaurants they added."""
+    reviews = (
+        db.query(Review)
+        .filter(Review.user_id == current_user.id)
+        .order_by(Review.created_at.desc())
+        .all()
+    )
+    reviews_out = []
+    for rev in reviews:
+        rest = db.query(Restaurant).filter(Restaurant.id == rev.restaurant_id).first()
+        reviews_out.append({
+            "id": rev.id,
+            "restaurant_id": rev.restaurant_id,
+            "restaurant_name": rest.name if rest else "Unknown",
+            "rating": rev.rating,
+            "comment": rev.comment,
+            "created_at": rev.created_at.isoformat() if rev.created_at else None,
+        })
+
+    restaurants_added = (
+        db.query(Restaurant)
+        .filter(Restaurant.added_by == current_user.id)
+        .order_by(Restaurant.created_at.desc())
+        .all()
+    )
+    restaurants_out = []
+    for r in restaurants_added:
+        restaurants_out.append({
+            "id": r.id,
+            "name": r.name,
+            "cuisine_type": r.cuisine_type,
+            "city": r.city,
+            "avg_rating": float(r.avg_rating or 0),
+            "review_count": r.review_count or 0,
+            "pricing_tier": r.pricing_tier,
+            "created_at": r.created_at.isoformat() if r.created_at else None,
+        })
+
+    return {"reviews": reviews_out, "restaurants_added": restaurants_out}
 
 
 # ---------------------------------------------------------------------------

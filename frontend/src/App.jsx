@@ -15,6 +15,8 @@ import AddRestaurantPage from './pages/AddRestaurantPage';
 import FavoritesPage from './pages/FavoritesPage';
 import OwnerDashboardPage from './pages/OwnerDashboardPage';
 import OwnerManagePage from './pages/OwnerManagePage';
+import HistoryPage from './pages/HistoryPage';
+import NotFoundPage from './pages/NotFoundPage';
 
 function App() {
   return (
@@ -31,10 +33,14 @@ function App() {
         <Route path="/restaurants/:id/review" element={<ProtectedRoute><WriteReviewPage /></ProtectedRoute>} />
         <Route path="/add-restaurant" element={<ProtectedRoute><AddRestaurantPage /></ProtectedRoute>} />
         <Route path="/favorites" element={<ProtectedRoute><FavoritesPage /></ProtectedRoute>} />
+        <Route path="/history" element={<ProtectedRoute><HistoryPage /></ProtectedRoute>} />
 
         {/* Owner-only routes */}
         <Route path="/owner/dashboard" element={<ProtectedRoute ownerOnly><OwnerDashboardPage /></ProtectedRoute>} />
         <Route path="/owner/manage/:id" element={<ProtectedRoute ownerOnly><OwnerManagePage /></ProtectedRoute>} />
+
+        {/* 404 */}
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
 
       <ChatWidget />

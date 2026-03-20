@@ -1,15 +1,30 @@
 // pages/ProfilePage.jsx — Profile + Preferences tabs
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import api from '../services/api';
 import { useAuth } from '../context/AuthContext';
+import { Pencil } from 'lucide-react';
+
+const API_BASE = 'http://localhost:8000';
 
 const CUISINE_OPTIONS = ['Italian', 'American', 'French', 'Japanese', 'Thai', 'Mediterranean', 'Greek', 'Mexican', 'Indian', 'Chinese', 'Burmese', 'Korean'];
 const DIETARY_OPTIONS = ['vegan', 'vegetarian', 'gluten-free', 'halal', 'kosher', 'dairy-free'];
 const AMBIANCE_OPTIONS = ['romantic', 'outdoor', 'family-friendly', 'trendy', 'casual', 'fine-dining', 'live-music'];
+const COUNTRY_OPTIONS = [
+  'US', 'Canada', 'United Kingdom', 'Australia', 'Germany', 'France', 'Italy', 'Spain',
+  'Japan', 'China', 'India', 'Brazil', 'Mexico', 'South Korea', 'Netherlands', 'Sweden',
+  'Norway', 'Denmark', 'Switzerland', 'Singapore', 'New Zealand', 'South Africa',
+  'Argentina', 'Chile', 'Portugal', 'Greece', 'Turkey', 'UAE', 'Saudi Arabia', 'Pakistan',
+];
 
 export default function ProfilePage() {
   const { user } = useAuth();
   const [tab, setTab] = useState('profile');
+
+  // Avatar state
+  const [avatarUrl, setAvatarUrl] = useState(null);
+  const [avatarUploading, setAvatarUploading] = useState(false);
+  const [avatarMsg, setAvatarMsg] = useState('');
+  const avatarInputRef = useRef(null);
 
   // Profile state
   const [profile, setProfile] = useState({ name: '', phone: '', about_me: '', city: '', state: '', country: '', gender: '' });
@@ -31,6 +46,7 @@ export default function ProfilePage() {
         name: user.name || '', phone: user.phone || '', about_me: user.about_me || '',
         city: user.city || '', state: user.state || '', country: user.country || 'US', gender: user.gender || '',
       });
+      setAvatarUrl(user.profile_picture ? `${API_BASE}${user.profile_picture}` : null);
     }
     // Fetch preferences
     api.get('/users/me/preferences')
@@ -72,6 +88,27 @@ export default function ProfilePage() {
     }));
   };
 
+  const uploadAvatar = async (e) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    setAvatarUploading(true);
+    setAvatarMsg('');
+    try {
+      const formData = new FormData();
+      formData.append('file', file);
+      const res = await api.post('/users/me/avatar', formData, {
+        headers: { 'Content-Type': 'multipart/form-data' },
+      });
+      setAvatarUrl(`${API_BASE}${res.data.profile_picture}`);
+      setAvatarMsg('Photo updated!');
+      setTimeout(() => setAvatarMsg(''), 3000);
+    } catch (err) {
+      setAvatarMsg(err.response?.data?.detail || 'Upload failed.');
+    } finally {
+      setAvatarUploading(false);
+    }
+  };
+
   const initial = (user?.name || 'U').charAt(0).toUpperCase();
 
   return (
@@ -79,11 +116,33 @@ export default function ProfilePage() {
       <div className="container" style={{ maxWidth: '720px' }}>
         {/* Header */}
         <div className="profile-header fade-in">
-          <div className="profile-avatar">{initial}</div>
+          <div style={{ position: 'relative', flexShrink: 0 }}>
+            {avatarUrl ? (
+              <img
+                src={avatarUrl}
+                alt="Profile"
+                style={{ width: '80px', height: '80px', borderRadius: '50%', objectFit: 'cover', border: '2px solid var(--clr-border)' }}
+                onError={() => setAvatarUrl(null)}
+              />
+            ) : (
+              <div className="profile-avatar">{initial}</div>
+            )}
+            <button
+              type="button"
+              onClick={() => avatarInputRef.current?.click()}
+              disabled={avatarUploading}
+              title="Change profile photo"
+              style={{ position: 'absolute', bottom: 0, right: 0, background: 'var(--clr-primary)', border: 'none', borderRadius: '50%', width: '24px', height: '24px', cursor: 'pointer', fontSize: '0.75rem', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff' }}
+            >
+              {avatarUploading ? '…' : <Pencil size={12} />}
+            </button>
+            <input ref={avatarInputRef} type="file" accept="image/*" style={{ display: 'none' }} onChange={uploadAvatar} />
+          </div>
           <div>
             <h1 style={{ fontSize: '1.5rem' }}>{user?.name}</h1>
             <p className="text-secondary">{user?.email}</p>
             <span className="badge badge-primary" style={{ marginTop: '4px' }}>{user?.role}</span>
+            {avatarMsg && <p style={{ fontSize: '0.8125rem', marginTop: '4px', color: avatarMsg.includes('failed') || avatarMsg.includes('Failed') ? 'var(--clr-error)' : 'var(--clr-success)' }}>{avatarMsg}</p>}
           </div>
         </div>
 
@@ -111,14 +170,25 @@ export default function ProfilePage() {
               <label className="form-label">About Me</label>
               <textarea className="form-textarea" value={profile.about_me} onChange={(e) => setProfile((p) => ({ ...p, about_me: e.target.value }))} rows={3} />
             </div>
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '16px' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
               <div className="form-group">
                 <label className="form-label">City</label>
                 <input className="form-input" value={profile.city} onChange={(e) => setProfile((p) => ({ ...p, city: e.target.value }))} />
               </div>
               <div className="form-group">
-                <label className="form-label">State</label>
-                <input className="form-input" value={profile.state} onChange={(e) => setProfile((p) => ({ ...p, state: e.target.value }))} />
+                <label className="form-label">State (abbrev.)</label>
+                <input className="form-input" maxLength={3} placeholder="e.g. CA" value={profile.state} onChange={(e) => setProfile((p) => ({ ...p, state: e.target.value.toUpperCase() }))} />
+              </div>
+            </div>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
+              <div className="form-group">
+                <label className="form-label">Country</label>
+                <select className="form-select" value={profile.country} onChange={(e) => setProfile((p) => ({ ...p, country: e.target.value }))}>
+                  <option value="">Select country</option>
+                  {COUNTRY_OPTIONS.map((c) => (
+                    <option key={c} value={c}>{c}</option>
+                  ))}
+                </select>
               </div>
               <div className="form-group">
                 <label className="form-label">Gender</label>

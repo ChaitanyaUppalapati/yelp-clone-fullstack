@@ -1,6 +1,7 @@
 // components/Navbar.jsx
 import { Link, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import { UtensilsCrossed, Heart, ClipboardList, BarChart2 } from 'lucide-react';
 
 export default function Navbar() {
   const { isAuthenticated, isOwner, user, logout } = useAuth();
@@ -11,7 +12,7 @@ export default function Navbar() {
   return (
     <nav className="navbar">
       <div className="navbar-inner">
-        <Link to="/" className="navbar-logo">🍽️ YelpClone</Link>
+        <Link to="/" className="navbar-logo"><UtensilsCrossed size={20} /> Yelp</Link>
 
         <div className="navbar-links">
           <Link to="/" className={isActive('/')}>Explore</Link>
@@ -22,14 +23,17 @@ export default function Navbar() {
                 + Add Restaurant
               </Link>
               <Link to="/favorites" className={isActive('/favorites')}>
-                ♥ Favorites
+                <Heart size={14} /> Favorites
+              </Link>
+              <Link to="/history" className={isActive('/history')}>
+                <ClipboardList size={14} /> History
               </Link>
               <Link to="/profile" className={isActive('/profile')}>
                 {user?.name || 'Profile'}
               </Link>
               {isOwner && (
                 <Link to="/owner/dashboard" className={isActive('/owner/dashboard')}>
-                  📊 Dashboard
+                  <BarChart2 size={14} /> Dashboard
                 </Link>
               )}
               <button onClick={logout} className="navbar-link" style={{ cursor: 'pointer' }}>

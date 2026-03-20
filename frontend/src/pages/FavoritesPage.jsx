@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react';
 import api from '../services/api';
 import RestaurantCard from '../components/RestaurantCard';
+import { Heart, HeartOff } from 'lucide-react';
 
 export default function FavoritesPage() {
   const [favorites, setFavorites] = useState([]);
@@ -32,7 +33,7 @@ export default function FavoritesPage() {
   return (
     <div className="page">
       <div className="container">
-        <h1 style={{ marginBottom: 'var(--sp-xs)' }}>♥ Your Favorites</h1>
+        <h1 style={{ marginBottom: 'var(--sp-xs)', display: 'flex', alignItems: 'center', gap: '10px' }}><Heart size={26} /> Your Favorites</h1>
         <p className="text-secondary" style={{ marginBottom: 'var(--sp-xl)' }}>
           Restaurants you've saved for later
         </p>
@@ -41,7 +42,7 @@ export default function FavoritesPage() {
           <div className="loading-center"><div className="spinner"></div></div>
         ) : restaurants.length === 0 ? (
           <div className="empty-state">
-            <div className="empty-state-icon">💔</div>
+            <div className="empty-state-icon"><HeartOff size={48} /></div>
             <h3>No favorites yet</h3>
             <p>Click the heart on any restaurant to save it here</p>
           </div>
