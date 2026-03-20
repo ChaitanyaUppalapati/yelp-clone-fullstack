@@ -1,5 +1,6 @@
 // components/SearchBar.jsx
 import { useState } from 'react';
+import { Search } from 'lucide-react';
 
 const CUISINE_OPTIONS = [
   'All', 'American', 'Italian', 'French', 'Japanese', 'Thai',
@@ -12,14 +13,20 @@ export default function SearchBar({ onSearch, initialValues = {} }) {
   const [city, setCity] = useState(initialValues.city || '');
   const [pricingTier, setPricingTier] = useState(initialValues.pricing_tier || '');
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    onSearch({
+  const search = (overrides = {}) => {
+    const filters = {
       keyword: keyword.trim(),
       cuisine: cuisine === 'All' ? '' : cuisine,
       city: city.trim(),
       pricing_tier: pricingTier ? parseInt(pricingTier) : '',
-    });
+      ...overrides,
+    };
+    onSearch(filters);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    search();
   };
 
   return (
@@ -34,7 +41,7 @@ export default function SearchBar({ onSearch, initialValues = {} }) {
           id="search-keyword"
         />
         <button type="submit" className="btn btn-primary">
-          🔍 Search
+          <Search size={15} /> Search
         </button>
       </div>
 
@@ -43,8 +50,9 @@ export default function SearchBar({ onSearch, initialValues = {} }) {
           className="filter-chip"
           value={cuisine}
           onChange={(e) => {
-            setCuisine(e.target.value);
-            handleSubmit({ preventDefault: () => {} });
+            const val = e.target.value;
+            setCuisine(val);
+            search({ cuisine: val === 'All' ? '' : val });
           }}
           style={{ background: 'var(--clr-bg-elevated)', border: '1px solid var(--clr-border)', color: 'var(--clr-text-secondary)', padding: '6px 16px', borderRadius: '9999px', fontSize: '0.8125rem' }}
           id="filter-cuisine"
@@ -59,8 +67,9 @@ export default function SearchBar({ onSearch, initialValues = {} }) {
           className="filter-chip"
           value={pricingTier}
           onChange={(e) => {
-            setPricingTier(e.target.value);
-            handleSubmit({ preventDefault: () => {} });
+            const val = e.target.value;
+            setPricingTier(val);
+            search({ pricing_tier: val ? parseInt(val) : '' });
           }}
           style={{ background: 'var(--clr-bg-elevated)', border: '1px solid var(--clr-border)', color: 'var(--clr-text-secondary)', padding: '6px 16px', borderRadius: '9999px', fontSize: '0.8125rem' }}
           id="filter-price"
@@ -78,6 +87,7 @@ export default function SearchBar({ onSearch, initialValues = {} }) {
           placeholder="City..."
           value={city}
           onChange={(e) => setCity(e.target.value)}
+          onBlur={() => search()}
           style={{ background: 'var(--clr-bg-elevated)', border: '1px solid var(--clr-border)', color: 'var(--clr-text-secondary)', padding: '6px 16px', borderRadius: '9999px', fontSize: '0.8125rem', width: '120px' }}
           id="filter-city"
         />

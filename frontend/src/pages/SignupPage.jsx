@@ -3,6 +3,13 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 
+const COUNTRY_OPTIONS = [
+  'US', 'Canada', 'United Kingdom', 'Australia', 'Germany', 'France', 'Italy', 'Spain',
+  'Japan', 'China', 'India', 'Brazil', 'Mexico', 'South Korea', 'Netherlands', 'Sweden',
+  'Norway', 'Denmark', 'Switzerland', 'Singapore', 'New Zealand', 'South Africa',
+  'Argentina', 'Chile', 'Portugal', 'Greece', 'Turkey', 'UAE', 'Saudi Arabia', 'Pakistan',
+];
+
 export default function SignupPage() {
   const { signup } = useAuth();
   const navigate = useNavigate();
@@ -16,6 +23,7 @@ export default function SignupPage() {
     phone: '',
     city: '',
     state: '',
+    country: 'US',
   });
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
@@ -45,6 +53,7 @@ export default function SignupPage() {
         phone: form.phone || undefined,
         city: form.city || undefined,
         state: form.state || undefined,
+        country: form.country || undefined,
       });
       navigate('/login');
     } catch (err) {
@@ -107,6 +116,16 @@ export default function SignupPage() {
               <input id="signup-state" type="text" className="form-input" placeholder="CA"
                 value={form.state} onChange={update('state')} />
             </div>
+          </div>
+
+          <div className="form-group">
+            <label className="form-label" htmlFor="signup-country">Country</label>
+            <select id="signup-country" className="form-select" value={form.country} onChange={update('country')}>
+              <option value="">Select country</option>
+              {COUNTRY_OPTIONS.map((c) => (
+                <option key={c} value={c}>{c}</option>
+              ))}
+            </select>
           </div>
 
           <div className="form-group">

@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import api from '../services/api';
+import { Save } from 'lucide-react';
 
 const DAYS = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
 
@@ -144,7 +145,7 @@ export default function OwnerManagePage() {
 
             <div style={{ display: 'flex', gap: 'var(--sp-md)' }}>
               <button type="submit" className="btn btn-primary btn-lg" disabled={saving}>
-                {saving ? 'Saving…' : '💾 Save Changes'}
+                {saving ? 'Saving…' : <><Save size={15} /> Save Changes</>}
               </button>
               <button type="button" className="btn btn-ghost btn-lg" onClick={() => navigate('/owner/dashboard')}>Back</button>
             </div>

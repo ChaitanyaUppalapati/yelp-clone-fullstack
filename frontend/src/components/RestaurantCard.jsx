@@ -1,6 +1,7 @@
 // components/RestaurantCard.jsx
 import { useNavigate } from 'react-router-dom';
 import StarRating from './StarRating';
+import { MapPin } from 'lucide-react';
 
 const PRICE_LABELS = ['', '$', '$$', '$$$', '$$$$'];
 
@@ -61,7 +62,7 @@ export default function RestaurantCard({ restaurant }) {
           )}
           {city && (
             <span className="text-secondary">
-              📍 {city}{state ? `, ${state}` : ''}
+              <MapPin size={12} /> {city}{state ? `, ${state}` : ''}
             </span>
           )}
         </div>

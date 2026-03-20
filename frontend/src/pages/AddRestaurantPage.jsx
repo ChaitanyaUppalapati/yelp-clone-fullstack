@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import api from '../services/api';
+import { Store } from 'lucide-react';
 
 const DAYS = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
 const AMENITY_OPTIONS = ['wifi', 'parking', 'outdoor_seating', 'reservations', 'wheelchair_accessible', 'bar', 'live_music', 'takeout', 'delivery', 'valet_parking'];
@@ -175,7 +176,7 @@ export default function AddRestaurantPage() {
 
             <div style={{ display: 'flex', gap: 'var(--sp-md)' }}>
               <button type="submit" className="btn btn-primary btn-lg" disabled={loading} id="add-restaurant-submit">
-                {loading ? 'Saving…' : '🏪 Add Restaurant'}
+                {loading ? 'Saving…' : <><Store size={15} /> Add Restaurant</>}
               </button>
               <button type="button" className="btn btn-ghost btn-lg" onClick={() => navigate(-1)}>Cancel</button>
             </div>

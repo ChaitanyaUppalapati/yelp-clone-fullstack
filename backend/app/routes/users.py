@@ -1,6 +1,6 @@
-import os
 import uuid
-from fastapi import APIRouter, Depends, HTTPException, UploadFile, File, status
+import os
+from fastapi import APIRouter, Depends, HTTPException, status, UploadFile, File
 from sqlalchemy.orm import Session
 
 from app.database import get_db
@@ -15,6 +15,9 @@ from app.schemas.restaurant import RestaurantListOut
 UPLOAD_DIR = os.path.join(os.path.dirname(__file__), "..", "..", "uploads")
 os.makedirs(UPLOAD_DIR, exist_ok=True)
 
+ALLOWED_IMAGE_TYPES = {"image/jpeg", "image/png", "image/webp", "image/gif"}
+UPLOAD_DIR = "uploads/avatars"
+
 router = APIRouter()
 
 
@@ -24,6 +27,34 @@ router = APIRouter()
 @router.get("/me", response_model=UserOut)
 def get_me(current_user: User = Depends(get_current_user)):
     """Return the authenticated user's profile."""
+    return current_user
+
+
+@router.post("/me/avatar", response_model=UserOut)
+async def upload_avatar(
+    file: UploadFile = File(...),
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user),
+):
+    """Upload a profile picture. Accepts JPEG, PNG, WebP, or GIF."""
+    if file.content_type not in ALLOWED_IMAGE_TYPES:
+        raise HTTPException(status_code=400, detail="Only image files are allowed (JPEG, PNG, WebP, GIF)")
+
+    ext = file.filename.rsplit(".", 1)[-1].lower() if "." in file.filename else "jpg"
+    filename = f"{current_user.id}_{uuid.uuid4().hex}.{ext}"
+    save_path = os.path.join(UPLOAD_DIR, filename)
+
+    contents = await file.read()
+    if len(contents) > 5 * 1024 * 1024:
+        raise HTTPException(status_code=400, detail="File too large (max 5MB)")
+
+    os.makedirs(UPLOAD_DIR, exist_ok=True)
+    with open(save_path, "wb") as f:
+        f.write(contents)
+
+    current_user.profile_picture = f"/uploads/avatars/{filename}"
+    db.commit()
+    db.refresh(current_user)
     return current_user
 
 
@@ -87,78 +118,52 @@ def update_preferences(
 
 
 # ---------------------------------------------------------------------------
-# Profile picture upload
-# ---------------------------------------------------------------------------
-@router.post("/me/photo", response_model=UserOut)
-async def upload_photo(
-    file: UploadFile = File(...),
-    db: Session = Depends(get_db),
-    current_user: User = Depends(get_current_user),
-):
-    """Upload a profile picture. Returns updated user profile."""
-    allowed = {"image/jpeg", "image/png", "image/webp", "image/gif"}
-    if file.content_type not in allowed:
-        raise HTTPException(status_code=400, detail="Only JPEG, PNG, WebP or GIF images allowed")
-
-    ext = file.filename.rsplit(".", 1)[-1] if "." in file.filename else "jpg"
-    filename = f"{uuid.uuid4().hex}.{ext}"
-    dest = os.path.join(UPLOAD_DIR, filename)
-
-    contents = await file.read()
-    with open(dest, "wb") as f:
-        f.write(contents)
-
-    current_user.profile_picture = f"/uploads/{filename}"
-    db.commit()
-    db.refresh(current_user)
-    return current_user
-
-
-# ---------------------------------------------------------------------------
-# User activity history
+# User history
 # ---------------------------------------------------------------------------
 @router.get("/me/history")
 def get_history(
     db: Session = Depends(get_db),
     current_user: User = Depends(get_current_user),
 ):
-    """Return the current user's reviews and restaurants they added."""
+    """Return the user's review history and restaurants they added."""
     reviews = (
         db.query(Review)
         .filter(Review.user_id == current_user.id)
         .order_by(Review.created_at.desc())
         .all()
     )
-    added_restaurants = (
+    reviews_out = []
+    for rev in reviews:
+        rest = db.query(Restaurant).filter(Restaurant.id == rev.restaurant_id).first()
+        reviews_out.append({
+            "id": rev.id,
+            "restaurant_id": rev.restaurant_id,
+            "restaurant_name": rest.name if rest else "Unknown",
+            "rating": rev.rating,
+            "comment": rev.comment,
+            "created_at": rev.created_at.isoformat() if rev.created_at else None,
+        })
+
+    restaurants_added = (
         db.query(Restaurant)
         .filter(Restaurant.added_by == current_user.id)
         .order_by(Restaurant.created_at.desc())
         .all()
     )
-    return {
-        "reviews": [
-            {
-                "id": r.id,
-                "restaurant_id": r.restaurant_id,
-                "rating": r.rating,
-                "comment": r.comment,
-                "created_at": r.created_at,
-            }
-            for r in reviews
-        ],
-        "added_restaurants": [
-            {
-                "id": r.id,
-                "name": r.name,
-                "cuisine_type": r.cuisine_type,
-                "city": r.city,
-                "avg_rating": float(r.avg_rating),
-                "review_count": r.review_count,
-                "created_at": r.created_at,
-            }
-            for r in added_restaurants
-        ],
-    }
+    restaurants_out = []
+    for r in restaurants_added:
+        restaurants_out.append({
+            "id": r.id,
+            "name": r.name,
+            "cuisine_type": r.cuisine_type,
+            "city": r.city,
+            "avg_rating": float(r.avg_rating or 0),
+            "review_count": r.review_count or 0,
+            "pricing_tier": r.pricing_tier,
+            "created_at": r.created_at.isoformat() if r.created_at else None,
+        })
+
+    return {"reviews": reviews_out, "restaurants_added": restaurants_out}
 
 
 # ---------------------------------------------------------------------------

@@ -1,5 +1,8 @@
 from fastapi import APIRouter, Depends, HTTPException, Query, status
-from sqlalchemy.orm import Session, joinedload
+
+from sqlalchemy import or_, cast, String as SAString
+from sqlalchemy.orm import Session
+
 from typing import Optional
 
 from app.database import get_db
@@ -12,35 +15,31 @@ router = APIRouter()
 
 @router.get("/", response_model=list[RestaurantListOut])
 def list_restaurants(
-    name:         Optional[str] = Query(None),
-    cuisine:      Optional[str] = Query(None),
-    keyword:      Optional[str] = Query(None),
-    city:         Optional[str] = Query(None),
-    zip_code:     Optional[str] = Query(None),
+    q:           Optional[str] = Query(None, description="Keyword search on name, description, amenities"),
+    city:        Optional[str] = Query(None),
+    cuisine:     Optional[str] = Query(None),
     pricing_tier: Optional[int] = Query(None, ge=1, le=4),
     skip:         int = Query(0, ge=0),
     limit:        int = Query(20, le=100),
     db: Session = Depends(get_db),
 ):
-    """List/search restaurants with optional filters."""
-    q = db.query(Restaurant).filter(Restaurant.is_active == True)
-    if name:
-        q = q.filter(Restaurant.name.ilike(f"%{name}%"))
-    if cuisine:
-        q = q.filter(Restaurant.cuisine_type.ilike(f"%{cuisine}%"))
-    if keyword:
-        q = q.filter(
-            Restaurant.name.ilike(f"%{keyword}%") |
-            Restaurant.description.ilike(f"%{keyword}%") |
-            Restaurant.cuisine_type.ilike(f"%{keyword}%")
-        )
+    """List restaurants with optional filters."""
+    query = db.query(Restaurant).filter(Restaurant.is_active == True)
     if city:
-        q = q.filter(Restaurant.city.ilike(f"%{city}%"))
-    if zip_code:
-        q = q.filter(Restaurant.zip_code == zip_code)
+        query = query.filter(Restaurant.city.ilike(f"%{city}%"))
+    if cuisine:
+        query = query.filter(Restaurant.cuisine_type.ilike(f"%{cuisine}%"))
     if pricing_tier:
-        q = q.filter(Restaurant.pricing_tier == pricing_tier)
-    return q.order_by(Restaurant.avg_rating.desc()).offset(skip).limit(limit).all()
+        query = query.filter(Restaurant.pricing_tier == pricing_tier)
+    if q:
+        query = query.filter(
+            or_(
+                Restaurant.name.ilike(f"%{q}%"),
+                Restaurant.description.ilike(f"%{q}%"),
+                cast(Restaurant.amenities, SAString).ilike(f"%{q}%"),
+            )
+        )
+    return query.order_by(Restaurant.avg_rating.desc()).offset(skip).limit(limit).all()
 
 
 @router.get("/{restaurant_id}", response_model=RestaurantOut)

@@ -6,8 +6,10 @@ from fastapi.staticfiles import StaticFiles
 from app.routes import auth, users, restaurants, reviews, favorites, owner
 from app.routes import ai_assistant
 
-UPLOAD_DIR = os.path.join(os.path.dirname(__file__), "..", "uploads")
-os.makedirs(UPLOAD_DIR, exist_ok=True)
+
+# Ensure upload directories exist
+os.makedirs("uploads/avatars", exist_ok=True)
+os.makedirs("uploads/reviews", exist_ok=True)
 
 app = FastAPI(
     title="Yelp Clone API",
@@ -44,3 +46,7 @@ app.mount("/uploads", StaticFiles(directory=UPLOAD_DIR), name="uploads")
 @app.get("/", tags=["Health"])
 def root():
     return {"status": "ok", "message": "Yelp Clone API is running"}
+
+
+# Serve uploaded files as static assets
+app.mount("/uploads", StaticFiles(directory="uploads"), name="uploads")
