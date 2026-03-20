@@ -19,6 +19,7 @@ class ReviewUpdate(BaseModel):
 class ReviewOut(BaseModel):
     id:            int
     user_id:       int
+    user_name:     str | None = None
     restaurant_id: int
     rating:        int
     comment:       str | None

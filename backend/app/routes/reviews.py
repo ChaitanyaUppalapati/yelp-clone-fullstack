@@ -2,7 +2,7 @@ import uuid
 import os
 from typing import List
 from fastapi import APIRouter, Depends, HTTPException, status, UploadFile, File
-from sqlalchemy.orm import Session
+from sqlalchemy.orm import Session, joinedload
 
 from app.database import get_db
 from app.auth import get_current_user
@@ -26,6 +26,7 @@ def get_reviews(
     """List all reviews for a restaurant."""
     return (
         db.query(Review)
+        .options(joinedload(Review.user))
         .filter(Review.restaurant_id == restaurant_id)
         .order_by(Review.created_at.desc())
         .offset(skip).limit(limit).all()

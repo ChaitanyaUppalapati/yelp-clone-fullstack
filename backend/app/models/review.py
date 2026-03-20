@@ -22,3 +22,7 @@ class Review(Base):
                               back_populates="reviews")
     restaurant = relationship("Restaurant", foreign_keys=[restaurant_id],
                               back_populates="reviews")
+
+    @property
+    def user_name(self) -> str | None:
+        return self.user.name if self.user else None
