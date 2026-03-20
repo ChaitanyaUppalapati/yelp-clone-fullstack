@@ -75,6 +75,15 @@ def update_review(
         raise HTTPException(status_code=404, detail="Review not found")
     if review.user_id != current_user.id:
         raise HTTPException(status_code=403, detail="Not allowed")
+
+    # Recalculate avg_rating if rating changed
+    if payload.rating is not None and payload.rating != review.rating:
+        restaurant = db.query(Restaurant).filter(Restaurant.id == review.restaurant_id).first()
+        if restaurant and restaurant.review_count > 0:
+            old_total = float(restaurant.avg_rating) * restaurant.review_count
+            new_total = old_total - review.rating + payload.rating
+            restaurant.avg_rating = round(new_total / restaurant.review_count, 2)
+
     for field, value in payload.model_dump(exclude_none=True).items():
         setattr(review, field, value)
     db.commit()
@@ -131,5 +140,18 @@ def delete_review(
         raise HTTPException(status_code=404, detail="Review not found")
     if review.user_id != current_user.id:
         raise HTTPException(status_code=403, detail="Not allowed")
+
+    # Recalculate avg_rating after deletion
+    restaurant = db.query(Restaurant).filter(Restaurant.id == review.restaurant_id).first()
+    if restaurant:
+        new_count = restaurant.review_count - 1
+        if new_count <= 0:
+            restaurant.avg_rating = 0
+            restaurant.review_count = 0
+        else:
+            old_total = float(restaurant.avg_rating) * restaurant.review_count
+            restaurant.avg_rating = round((old_total - review.rating) / new_count, 2)
+            restaurant.review_count = new_count
+
     db.delete(review)
     db.commit()

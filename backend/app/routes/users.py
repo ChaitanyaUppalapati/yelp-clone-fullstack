@@ -9,6 +9,11 @@ from app.models.user import User, UserPreferences
 from app.models.review import Review
 from app.models.restaurant import Restaurant
 from app.schemas.user import UserOut, UserUpdate, UserPreferencesCreate, UserPreferencesOut, UserPreferencesUpdate
+from app.schemas.review import ReviewOut
+from app.schemas.restaurant import RestaurantListOut
+
+UPLOAD_DIR = os.path.join(os.path.dirname(__file__), "..", "..", "uploads")
+os.makedirs(UPLOAD_DIR, exist_ok=True)
 
 ALLOWED_IMAGE_TYPES = {"image/jpeg", "image/png", "image/webp", "image/gif"}
 UPLOAD_DIR = "uploads/avatars"

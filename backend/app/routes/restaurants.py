@@ -1,6 +1,8 @@
 from fastapi import APIRouter, Depends, HTTPException, Query, status
+
 from sqlalchemy import or_, cast, String as SAString
 from sqlalchemy.orm import Session
+
 from typing import Optional
 
 from app.database import get_db
@@ -17,8 +19,8 @@ def list_restaurants(
     city:        Optional[str] = Query(None),
     cuisine:     Optional[str] = Query(None),
     pricing_tier: Optional[int] = Query(None, ge=1, le=4),
-    skip:        int = Query(0, ge=0),
-    limit:       int = Query(20, le=100),
+    skip:         int = Query(0, ge=0),
+    limit:        int = Query(20, le=100),
     db: Session = Depends(get_db),
 ):
     """List restaurants with optional filters."""
@@ -42,8 +44,13 @@ def list_restaurants(
 
 @router.get("/{restaurant_id}", response_model=RestaurantOut)
 def get_restaurant(restaurant_id: int, db: Session = Depends(get_db)):
-    """Get a single restaurant by ID."""
-    r = db.query(Restaurant).filter(Restaurant.id == restaurant_id).first()
+    """Get a single restaurant by ID, including its reviews."""
+    r = (
+        db.query(Restaurant)
+        .options(joinedload(Restaurant.reviews))
+        .filter(Restaurant.id == restaurant_id)
+        .first()
+    )
     if not r:
         raise HTTPException(status_code=404, detail="Restaurant not found")
     return r
@@ -62,6 +69,28 @@ def create_restaurant(
         **payload.model_dump(),
     )
     db.add(r)
+    db.commit()
+    db.refresh(r)
+    return r
+
+
+@router.post("/{restaurant_id}/claim", response_model=RestaurantOut)
+def claim_restaurant(
+    restaurant_id: int,
+    db: Session = Depends(get_db),
+    current_user=Depends(get_current_user),
+):
+    """Claim ownership of a restaurant (owner role only)."""
+    if current_user.role != "owner":
+        raise HTTPException(status_code=403, detail="Owner role required")
+
+    r = db.query(Restaurant).filter(Restaurant.id == restaurant_id, Restaurant.is_active == True).first()
+    if not r:
+        raise HTTPException(status_code=404, detail="Restaurant not found")
+    if r.owner_id == current_user.id:
+        raise HTTPException(status_code=400, detail="You already own this restaurant")
+
+    r.owner_id = current_user.id
     db.commit()
     db.refresh(r)
     return r
