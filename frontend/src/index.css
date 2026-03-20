@@ -540,11 +540,19 @@ h5 { font-size: 1rem; }
   transition: all var(--transition-fast);
   cursor: pointer;
 }
-.filter-chip:hover,
-.filter-chip.active {
-  background: rgba(211, 35, 35, 0.15);
+.filter-chip:hover {
+  background: rgba(211, 35, 35, 0.08);
   border-color: var(--clr-primary);
   color: var(--clr-primary-light);
+}
+.filter-chip.active {
+  background: rgba(211, 35, 35, 0.18);
+  border-color: var(--clr-primary);
+  color: var(--clr-primary-light);
+  font-weight: var(--fw-semibold);
+}
+.filter-chip.active:hover {
+  background: rgba(211, 35, 35, 0.1);
 }
 
 

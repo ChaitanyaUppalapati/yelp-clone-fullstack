@@ -216,7 +216,9 @@ export default function ProfilePage() {
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
                 {CUISINE_OPTIONS.map((c) => (
                   <button key={c} type="button" className={`filter-chip ${prefs.cuisine_preferences?.includes(c) ? 'active' : ''}`}
-                    onClick={() => togglePrefArray('cuisine_preferences', c)}>{c}</button>
+                    onClick={() => togglePrefArray('cuisine_preferences', c)}>
+                    {prefs.cuisine_preferences?.includes(c) ? '✓ ' : ''}{c}
+                  </button>
                 ))}
               </div>
             </div>
@@ -249,7 +251,9 @@ export default function ProfilePage() {
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
                 {DIETARY_OPTIONS.map((d) => (
                   <button key={d} type="button" className={`filter-chip ${prefs.dietary_needs?.includes(d) ? 'active' : ''}`}
-                    onClick={() => togglePrefArray('dietary_needs', d)}>{d}</button>
+                    onClick={() => togglePrefArray('dietary_needs', d)}>
+                    {prefs.dietary_needs?.includes(d) ? '✓ ' : ''}{d}
+                  </button>
                 ))}
               </div>
             </div>
@@ -259,7 +263,9 @@ export default function ProfilePage() {
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
                 {AMBIANCE_OPTIONS.map((a) => (
                   <button key={a} type="button" className={`filter-chip ${prefs.ambiance_preferences?.includes(a) ? 'active' : ''}`}
-                    onClick={() => togglePrefArray('ambiance_preferences', a)}>{a}</button>
+                    onClick={() => togglePrefArray('ambiance_preferences', a)}>
+                    {prefs.ambiance_preferences?.includes(a) ? '✓ ' : ''}{a}
+                  </button>
                 ))}
               </div>
             </div>
