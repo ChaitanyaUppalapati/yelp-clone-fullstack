@@ -6,6 +6,7 @@ import { Pencil } from 'lucide-react';
 
 const API_BASE = 'http://localhost:8000';
 
+const LANGUAGE_OPTIONS = ['English', 'Spanish', 'French', 'Mandarin', 'Hindi', 'Arabic', 'Portuguese', 'Japanese', 'Korean', 'German', 'Italian', 'Punjabi', 'Tagalog', 'Vietnamese'];
 const CUISINE_OPTIONS = ['Italian', 'American', 'French', 'Japanese', 'Thai', 'Mediterranean', 'Greek', 'Mexican', 'Indian', 'Chinese', 'Burmese', 'Korean'];
 const DIETARY_OPTIONS = ['vegan', 'vegetarian', 'gluten-free', 'halal', 'kosher', 'dairy-free'];
 const AMBIANCE_OPTIONS = ['romantic', 'outdoor', 'family-friendly', 'trendy', 'casual', 'fine-dining', 'live-music'];
@@ -27,7 +28,7 @@ export default function ProfilePage() {
   const avatarInputRef = useRef(null);
 
   // Profile state
-  const [profile, setProfile] = useState({ name: '', phone: '', about_me: '', city: '', state: '', country: '', gender: '' });
+  const [profile, setProfile] = useState({ name: '', phone: '', about_me: '', city: '', state: '', country: '', gender: '', languages: [] });
   const [profileMsg, setProfileMsg] = useState('');
   const [profileLoading, setProfileLoading] = useState(false);
 
@@ -45,6 +46,7 @@ export default function ProfilePage() {
       setProfile({
         name: user.name || '', phone: user.phone || '', about_me: user.about_me || '',
         city: user.city || '', state: user.state || '', country: user.country || 'US', gender: user.gender || '',
+        languages: user.languages || [],
       });
       setAvatarUrl(user.profile_picture ? `${API_BASE}${user.profile_picture}` : null);
     }
@@ -162,6 +164,12 @@ export default function ProfilePage() {
                 <input className="form-input" value={profile.name} onChange={(e) => setProfile((p) => ({ ...p, name: e.target.value }))} />
               </div>
               <div className="form-group">
+                <label className="form-label">Email</label>
+                <input className="form-input" value={user?.email || ''} readOnly style={{ opacity: 0.6, cursor: 'not-allowed' }} title="Email cannot be changed" />
+              </div>
+            </div>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
+              <div className="form-group">
                 <label className="form-label">Phone</label>
                 <input className="form-input" value={profile.phone} onChange={(e) => setProfile((p) => ({ ...p, phone: e.target.value }))} />
               </div>
@@ -198,6 +206,23 @@ export default function ProfilePage() {
                   <option value="female">Female</option>
                   <option value="non-binary">Non-binary</option>
                 </select>
+              </div>
+            </div>
+            <div className="form-group">
+              <label className="form-label">Languages</label>
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
+                {LANGUAGE_OPTIONS.map((lang) => (
+                  <button key={lang} type="button"
+                    className={`filter-chip ${profile.languages?.includes(lang) ? 'active' : ''}`}
+                    onClick={() => setProfile((p) => ({
+                      ...p,
+                      languages: p.languages?.includes(lang)
+                        ? p.languages.filter((l) => l !== lang)
+                        : [...(p.languages || []), lang],
+                    }))}>
+                    {profile.languages?.includes(lang) ? '✓ ' : ''}{lang}
+                  </button>
+                ))}
               </div>
             </div>
             <button type="submit" className="btn btn-primary" disabled={profileLoading} style={{ marginTop: '8px' }}>
