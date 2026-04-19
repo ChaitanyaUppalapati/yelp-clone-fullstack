@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: yelp-config
+  namespace: yelp
+data:
+  MONGO_URL: "mongodb://mongodb-service:27017/yelp_db"
+  KAFKA_BOOTSTRAP_SERVERS: "kafka-service:9092"
+  JWT_ALGORITHM: "HS256"
+  JWT_EXPIRATION_MINUTES: "1440"
