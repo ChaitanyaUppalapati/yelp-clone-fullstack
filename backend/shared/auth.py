@@ -3,13 +3,13 @@ import os
 from jose import JWTError, jwt
 import bcrypt
 from fastapi import Depends, HTTPException, status
-from fastapi.security import OAuth2PasswordBearer
+from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 
 SECRET_KEY = os.getenv("JWT_SECRET_KEY", "changeme-secret-key")
 ALGORITHM = os.getenv("JWT_ALGORITHM", "HS256")
 ACCESS_TOKEN_EXPIRE_MINUTES = int(os.getenv("JWT_EXPIRATION_MINUTES", "1440"))
 
-oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/auth/login")
+_bearer = HTTPBearer()
 
 
 def verify_password(plain: str, hashed: str) -> bool:
@@ -33,7 +33,8 @@ def decode_token(token: str) -> dict:
     return jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
 
 
-def get_token_user_id(token: str = Depends(oauth2_scheme)) -> str:
+def get_token_user_id(credentials: HTTPAuthorizationCredentials = Depends(_bearer)) -> str:
+    token = credentials.credentials
     credentials_exc = HTTPException(
         status_code=status.HTTP_401_UNAUTHORIZED,
         detail="Could not validate credentials",

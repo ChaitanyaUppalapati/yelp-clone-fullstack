@@ -43,17 +43,18 @@ services:
       zookeeper:
         condition: service_healthy
     ports:
-      - "9092:9092"
+      - "29092:29092"
     environment:
       KAFKA_BROKER_ID: 1
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092,PLAINTEXT_HOST://localhost:9092
+      KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9092,PLAINTEXT_HOST://0.0.0.0:29092
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092,PLAINTEXT_HOST://localhost:29092
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
       KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
       KAFKA_AUTO_CREATE_TOPICS_ENABLE: "true"
     healthcheck:
-      test: ["CMD", "kafka-broker-api-versions", "--bootstrap-server", "localhost:9092"]
+      test: ["CMD", "kafka-broker-api-versions", "--bootstrap-server", "localhost:29092"]
       interval: 15s
       timeout: 10s
       retries: 10
@@ -62,8 +63,8 @@ services:
 
   user-service:
     build:
-      context: ./backend/user-service
-      dockerfile: Dockerfile
+      context: ./backend
+      dockerfile: user-service/Dockerfile
     container_name: user-service
     ports:
       - "8001:8001"
@@ -80,8 +81,8 @@ services:
 
   restaurant-service:
     build:
-      context: ./backend/restaurant-service
-      dockerfile: Dockerfile
+      context: ./backend
+      dockerfile: restaurant-service/Dockerfile
     container_name: restaurant-service
     ports:
       - "8002:8002"
@@ -98,8 +99,8 @@ services:
 
   owner-service:
     build:
-      context: ./backend/owner-service
-      dockerfile: Dockerfile
+      context: ./backend
+      dockerfile: owner-service/Dockerfile
     container_name: owner-service
     ports:
       - "8003:8003"
@@ -114,8 +115,8 @@ services:
 
   review-service:
     build:
-      context: ./backend/review-service
-      dockerfile: Dockerfile
+      context: ./backend
+      dockerfile: review-service/Dockerfile
     container_name: review-service
     ports:
       - "8004:8004"
@@ -134,8 +135,8 @@ services:
 
   review-worker:
     build:
-      context: ./backend/review-worker
-      dockerfile: Dockerfile
+      context: ./backend
+      dockerfile: review-worker/Dockerfile
     container_name: review-worker
     environment:
       <<: *common-env
@@ -148,8 +149,8 @@ services:
 
   restaurant-worker:
     build:
-      context: ./backend/restaurant-worker
-      dockerfile: Dockerfile
+      context: ./backend
+      dockerfile: restaurant-worker/Dockerfile
     container_name: restaurant-worker
     environment:
       <<: *common-env
@@ -160,8 +161,8 @@ services:
 
   user-worker:
     build:
-      context: ./backend/user-worker
-      dockerfile: Dockerfile
+      context: ./backend
+      dockerfile: user-worker/Dockerfile
     container_name: user-worker
     environment:
       <<: *common-env

@@ -2,7 +2,6 @@ import os
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
-
 from routes.restaurants import router as restaurants_router
 
 os.makedirs("uploads/restaurants", exist_ok=True)

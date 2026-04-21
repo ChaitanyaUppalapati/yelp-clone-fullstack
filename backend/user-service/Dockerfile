@@ -2,11 +2,11 @@ FROM python:3.13-slim
 
 WORKDIR /app
 
-COPY requirements.txt .
+COPY user-service/requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-COPY . .
-COPY ../shared /app/shared
+COPY shared/ ./shared/
+COPY user-service/ .
 
 RUN mkdir -p uploads/avatars
 
