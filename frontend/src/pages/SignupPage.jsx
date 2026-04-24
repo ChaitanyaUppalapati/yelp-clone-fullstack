@@ -1,7 +1,8 @@
 // pages/SignupPage.jsx
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext';
+import { useDispatch, useSelector } from 'react-redux';
+import { registerUser, clearError } from '../store/authSlice';
 
 const COUNTRY_OPTIONS = [
   'US', 'Canada', 'United Kingdom', 'Australia', 'Germany', 'France', 'Italy', 'Spain',
@@ -11,8 +12,9 @@ const COUNTRY_OPTIONS = [
 ];
 
 export default function SignupPage() {
-  const { signup } = useAuth();
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { loading, error: reduxError } = useSelector((state) => state.auth);
 
   const [form, setForm] = useState({
     name: '',
@@ -25,43 +27,46 @@ export default function SignupPage() {
     state: '',
     country: 'US',
   });
-  const [error, setError] = useState('');
-  const [loading, setLoading] = useState(false);
+  // Client-side validation lives in local state so it doesn't collide with the
+  // async Redux error (which is cleared on mount/unmount).
+  const [localError, setLocalError] = useState('');
+
+  useEffect(() => {
+    dispatch(clearError());
+    return () => { dispatch(clearError()); };
+  }, [dispatch]);
 
   const update = (field) => (e) => setForm((f) => ({ ...f, [field]: e.target.value }));
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError('');
+    setLocalError('');
 
     if (form.password !== form.confirmPassword) {
-      setError('Passwords do not match.');
+      setLocalError('Passwords do not match.');
       return;
     }
     if (form.password.length < 8) {
-      setError('Password must be at least 8 characters.');
+      setLocalError('Password must be at least 8 characters.');
       return;
     }
 
-    setLoading(true);
-    try {
-      await signup({
-        name: form.name,
-        email: form.email,
-        password: form.password,
-        role: form.role,
-        phone: form.phone || undefined,
-        city: form.city || undefined,
-        state: form.state || undefined,
-        country: form.country || undefined,
-      });
+    const result = await dispatch(registerUser({
+      name: form.name,
+      email: form.email,
+      password: form.password,
+      role: form.role,
+      phone: form.phone || undefined,
+      city: form.city || undefined,
+      state: form.state || undefined,
+      country: form.country || undefined,
+    }));
+    if (registerUser.fulfilled.match(result)) {
       navigate('/login');
-    } catch (err) {
-      setError(err.response?.data?.detail || 'Signup failed. Please try again.');
-    } finally {
-      setLoading(false);
     }
   };
+
+  const error = localError || reduxError;
 
   return (
     <div className="auth-page">

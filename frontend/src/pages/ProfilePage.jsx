@@ -1,10 +1,9 @@
 // pages/ProfilePage.jsx — Profile + Preferences tabs
 import { useState, useEffect, useRef } from 'react';
-import api from '../services/api';
-import { useAuth } from '../context/AuthContext';
+import { useDispatch, useSelector } from 'react-redux';
+import api, { MEDIA_BASE_URL } from '../services/api';
+import { setUser } from '../store/authSlice';
 import { Pencil } from 'lucide-react';
-
-const API_BASE = 'http://localhost:8000';
 
 const CUISINE_OPTIONS = ['Italian', 'American', 'French', 'Japanese', 'Thai', 'Mediterranean', 'Greek', 'Mexican', 'Indian', 'Chinese', 'Burmese', 'Korean'];
 const DIETARY_OPTIONS = ['vegan', 'vegetarian', 'gluten-free', 'halal', 'kosher', 'dairy-free'];
@@ -17,7 +16,8 @@ const COUNTRY_OPTIONS = [
 ];
 
 export default function ProfilePage() {
-  const { user } = useAuth();
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.auth.user);
   const [tab, setTab] = useState('profile');
 
   // Avatar state
@@ -46,9 +46,8 @@ export default function ProfilePage() {
         name: user.name || '', phone: user.phone || '', about_me: user.about_me || '',
         city: user.city || '', state: user.state || '', country: user.country || 'US', gender: user.gender || '',
       });
-      setAvatarUrl(user.profile_picture ? `${API_BASE}${user.profile_picture}` : null);
+      setAvatarUrl(user.profile_picture ? `${MEDIA_BASE_URL}${user.profile_picture}` : null);
     }
-    // Fetch preferences
     api.get('/users/me/preferences')
       .then((res) => { setPrefs(res.data); setPrefsExist(true); })
       .catch(() => setPrefsExist(false));
@@ -58,7 +57,8 @@ export default function ProfilePage() {
     e.preventDefault();
     setProfileLoading(true);
     try {
-      await api.put('/users/me', profile);
+      const res = await api.put('/users/me', profile);
+      dispatch(setUser(res.data));
       setProfileMsg('Profile updated!');
       setTimeout(() => setProfileMsg(''), 3000);
     } catch { setProfileMsg('Failed to update.'); }
@@ -99,7 +99,8 @@ export default function ProfilePage() {
       const res = await api.post('/users/me/avatar', formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
       });
-      setAvatarUrl(`${API_BASE}${res.data.profile_picture}`);
+      setAvatarUrl(`${MEDIA_BASE_URL}${res.data.profile_picture}`);
+      dispatch(setUser({ ...user, profile_picture: res.data.profile_picture }));
       setAvatarMsg('Photo updated!');
       setTimeout(() => setAvatarMsg(''), 3000);
     } catch (err) {

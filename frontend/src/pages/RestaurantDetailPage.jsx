@@ -1,8 +1,9 @@
 // pages/RestaurantDetailPage.jsx
 import { useState, useEffect } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import api from '../services/api';
-import { useAuth } from '../context/AuthContext';
+import { fetchFavorites, addFavorite, removeFavorite } from '../store/favoritesSlice';
 import StarRating from '../components/StarRating';
 import ReviewCard from '../components/ReviewCard';
 import { Heart, Store, PenLine, UtensilsCrossed, ArrowLeft, Search } from 'lucide-react';
@@ -19,11 +20,15 @@ const PLACEHOLDER_IMAGES = [
 export default function RestaurantDetailPage() {
   const { id } = useParams();
   const navigate = useNavigate();
-  const { isAuthenticated, isOwner, user } = useAuth();
+  const dispatch = useDispatch();
+
+  const { isAuthenticated, user } = useSelector((state) => state.auth);
+  const { favorites, loading: favoritesLoading, loadedForUserId } = useSelector((state) => state.favorites);
+  const isOwner = user?.role === 'owner';
+  const isFavorited = favorites.some((f) => f.restaurant_id === parseInt(id));
 
   const [restaurant, setRestaurant] = useState(null);
   const [reviews, setReviews] = useState([]);
-  const [isFavorited, setIsFavorited] = useState(false);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [claiming, setClaiming] = useState(false);
@@ -39,22 +44,21 @@ export default function RestaurantDetailPage() {
         ]);
         setRestaurant(restRes.data);
         setReviews(revRes.data);
-
-        // Check if user has favorited (only if authenticated)
-        if (isAuthenticated) {
-          try {
-            const favRes = await api.get('/favorites/');
-            setIsFavorited(favRes.data.some((f) => f.restaurant_id === parseInt(id)));
-          } catch { /* ignore if not auth */ }
-        }
-      } catch (err) {
+      } catch {
         setError('Restaurant not found.');
       } finally {
         setLoading(false);
       }
     };
     fetchData();
-  }, [id, isAuthenticated]);
+  }, [id]);
+
+  // Hydrate favorites once per session so the heart icon reflects real state.
+  useEffect(() => {
+    if (isAuthenticated && user?.id && loadedForUserId !== user.id) {
+      dispatch(fetchFavorites());
+    }
+  }, [isAuthenticated, dispatch, loadedForUserId, user?.id]);
 
   const claimRestaurant = async () => {
     setClaiming(true);
@@ -70,17 +74,13 @@ export default function RestaurantDetailPage() {
     }
   };
 
-  const toggleFavorite = async () => {
+  const toggleFavorite = () => {
     if (!isAuthenticated) { navigate('/login'); return; }
-    try {
-      if (isFavorited) {
-        await api.delete(`/favorites/${id}`);
-      } else {
-        await api.post(`/favorites/${id}`);
-      }
-      setIsFavorited(!isFavorited);
-    } catch (err) {
-      console.error('Favorite toggle failed', err);
+    if (favoritesLoading) return;
+    if (isFavorited) {
+      dispatch(removeFavorite(parseInt(id)));
+    } else {
+      dispatch(addFavorite(parseInt(id)));
     }
   };
 
@@ -126,6 +126,7 @@ export default function RestaurantDetailPage() {
               <button
                 className={`fav-btn ${isFavorited ? 'favorited' : ''}`}
                 onClick={toggleFavorite}
+                disabled={favoritesLoading}
                 title={isFavorited ? 'Remove from favorites' : 'Add to favorites'}
                 id="fav-toggle"
               >
@@ -205,7 +206,6 @@ export default function RestaurantDetailPage() {
           <div className="detail-sidebar">
             <div className="card">
               <div className="card-body">
-                {/* Contact */}
                 {restaurant.address_line && (
                   <div style={{ marginBottom: 'var(--sp-md)' }}>
                     <h5 style={{ marginBottom: '4px', color: 'var(--clr-text-muted)', fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Address</h5>
@@ -232,7 +232,6 @@ export default function RestaurantDetailPage() {
                   </div>
                 )}
 
-                {/* Hours */}
                 {restaurant.hours_of_operation && (
                   <div>
                     <h5 style={{ marginBottom: '8px', color: 'var(--clr-text-muted)', fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Hours</h5>

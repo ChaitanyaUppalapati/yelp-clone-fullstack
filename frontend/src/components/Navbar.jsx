@@ -1,13 +1,22 @@
 // components/Navbar.jsx
-import { Link, useLocation } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { logoutUser } from '../store/authSlice';
 import { UtensilsCrossed, Heart, ClipboardList, BarChart2 } from 'lucide-react';
 
 export default function Navbar() {
-  const { isAuthenticated, isOwner, user, logout } = useAuth();
   const location = useLocation();
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { isAuthenticated, user } = useSelector((state) => state.auth);
+  const isOwner = user?.role === 'owner';
 
   const isActive = (path) => location.pathname === path ? 'navbar-link active' : 'navbar-link';
+
+  const handleLogout = async () => {
+    await dispatch(logoutUser());
+    navigate('/login');
+  };
 
   return (
     <nav className="navbar">
@@ -36,7 +45,7 @@ export default function Navbar() {
                   <BarChart2 size={14} /> Dashboard
                 </Link>
               )}
-              <button onClick={logout} className="navbar-link" style={{ cursor: 'pointer' }}>
+              <button onClick={handleLogout} className="navbar-link" style={{ cursor: 'pointer' }}>
                 Logout
               </button>
             </>

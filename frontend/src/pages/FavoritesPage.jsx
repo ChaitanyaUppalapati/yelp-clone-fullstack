@@ -1,34 +1,42 @@
 // pages/FavoritesPage.jsx
 import { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import api from '../services/api';
 import RestaurantCard from '../components/RestaurantCard';
+import { fetchFavorites } from '../store/favoritesSlice';
 import { Heart, HeartOff } from 'lucide-react';
 
 export default function FavoritesPage() {
-  const [favorites, setFavorites] = useState([]);
+  const dispatch = useDispatch();
+  const { favorites, loading: favLoading } = useSelector((state) => state.favorites);
   const [restaurants, setRestaurants] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [restaurantsLoading, setRestaurantsLoading] = useState(true);
 
   useEffect(() => {
-    const fetchFavorites = async () => {
-      try {
-        const favRes = await api.get('/favorites/');
-        setFavorites(favRes.data);
+    dispatch(fetchFavorites());
+  }, [dispatch]);
 
-        // Fetch each favorited restaurant's details
-        const restaurantPromises = favRes.data.map((fav) =>
-          api.get(`/restaurants/${fav.restaurant_id}`).then((r) => r.data).catch(() => null)
+  // Hydrate full restaurant details for each favorited id.
+  useEffect(() => {
+    if (favLoading) return;
+    let cancelled = false;
+    (async () => {
+      setRestaurantsLoading(true);
+      try {
+        const results = await Promise.all(
+          favorites.map((fav) =>
+            api.get(`/restaurants/${fav.restaurant_id}`).then((r) => r.data).catch(() => null)
+          )
         );
-        const results = await Promise.all(restaurantPromises);
-        setRestaurants(results.filter(Boolean));
-      } catch (err) {
-        console.error('Failed to load favorites', err);
+        if (!cancelled) setRestaurants(results.filter(Boolean));
       } finally {
-        setLoading(false);
+        if (!cancelled) setRestaurantsLoading(false);
       }
-    };
-    fetchFavorites();
-  }, []);
+    })();
+    return () => { cancelled = true; };
+  }, [favorites, favLoading]);
+
+  const loading = favLoading || restaurantsLoading;
 
   return (
     <div className="page">

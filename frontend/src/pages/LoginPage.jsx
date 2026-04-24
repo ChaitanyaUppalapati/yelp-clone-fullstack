@@ -1,27 +1,28 @@
 // pages/LoginPage.jsx
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext';
+import { useDispatch, useSelector } from 'react-redux';
+import { loginUser, clearError } from '../store/authSlice';
 
 export default function LoginPage() {
-  const { login } = useAuth();
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { loading, error } = useSelector((state) => state.auth);
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
-  const [loading, setLoading] = useState(false);
+
+  // Stale auth errors shouldn't persist across route changes.
+  useEffect(() => {
+    dispatch(clearError());
+    return () => { dispatch(clearError()); };
+  }, [dispatch]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError('');
-    setLoading(true);
-    try {
-      await login(email, password);
+    const result = await dispatch(loginUser({ email, password }));
+    if (loginUser.fulfilled.match(result)) {
       navigate('/');
-    } catch (err) {
-      setError(err.response?.data?.detail || 'Login failed. Please check your credentials.');
-    } finally {
-      setLoading(false);
     }
   };
 
