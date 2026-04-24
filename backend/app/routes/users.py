@@ -24,13 +24,13 @@ router = APIRouter()
 # ---------------------------------------------------------------------------
 # Current user
 # ---------------------------------------------------------------------------
-@router.get("/me", response_model=UserOut)
+@router.get("/me", response_model=UserOut, summary="Get current user profile")
 def get_me(current_user: User = Depends(get_current_user)):
     """Return the authenticated user's profile."""
     return current_user
 
 
-@router.post("/me/avatar", response_model=UserOut)
+@router.post("/me/avatar", response_model=UserOut, summary="Upload profile picture")
 async def upload_avatar(
     file: UploadFile = File(...),
     db: Session = Depends(get_db),
@@ -58,7 +58,7 @@ async def upload_avatar(
     return current_user
 
 
-@router.put("/me", response_model=UserOut)
+@router.put("/me", response_model=UserOut, summary="Update current user profile")
 def update_me(
     payload: UserUpdate,
     db: Session = Depends(get_db),
@@ -75,7 +75,7 @@ def update_me(
 # ---------------------------------------------------------------------------
 # User preferences
 # ---------------------------------------------------------------------------
-@router.get("/me/preferences", response_model=UserPreferencesOut)
+@router.get("/me/preferences", response_model=UserPreferencesOut, summary="Get user preferences")
 def get_preferences(
     db: Session = Depends(get_db),
     current_user: User = Depends(get_current_user),
@@ -86,7 +86,7 @@ def get_preferences(
     return prefs
 
 
-@router.post("/me/preferences", response_model=UserPreferencesOut, status_code=status.HTTP_201_CREATED)
+@router.post("/me/preferences", response_model=UserPreferencesOut, status_code=status.HTTP_201_CREATED, summary="Create user preferences")
 def create_preferences(
     payload: UserPreferencesCreate,
     db: Session = Depends(get_db),
@@ -101,7 +101,7 @@ def create_preferences(
     return prefs
 
 
-@router.put("/me/preferences", response_model=UserPreferencesOut)
+@router.put("/me/preferences", response_model=UserPreferencesOut, summary="Update user preferences")
 def update_preferences(
     payload: UserPreferencesUpdate,
     db: Session = Depends(get_db),
@@ -120,7 +120,7 @@ def update_preferences(
 # ---------------------------------------------------------------------------
 # User history
 # ---------------------------------------------------------------------------
-@router.get("/me/history")
+@router.get("/me/history", summary="Get user activity history")
 def get_history(
     db: Session = Depends(get_db),
     current_user: User = Depends(get_current_user),
@@ -169,7 +169,7 @@ def get_history(
 # ---------------------------------------------------------------------------
 # Public user lookup
 # ---------------------------------------------------------------------------
-@router.get("/{user_id}", response_model=UserOut)
+@router.get("/{user_id}", response_model=UserOut, summary="Get public user profile by ID")
 def get_user(user_id: int, db: Session = Depends(get_db)):
     """Public profile lookup."""
     user = db.query(User).filter(User.id == user_id).first()

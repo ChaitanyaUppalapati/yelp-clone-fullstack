@@ -76,7 +76,7 @@ class AIService:
             "dietary_needs": prefs.dietary_needs or [],
             "ambiance_preferences": prefs.ambiance_preferences or [],
             "preferred_locations": prefs.preferred_locations or [],
-            "sort_preference": str(prefs.sort_preference) if prefs.sort_preference else None,
+            "sort_preference": prefs.sort_preference.value if prefs.sort_preference else None,
         }
 
     # ------------------------------------------------------------------
@@ -89,7 +89,7 @@ class AIService:
                 ConversationHistory.user_id == self.user_id,
                 ConversationHistory.session_id == session_id,
             )
-            .order_by(ConversationHistory.created_at.asc())
+            .order_by(ConversationHistory.id.asc())
             .limit(limit)
             .all()
         )
@@ -237,14 +237,15 @@ Your job is to help users find great restaurants based on their queries and pref
 
 {pref_section}
 
-Guidelines:
-- Always use the search_restaurants tool to find relevant restaurants before making recommendations.
-- Reference the user's saved preferences when relevant (match cuisine, price, dietary needs).
-- Provide personalized recommendations with brief reasoning (why it matches the user's request).
-- Format each recommendation clearly: name, rating (★), price tier ($-$$$$), and a short reason.
-- If the user asks a follow-up or refinement, use conversation history to stay contextual.
-- If local results are insufficient, use the web search tool for additional context.
-- Keep responses conversational, warm, and helpful — not robotic or formulaic.
+IMPORTANT RULES:
+1. ALWAYS call search_restaurants immediately for any restaurant-related query — never ask clarifying questions first.
+2. Search BROADLY: do NOT pass cuisine, dietary, or price filters from the user's preferences into the tool. Instead, search with only a keyword or city if the user mentioned one. Return a wide set of results and then YOU pick the best matches based on preferences.
+3. If the user says "yes", "sure", "go ahead", or similar follow-ups, call search_restaurants again with a broader or different keyword to find more options — do not error out.
+4. If no city is mentioned, omit the city filter and search the whole database.
+5. Preferences are for RANKING and RECOMMENDING, not for filtering the search query.
+6. Format each recommendation: restaurant name, rating (★), price ($-$$$$), and one sentence on why it suits the user.
+7. Keep responses conversational and warm — never robotic or overly formal.
+8. NEVER ask "do you have any preferences?" — you already know them from the section above.
 """
 
     # ------------------------------------------------------------------

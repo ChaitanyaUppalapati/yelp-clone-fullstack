@@ -10,7 +10,7 @@ from app.auth import hash_password, verify_password, create_access_token, get_cu
 router = APIRouter()
 
 
-@router.post("/register", response_model=UserOut, status_code=status.HTTP_201_CREATED)
+@router.post("/register", response_model=UserOut, status_code=status.HTTP_201_CREATED, summary="Register a new user")
 def register(payload: UserCreate, db: Session = Depends(get_db)):
     """Create a new user account."""
     if db.query(User).filter(User.email == payload.email).first():
@@ -32,7 +32,7 @@ def register(payload: UserCreate, db: Session = Depends(get_db)):
     return user
 
 
-@router.post("/login", response_model=Token)
+@router.post("/login", response_model=Token, summary="Login and get JWT token")
 def login(
     form_data: OAuth2PasswordRequestForm = Depends(),
     db: Session = Depends(get_db),
@@ -49,7 +49,7 @@ def login(
     return {"access_token": token, "token_type": "bearer"}
 
 
-@router.post("/logout", status_code=status.HTTP_200_OK)
+@router.post("/logout", status_code=status.HTTP_200_OK, summary="Logout (invalidate client token)")
 def logout(_=Depends(get_current_user)):
     """Logout — client should discard the JWT token."""
     return {"message": "Successfully logged out"}

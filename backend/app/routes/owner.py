@@ -3,7 +3,7 @@ from sqlalchemy.orm import Session
 from sqlalchemy import func
 
 from app.database import get_db
-from app.auth import require_owner
+from app.auth import require_owner, get_current_user
 from app.models.restaurant import Restaurant
 from app.models.review import Review
 from app.schemas.restaurant import RestaurantOut, RestaurantUpdate, RestaurantListOut
@@ -12,7 +12,7 @@ from app.schemas.review import ReviewOut
 router = APIRouter()
 
 
-@router.put("/claim/{restaurant_id}", response_model=RestaurantOut)
+@router.put("/claim/{restaurant_id}", response_model=RestaurantOut, summary="Claim an existing restaurant listing")
 def claim_restaurant(
     restaurant_id: int,
     db: Session = Depends(get_db),
@@ -32,7 +32,7 @@ def claim_restaurant(
     return r
 
 
-@router.get("/analytics")
+@router.get("/analytics", summary="Get analytics for all owned restaurants")
 def owner_analytics(
     db: Session = Depends(get_db),
     current_user=Depends(get_current_user),
@@ -88,7 +88,7 @@ def owner_analytics(
     }
 
 
-@router.get("/restaurants", response_model=list[RestaurantListOut])
+@router.get("/restaurants", response_model=list[RestaurantListOut], summary="List restaurants you own")
 def owner_restaurants(
     db: Session = Depends(get_db),
     current_user=Depends(require_owner),
@@ -101,7 +101,7 @@ def owner_restaurants(
     )
 
 
-@router.put("/restaurants/{restaurant_id}", response_model=RestaurantOut)
+@router.put("/restaurants/{restaurant_id}", response_model=RestaurantOut, summary="Update a restaurant you own")
 def update_restaurant(
     restaurant_id: int,
     payload: RestaurantUpdate,
@@ -121,7 +121,7 @@ def update_restaurant(
     return r
 
 
-@router.delete("/restaurants/{restaurant_id}", status_code=status.HTTP_204_NO_CONTENT)
+@router.delete("/restaurants/{restaurant_id}", status_code=status.HTTP_204_NO_CONTENT, summary="Deactivate (soft-delete) a restaurant you own")
 def delete_restaurant(
     restaurant_id: int,
     db: Session = Depends(get_db),
@@ -137,7 +137,7 @@ def delete_restaurant(
     db.commit()
 
 
-@router.get("/dashboard")
+@router.get("/dashboard", summary="Owner analytics dashboard")
 def owner_dashboard(
     db: Session = Depends(get_db),
     current_user=Depends(require_owner),
@@ -222,7 +222,7 @@ def owner_dashboard(
     }
 
 
-@router.get("/reviews", response_model=list[ReviewOut])
+@router.get("/reviews", response_model=list[ReviewOut], summary="List all reviews for your restaurants")
 def owner_reviews(
     skip: int = Query(0, ge=0),
     limit: int = Query(20, le=100),

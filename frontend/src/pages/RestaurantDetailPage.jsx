@@ -196,7 +196,7 @@ export default function RestaurantDetailPage() {
                 </div>
               ) : (
                 reviews.map((rev) => (
-                  <ReviewCard key={rev.id} review={rev} userName={`User #${rev.user_id}`} />
+                  <ReviewCard key={rev.id} review={rev} />
                 ))
               )}
             </div>

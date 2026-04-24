@@ -5,6 +5,7 @@ import api, { MEDIA_BASE_URL } from '../services/api';
 import { setUser } from '../store/authSlice';
 import { Pencil } from 'lucide-react';
 
+const LANGUAGE_OPTIONS = ['English', 'Spanish', 'French', 'Mandarin', 'Hindi', 'Arabic', 'Portuguese', 'Japanese', 'Korean', 'German', 'Italian', 'Punjabi', 'Tagalog', 'Vietnamese'];
 const CUISINE_OPTIONS = ['Italian', 'American', 'French', 'Japanese', 'Thai', 'Mediterranean', 'Greek', 'Mexican', 'Indian', 'Chinese', 'Burmese', 'Korean'];
 const DIETARY_OPTIONS = ['vegan', 'vegetarian', 'gluten-free', 'halal', 'kosher', 'dairy-free'];
 const AMBIANCE_OPTIONS = ['romantic', 'outdoor', 'family-friendly', 'trendy', 'casual', 'fine-dining', 'live-music'];
@@ -27,7 +28,7 @@ export default function ProfilePage() {
   const avatarInputRef = useRef(null);
 
   // Profile state
-  const [profile, setProfile] = useState({ name: '', phone: '', about_me: '', city: '', state: '', country: '', gender: '' });
+  const [profile, setProfile] = useState({ name: '', phone: '', about_me: '', city: '', state: '', country: '', gender: '', languages: [] });
   const [profileMsg, setProfileMsg] = useState('');
   const [profileLoading, setProfileLoading] = useState(false);
 
@@ -45,6 +46,7 @@ export default function ProfilePage() {
       setProfile({
         name: user.name || '', phone: user.phone || '', about_me: user.about_me || '',
         city: user.city || '', state: user.state || '', country: user.country || 'US', gender: user.gender || '',
+        languages: user.languages || [],
       });
       setAvatarUrl(user.profile_picture ? `${MEDIA_BASE_URL}${user.profile_picture}` : null);
     }
@@ -163,6 +165,12 @@ export default function ProfilePage() {
                 <input className="form-input" value={profile.name} onChange={(e) => setProfile((p) => ({ ...p, name: e.target.value }))} />
               </div>
               <div className="form-group">
+                <label className="form-label">Email</label>
+                <input className="form-input" value={user?.email || ''} readOnly style={{ opacity: 0.6, cursor: 'not-allowed' }} title="Email cannot be changed" />
+              </div>
+            </div>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
+              <div className="form-group">
                 <label className="form-label">Phone</label>
                 <input className="form-input" value={profile.phone} onChange={(e) => setProfile((p) => ({ ...p, phone: e.target.value }))} />
               </div>
@@ -201,6 +209,23 @@ export default function ProfilePage() {
                 </select>
               </div>
             </div>
+            <div className="form-group">
+              <label className="form-label">Languages</label>
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
+                {LANGUAGE_OPTIONS.map((lang) => (
+                  <button key={lang} type="button"
+                    className={`filter-chip ${profile.languages?.includes(lang) ? 'active' : ''}`}
+                    onClick={() => setProfile((p) => ({
+                      ...p,
+                      languages: p.languages?.includes(lang)
+                        ? p.languages.filter((l) => l !== lang)
+                        : [...(p.languages || []), lang],
+                    }))}>
+                    {profile.languages?.includes(lang) ? '✓ ' : ''}{lang}
+                  </button>
+                ))}
+              </div>
+            </div>
             <button type="submit" className="btn btn-primary" disabled={profileLoading} style={{ marginTop: '8px' }}>
               {profileLoading ? 'Saving…' : 'Save Profile'}
             </button>
@@ -217,7 +242,9 @@ export default function ProfilePage() {
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
                 {CUISINE_OPTIONS.map((c) => (
                   <button key={c} type="button" className={`filter-chip ${prefs.cuisine_preferences?.includes(c) ? 'active' : ''}`}
-                    onClick={() => togglePrefArray('cuisine_preferences', c)}>{c}</button>
+                    onClick={() => togglePrefArray('cuisine_preferences', c)}>
+                    {prefs.cuisine_preferences?.includes(c) ? '✓ ' : ''}{c}
+                  </button>
                 ))}
               </div>
             </div>
@@ -250,7 +277,9 @@ export default function ProfilePage() {
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
                 {DIETARY_OPTIONS.map((d) => (
                   <button key={d} type="button" className={`filter-chip ${prefs.dietary_needs?.includes(d) ? 'active' : ''}`}
-                    onClick={() => togglePrefArray('dietary_needs', d)}>{d}</button>
+                    onClick={() => togglePrefArray('dietary_needs', d)}>
+                    {prefs.dietary_needs?.includes(d) ? '✓ ' : ''}{d}
+                  </button>
                 ))}
               </div>
             </div>
@@ -260,7 +289,9 @@ export default function ProfilePage() {
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
                 {AMBIANCE_OPTIONS.map((a) => (
                   <button key={a} type="button" className={`filter-chip ${prefs.ambiance_preferences?.includes(a) ? 'active' : ''}`}
-                    onClick={() => togglePrefArray('ambiance_preferences', a)}>{a}</button>
+                    onClick={() => togglePrefArray('ambiance_preferences', a)}>
+                    {prefs.ambiance_preferences?.includes(a) ? '✓ ' : ''}{a}
+                  </button>
                 ))}
               </div>
             </div>

@@ -2,7 +2,7 @@ import uuid
 import os
 from typing import List
 from fastapi import APIRouter, Depends, HTTPException, status, UploadFile, File
-from sqlalchemy.orm import Session
+from sqlalchemy.orm import Session, joinedload
 
 from app.database import get_db
 from app.auth import get_current_user
@@ -16,7 +16,7 @@ UPLOAD_DIR = "uploads/reviews"
 router = APIRouter()
 
 
-@router.get("/restaurant/{restaurant_id}", response_model=list[ReviewOut])
+@router.get("/restaurant/{restaurant_id}", response_model=list[ReviewOut], summary="List all reviews for a restaurant")
 def get_reviews(
     restaurant_id: int,
     skip: int = 0,
@@ -26,13 +26,14 @@ def get_reviews(
     """List all reviews for a restaurant."""
     return (
         db.query(Review)
+        .options(joinedload(Review.user))
         .filter(Review.restaurant_id == restaurant_id)
         .order_by(Review.created_at.desc())
         .offset(skip).limit(limit).all()
     )
 
 
-@router.post("/", response_model=ReviewOut, status_code=status.HTTP_201_CREATED)
+@router.post("/", response_model=ReviewOut, status_code=status.HTTP_201_CREATED, summary="Submit a review for a restaurant")
 def create_review(
     payload: ReviewCreate,
     db: Session = Depends(get_db),
@@ -62,7 +63,7 @@ def create_review(
     return review
 
 
-@router.put("/{review_id}", response_model=ReviewOut)
+@router.put("/{review_id}", response_model=ReviewOut, summary="Update your own review")
 def update_review(
     review_id: int,
     payload: ReviewUpdate,
@@ -91,7 +92,7 @@ def update_review(
     return review
 
 
-@router.post("/{review_id}/photos", response_model=ReviewOut)
+@router.post("/{review_id}/photos", response_model=ReviewOut, summary="Attach photos to a review")
 async def upload_review_photos(
     review_id: int,
     files: List[UploadFile] = File(...),
@@ -128,7 +129,7 @@ async def upload_review_photos(
     return review
 
 
-@router.delete("/{review_id}", status_code=status.HTTP_204_NO_CONTENT)
+@router.delete("/{review_id}", status_code=status.HTTP_204_NO_CONTENT, summary="Delete your own review")
 def delete_review(
     review_id: int,
     db: Session = Depends(get_db),

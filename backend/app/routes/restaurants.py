@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends, HTTPException, Query, status
 
 from sqlalchemy import or_, cast, String as SAString
-from sqlalchemy.orm import Session
+from sqlalchemy.orm import Session, joinedload
 
 from typing import Optional
 
@@ -13,7 +13,7 @@ from app.schemas.restaurant import RestaurantCreate, RestaurantOut, RestaurantLi
 router = APIRouter()
 
 
-@router.get("/", response_model=list[RestaurantListOut])
+@router.get("/", response_model=list[RestaurantListOut], summary="List restaurants with optional filters")
 def list_restaurants(
     q:           Optional[str] = Query(None, description="Keyword search on name, description, amenities"),
     city:        Optional[str] = Query(None),
@@ -42,7 +42,7 @@ def list_restaurants(
     return query.order_by(Restaurant.avg_rating.desc()).offset(skip).limit(limit).all()
 
 
-@router.get("/{restaurant_id}", response_model=RestaurantOut)
+@router.get("/{restaurant_id}", response_model=RestaurantOut, summary="Get restaurant details with reviews")
 def get_restaurant(restaurant_id: int, db: Session = Depends(get_db)):
     """Get a single restaurant by ID, including its reviews."""
     r = (
@@ -56,7 +56,7 @@ def get_restaurant(restaurant_id: int, db: Session = Depends(get_db)):
     return r
 
 
-@router.post("/", response_model=RestaurantOut, status_code=status.HTTP_201_CREATED)
+@router.post("/", response_model=RestaurantOut, status_code=status.HTTP_201_CREATED, summary="Create a new restaurant listing")
 def create_restaurant(
     payload: RestaurantCreate,
     db: Session = Depends(get_db),
@@ -74,7 +74,7 @@ def create_restaurant(
     return r
 
 
-@router.post("/{restaurant_id}/claim", response_model=RestaurantOut)
+@router.post("/{restaurant_id}/claim", response_model=RestaurantOut, summary="Claim ownership of a restaurant")
 def claim_restaurant(
     restaurant_id: int,
     db: Session = Depends(get_db),

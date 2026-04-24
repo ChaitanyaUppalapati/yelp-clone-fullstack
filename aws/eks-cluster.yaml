@@ -1,0 +1,48 @@
+apiVersion: eksctl.io/v1alpha5
+kind: ClusterConfig
+
+metadata:
+  name: yelp-cluster
+  region: us-west-2
+  version: "1.29"
+  tags:
+    project: yelp-clone
+    owner: dipin
+
+# VPC — eksctl creates a new VPC with public+private subnets
+vpc:
+  cidr: 10.0.0.0/16
+  nat:
+    gateway: Single   # use HighlyAvailable for prod
+
+managedNodeGroups:
+  - name: app-nodes
+    instanceType: t3.medium
+    minSize: 2
+    maxSize: 6
+    desiredCapacity: 3
+    volumeSize: 20
+    privateNetworking: true
+    labels:
+      role: app
+    tags:
+      nodegroup: app-nodes
+    iam:
+      withAddonPolicies:
+        ebs: true          # for PersistentVolumes (MongoDB)
+        albIngress: true   # for AWS Load Balancer Controller
+
+addons:
+  - name: vpc-cni
+    version: latest
+  - name: coredns
+    version: latest
+  - name: kube-proxy
+    version: latest
+  - name: aws-ebs-csi-driver
+    version: latest
+    wellKnownPolicies:
+      ebsCSIController: true
+
+iam:
+  withOIDC: true   # required for IAM Roles for Service Accounts (IRSA)

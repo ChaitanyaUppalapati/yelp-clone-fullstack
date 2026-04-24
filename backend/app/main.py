@@ -40,13 +40,9 @@ app.include_router(owner.router,        prefix="/owner",        tags=["Owner"])
 app.include_router(ai_assistant.router, prefix="/ai",           tags=["AI Assistant"])
 
 
-app.mount("/uploads", StaticFiles(directory=UPLOAD_DIR), name="uploads")
+app.mount("/uploads", StaticFiles(directory="uploads"), name="uploads")
 
 
-@app.get("/", tags=["Health"])
+@app.get("/", tags=["Health"], summary="Health check")
 def root():
     return {"status": "ok", "message": "Yelp Clone API is running"}
-
-
-# Serve uploaded files as static assets
-app.mount("/uploads", StaticFiles(directory="uploads"), name="uploads")

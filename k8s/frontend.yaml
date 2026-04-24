@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend
+  namespace: yelp
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: frontend
+  template:
+    metadata:
+      labels:
+        app: frontend
+    spec:
+      containers:
+        - name: frontend
+          image: yelp/frontend:latest
+          ports:
+            - containerPort: 5173
+          env:
+            - name: VITE_USER_SERVICE_URL
+              value: "http://user-service:8001"
+            - name: VITE_RESTAURANT_SERVICE_URL
+              value: "http://restaurant-service:8002"
+            - name: VITE_OWNER_SERVICE_URL
+              value: "http://owner-service:8003"
+            - name: VITE_REVIEW_SERVICE_URL
+              value: "http://review-service:8004"
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 5173
+            initialDelaySeconds: 15
+            periodSeconds: 10
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "128Mi"
+            limits:
+              cpu: "500m"
+              memory: "512Mi"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend-service
+  namespace: yelp
+spec:
+  selector:
+    app: frontend
+  ports:
+    - port: 80
+      targetPort: 5173
+  type: NodePort
