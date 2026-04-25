@@ -15,10 +15,17 @@ export const fetchCurrentUser = createAsyncThunk(
       const res = await api.get('/users/me');
       localStorage.setItem('user', JSON.stringify(res.data));
       return res.data;
-    } catch {
-      localStorage.removeItem('token');
-      localStorage.removeItem('user');
-      return rejectWithValue('Session expired');
+    } catch (err) {
+      // Only treat actual auth failures as session-ended. Network errors,
+      // 5xx, etc. are transient — leaving the token in place lets the user
+      // stay logged in once the backend recovers.
+      const status = err.response?.status;
+      if (status === 401 || status === 403) {
+        localStorage.removeItem('token');
+        localStorage.removeItem('user');
+        return rejectWithValue('Session expired');
+      }
+      return rejectWithValue(err.response?.data?.detail || 'Failed to restore session');
     }
   }
 );
@@ -102,11 +109,16 @@ const authSlice = createSlice({
         state.user = payload;
         state.isAuthenticated = true;
       })
-      .addCase(fetchCurrentUser.rejected, (state) => {
+      .addCase(fetchCurrentUser.rejected, (state, { payload }) => {
         state.loading = false;
-        state.token = null;
-        state.user = null;
-        state.isAuthenticated = false;
+        // Only drop the token on real session expiry. On transient failures
+        // (network/5xx) keep the cached token so a later retry — e.g. next
+        // page load — can still authenticate without forcing re-login.
+        if (payload === 'Session expired') {
+          state.token = null;
+          state.user = null;
+          state.isAuthenticated = false;
+        }
       })
 
       .addCase(loginUser.pending, (state) => { state.loading = true; state.error = null; })

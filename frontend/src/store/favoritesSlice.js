@@ -17,9 +17,11 @@ export const fetchFavorites = createAsyncThunk(
       const res = await api.get('/favorites/');
       const userIdAtEnd = getState().auth.user?.id ?? null;
       // If logout or user-switch happened mid-flight, drop the response so we
-      // don't repopulate favorites for a different (or no) user.
+      // don't repopulate favorites for a different (or no) user. The reducer
+      // checks for this code and skips writing to state.error so the abort
+      // doesn't surface as a real error in the UI.
       if (userIdAtStart !== userIdAtEnd) {
-        return rejectWithValue('User changed during fetch');
+        return rejectWithValue({ code: 'USER_CHANGED' });
       }
       return { items: res.data, userId: userIdAtEnd };
     } catch (err) {
@@ -77,6 +79,9 @@ const favoritesSlice = createSlice({
       })
       .addCase(fetchFavorites.rejected, (state, { payload }) => {
         state.loading = false;
+        // Silent abort: the thunk noticed the auth user changed mid-flight.
+        // Don't surface this as a UI error.
+        if (payload?.code === 'USER_CHANGED') return;
         state.error = payload;
       })
 

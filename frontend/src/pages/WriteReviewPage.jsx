@@ -4,7 +4,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import api from '../services/api';
 import StarRating from '../components/StarRating';
-import { createReview, clearReviewStatus } from '../store/reviewSlice';
+import { createReview, clearReviewStatus, clearReviewError } from '../store/reviewSlice';
 import { Camera, X, PenLine } from 'lucide-react';
 
 export default function WriteReviewPage() {
@@ -28,7 +28,16 @@ export default function WriteReviewPage() {
       .catch(() => setError('Restaurant not found'));
   }, [restaurantId]);
 
-  useEffect(() => () => { dispatch(clearReviewStatus()); }, [dispatch]);
+  // Clear any stale review status/error from a prior submission so revisiting
+  // the page doesn't immediately show a success banner from before.
+  useEffect(() => {
+    dispatch(clearReviewStatus());
+    dispatch(clearReviewError());
+    return () => {
+      dispatch(clearReviewStatus());
+      dispatch(clearReviewError());
+    };
+  }, [dispatch]);
 
   // Clear pending navigation timer if user leaves the page early.
   useEffect(() => () => {
