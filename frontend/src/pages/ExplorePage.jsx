@@ -1,38 +1,22 @@
 // pages/ExplorePage.jsx — Landing page with search and restaurant grid
-import { useState, useEffect } from 'react';
-import api from '../services/api';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import SearchBar from '../components/SearchBar';
 import RestaurantCard from '../components/RestaurantCard';
+import { fetchRestaurants } from '../store/restaurantSlice';
 import { UtensilsCrossed } from 'lucide-react';
 
 export default function ExplorePage() {
-  const [restaurants, setRestaurants] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState('');
-
-  const fetchRestaurants = async (filters = {}) => {
-    setLoading(true);
-    setError('');
-    try {
-      const params = {};
-      if (filters.keyword) params.q = filters.keyword;
-      if (filters.cuisine) params.cuisine = filters.cuisine;
-      if (filters.city) params.city = filters.city;
-      if (filters.pricing_tier) params.pricing_tier = filters.pricing_tier;
-
-      const res = await api.get('/restaurants/', { params });
-      setRestaurants(res.data);
-    } catch (err) {
-      setError('Failed to load restaurants. Please try again.');
-      console.error(err);
-    } finally {
-      setLoading(false);
-    }
-  };
+  const dispatch = useDispatch();
+  const { restaurants, loading, error } = useSelector((state) => state.restaurants);
 
   useEffect(() => {
-    fetchRestaurants();
-  }, []);
+    dispatch(fetchRestaurants({}));
+  }, [dispatch]);
+
+  const handleSearch = (filters) => {
+    dispatch(fetchRestaurants(filters));
+  };
 
   return (
     <div className="page">
@@ -41,7 +25,7 @@ export default function ExplorePage() {
         <div className="container">
           <h1>Discover Great Restaurants</h1>
           <p>Find the perfect spot for any occasion. Read reviews, explore menus, and make reservations.</p>
-          <SearchBar onSearch={fetchRestaurants} />
+          <SearchBar onSearch={handleSearch} />
         </div>
       </section>
 

@@ -1,13 +1,17 @@
 // pages/WriteReviewPage.jsx
 import { useState, useEffect, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import api from '../services/api';
 import StarRating from '../components/StarRating';
+import { createReview, clearReviewStatus, clearReviewError } from '../store/reviewSlice';
 import { Camera, X, PenLine } from 'lucide-react';
 
 export default function WriteReviewPage() {
   const { id: restaurantId } = useParams();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { loading: submitting, error: submitError, reviewStatus } = useSelector((s) => s.reviews);
 
   const [restaurant, setRestaurant] = useState(null);
   const [rating, setRating] = useState(0);
@@ -15,14 +19,30 @@ export default function WriteReviewPage() {
   const [photos, setPhotos] = useState([]);        // File objects
   const [previews, setPreviews] = useState([]);     // Object URLs for preview
   const [error, setError] = useState('');
-  const [loading, setLoading] = useState(false);
   const photoInputRef = useRef(null);
+  const navTimeoutRef = useRef(null);
 
   useEffect(() => {
     api.get(`/restaurants/${restaurantId}`)
       .then((res) => setRestaurant(res.data))
       .catch(() => setError('Restaurant not found'));
   }, [restaurantId]);
+
+  // Clear any stale review status/error from a prior submission so revisiting
+  // the page doesn't immediately show a success banner from before.
+  useEffect(() => {
+    dispatch(clearReviewStatus());
+    dispatch(clearReviewError());
+    return () => {
+      dispatch(clearReviewStatus());
+      dispatch(clearReviewError());
+    };
+  }, [dispatch]);
+
+  // Clear pending navigation timer if user leaves the page early.
+  useEffect(() => () => {
+    if (navTimeoutRef.current) clearTimeout(navTimeoutRef.current);
+  }, []);
 
   // Cleanup preview object URLs on unmount
   useEffect(() => {
@@ -49,33 +69,47 @@ export default function WriteReviewPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (rating === 0) { setError('Please select a rating.'); return; }
-
-    setLoading(true);
     setError('');
-    try {
-      // Step 1: create the review
-      const res = await api.post('/reviews/', {
-        restaurant_id: parseInt(restaurantId),
-        rating,
-        comment: comment.trim() || null,
-      });
 
-      // Step 2: upload photos if any
-      if (photos.length > 0) {
+    const result = await dispatch(createReview({
+      restaurant_id: parseInt(restaurantId),
+      rating,
+      comment: comment.trim() || null,
+    }));
+
+    if (!createReview.fulfilled.match(result)) return;
+
+    const { status, data } = result.payload;
+
+    // Photos can only be attached once the review row exists. When Kafka
+    // returns 202 we don't have an id yet, so skip photo upload and inform
+    // the user — they can add photos later from the detail page.
+    if (status === 202) {
+      // Show the async notice briefly, then navigate back. The ref + cleanup
+      // above cancels this timer if the user navigates away first.
+      navTimeoutRef.current = setTimeout(
+        () => navigate(`/restaurants/${restaurantId}`),
+        1500,
+      );
+      return;
+    }
+
+    if (photos.length > 0 && data?.id) {
+      try {
         const formData = new FormData();
-        photos.forEach((photo) => formData.append('files', photo));
-        await api.post(`/reviews/${res.data.id}/photos`, formData, {
+        photos.forEach((p) => formData.append('files', p));
+        await api.post(`/reviews/${data.id}/photos`, formData, {
           headers: { 'Content-Type': 'multipart/form-data' },
         });
+      } catch (err) {
+        setError(err.response?.data?.detail || 'Review saved but photo upload failed.');
+        return;
       }
-
-      navigate(`/restaurants/${restaurantId}`);
-    } catch (err) {
-      setError(err.response?.data?.detail || 'Failed to submit review.');
-    } finally {
-      setLoading(false);
     }
+    navigate(`/restaurants/${restaurantId}`);
   };
+
+  const displayError = error || submitError;
 
   return (
     <div className="page">
@@ -88,7 +122,12 @@ export default function WriteReviewPage() {
             </p>
           )}
 
-          {error && <div className="alert alert-error">{error}</div>}
+          {displayError && <div className="alert alert-error">{displayError}</div>}
+          {reviewStatus === 'accepted' && (
+            <div className="alert alert-success">
+              Your review was submitted — it'll appear shortly.
+            </div>
+          )}
 
           <form onSubmit={handleSubmit}>
             <div className="form-group" style={{ marginBottom: 'var(--sp-xl)' }}>
@@ -163,8 +202,8 @@ export default function WriteReviewPage() {
             </div>
 
             <div style={{ display: 'flex', gap: 'var(--sp-md)', marginTop: 'var(--sp-lg)' }}>
-              <button type="submit" className="btn btn-primary btn-lg" disabled={loading} id="review-submit">
-                {loading ? 'Submitting…' : <><PenLine size={15} /> Submit Review</>}
+              <button type="submit" className="btn btn-primary btn-lg" disabled={submitting} id="review-submit">
+                {submitting ? 'Submitting…' : <><PenLine size={15} /> Submit Review</>}
               </button>
               <button type="button" className="btn btn-ghost btn-lg" onClick={() => navigate(-1)}>
                 Cancel

@@ -1,9 +1,10 @@
 // components/ProtectedRoute.jsx
 import { Navigate } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext';
+import { useSelector } from 'react-redux';
 
 export default function ProtectedRoute({ children, ownerOnly = false }) {
-  const { isAuthenticated, isOwner, loading } = useAuth();
+  const { isAuthenticated, user, loading } = useSelector((state) => state.auth);
+  const isOwner = user?.role === 'owner';
 
   if (loading) {
     return (
