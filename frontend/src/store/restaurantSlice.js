@@ -82,8 +82,14 @@ const restaurantSlice = createSlice({
         state.currentRestaurant = null;
       })
 
+      .addCase(createRestaurant.pending, (state) => { state.loading = true; state.error = null; })
       .addCase(createRestaurant.fulfilled, (state, { payload }) => {
+        state.loading = false;
         state.restaurants = [payload, ...state.restaurants];
+      })
+      .addCase(createRestaurant.rejected, (state, { payload }) => {
+        state.loading = false;
+        state.error = payload;
       });
   },
 });

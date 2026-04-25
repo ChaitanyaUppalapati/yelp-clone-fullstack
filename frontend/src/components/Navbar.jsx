@@ -8,7 +8,7 @@ export default function Navbar() {
   const location = useLocation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { isAuthenticated, user } = useSelector((state) => state.auth);
+  const { isAuthenticated, user, loading: authLoading } = useSelector((state) => state.auth);
   const isOwner = user?.role === 'owner';
 
   const isActive = (path) => location.pathname === path ? 'navbar-link active' : 'navbar-link';
@@ -26,7 +26,7 @@ export default function Navbar() {
         <div className="navbar-links">
           <Link to="/" className={isActive('/')}>Explore</Link>
 
-          {isAuthenticated ? (
+          {authLoading ? null : isAuthenticated ? (
             <>
               <Link to="/add-restaurant" className={isActive('/add-restaurant')}>
                 + Add Restaurant

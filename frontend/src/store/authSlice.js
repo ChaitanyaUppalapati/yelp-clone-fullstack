@@ -35,14 +35,20 @@ export const loginUser = createAsyncThunk(
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       });
       const { access_token } = res.data;
-      localStorage.setItem('token', access_token);
 
+      // Pass the bearer explicitly here — we deliberately don't write the
+      // token to localStorage until /users/me succeeds, so a failed user
+      // fetch leaves no half-authenticated state behind.
       const userRes = await api.get('/users/me', {
         headers: { Authorization: `Bearer ${access_token}` },
       });
+
+      localStorage.setItem('token', access_token);
       localStorage.setItem('user', JSON.stringify(userRes.data));
       return { token: access_token, user: userRes.data };
     } catch (err) {
+      localStorage.removeItem('token');
+      localStorage.removeItem('user');
       return rejectWithValue(err.response?.data?.detail || 'Login failed');
     }
   }

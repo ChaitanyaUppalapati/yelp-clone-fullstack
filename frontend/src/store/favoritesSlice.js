@@ -12,9 +12,16 @@ import { fetchCurrentUser, logoutUser } from './authSlice';
 export const fetchFavorites = createAsyncThunk(
   'favorites/fetch',
   async (_, { getState, rejectWithValue }) => {
+    const userIdAtStart = getState().auth.user?.id ?? null;
     try {
       const res = await api.get('/favorites/');
-      return { items: res.data, userId: getState().auth.user?.id ?? null };
+      const userIdAtEnd = getState().auth.user?.id ?? null;
+      // If logout or user-switch happened mid-flight, drop the response so we
+      // don't repopulate favorites for a different (or no) user.
+      if (userIdAtStart !== userIdAtEnd) {
+        return rejectWithValue('User changed during fetch');
+      }
+      return { items: res.data, userId: userIdAtEnd };
     } catch (err) {
       return rejectWithValue(err.response?.data?.detail || 'Failed to load favorites');
     }

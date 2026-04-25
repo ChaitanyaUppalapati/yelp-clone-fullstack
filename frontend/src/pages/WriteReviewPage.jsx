@@ -20,6 +20,7 @@ export default function WriteReviewPage() {
   const [previews, setPreviews] = useState([]);     // Object URLs for preview
   const [error, setError] = useState('');
   const photoInputRef = useRef(null);
+  const navTimeoutRef = useRef(null);
 
   useEffect(() => {
     api.get(`/restaurants/${restaurantId}`)
@@ -28,6 +29,11 @@ export default function WriteReviewPage() {
   }, [restaurantId]);
 
   useEffect(() => () => { dispatch(clearReviewStatus()); }, [dispatch]);
+
+  // Clear pending navigation timer if user leaves the page early.
+  useEffect(() => () => {
+    if (navTimeoutRef.current) clearTimeout(navTimeoutRef.current);
+  }, []);
 
   // Cleanup preview object URLs on unmount
   useEffect(() => {
@@ -70,8 +76,12 @@ export default function WriteReviewPage() {
     // returns 202 we don't have an id yet, so skip photo upload and inform
     // the user — they can add photos later from the detail page.
     if (status === 202) {
-      // Show the async notice briefly, then navigate back.
-      setTimeout(() => navigate(`/restaurants/${restaurantId}`), 1500);
+      // Show the async notice briefly, then navigate back. The ref + cleanup
+      // above cancels this timer if the user navigates away first.
+      navTimeoutRef.current = setTimeout(
+        () => navigate(`/restaurants/${restaurantId}`),
+        1500,
+      );
       return;
     }
 
