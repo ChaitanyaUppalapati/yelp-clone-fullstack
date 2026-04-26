@@ -40,6 +40,17 @@ def create_review(
     current_user=Depends(get_current_user),
 ):
     """Submit a review (one per user per restaurant)."""
+    if current_user.role == "owner":
+        raise HTTPException(status_code=403, detail="Owner accounts cannot submit reviews")
+
+    restaurant = (
+        db.query(Restaurant)
+        .filter(Restaurant.id == payload.restaurant_id, Restaurant.is_active == True)
+        .first()
+    )
+    if not restaurant:
+        raise HTTPException(status_code=404, detail="Restaurant not found")
+
     existing = (
         db.query(Review)
         .filter(Review.user_id == current_user.id, Review.restaurant_id == payload.restaurant_id)
@@ -52,11 +63,9 @@ def create_review(
     db.add(review)
 
     # Update restaurant aggregate stats
-    restaurant = db.query(Restaurant).filter(Restaurant.id == payload.restaurant_id).first()
-    if restaurant:
-        total = restaurant.avg_rating * restaurant.review_count + payload.rating
-        restaurant.review_count += 1
-        restaurant.avg_rating = round(total / restaurant.review_count, 2)
+    total = restaurant.avg_rating * restaurant.review_count + payload.rating
+    restaurant.review_count += 1
+    restaurant.avg_rating = round(total / restaurant.review_count, 2)
 
     db.commit()
     db.refresh(review)

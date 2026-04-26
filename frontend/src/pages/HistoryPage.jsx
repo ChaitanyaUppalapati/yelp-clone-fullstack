@@ -1,9 +1,9 @@
-// pages/HistoryPage.jsx — User activity history: reviews written + restaurants added
+// pages/HistoryPage.jsx - User activity history: reviews written + restaurants added
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import api from '../services/api';
 import StarRating from '../components/StarRating';
-import { ClipboardList, PenLine, MapPin, Store } from 'lucide-react';
+import { ClipboardList, PenLine, MapPin, Store, Trash2 } from 'lucide-react';
 
 const PRICE_LABELS = ['', '$', '$$', '$$$', '$$$$'];
 
@@ -12,6 +12,7 @@ export default function HistoryPage() {
   const [history, setHistory] = useState({ reviews: [], restaurants_added: [] });
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  const [deletingReviewId, setDeletingReviewId] = useState(null);
 
   useEffect(() => {
     api.get('/users/me/history')
@@ -19,6 +20,24 @@ export default function HistoryPage() {
       .catch(() => setError('Failed to load history.'))
       .finally(() => setLoading(false));
   }, []);
+
+  const handleDeleteReview = async (reviewId) => {
+    if (!window.confirm('Delete this review?')) return;
+
+    setDeletingReviewId(reviewId);
+    setError('');
+    try {
+      await api.delete(`/reviews/${reviewId}`);
+      setHistory((prev) => ({
+        ...prev,
+        reviews: prev.reviews.filter((review) => review.id !== reviewId),
+      }));
+    } catch (err) {
+      setError(err.response?.data?.detail || 'Failed to delete review.');
+    } finally {
+      setDeletingReviewId(null);
+    }
+  };
 
   return (
     <div className="page">
@@ -71,7 +90,18 @@ export default function HistoryPage() {
                             >
                               {rev.restaurant_name}
                             </Link>
-                            <StarRating rating={rev.rating} size="0.875rem" />
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                              <StarRating rating={rev.rating} size="0.875rem" />
+                              <button
+                                type="button"
+                                className="btn btn-ghost btn-sm"
+                                onClick={() => handleDeleteReview(rev.id)}
+                                disabled={deletingReviewId === rev.id}
+                              >
+                                <Trash2 size={14} />
+                                {deletingReviewId === rev.id ? 'Deleting...' : 'Delete'}
+                              </button>
+                            </div>
                           </div>
                           {rev.comment && (
                             <p style={{ color: 'var(--clr-text-secondary)', fontSize: '0.9375rem', lineHeight: 1.6 }}>

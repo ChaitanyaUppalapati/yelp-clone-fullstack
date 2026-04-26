@@ -1,3 +1,6 @@
+import re
+from collections import Counter
+
 from fastapi import APIRouter, Depends, HTTPException, Query, status
 from sqlalchemy.orm import Session
 from sqlalchemy import func
@@ -10,6 +13,115 @@ from app.schemas.restaurant import RestaurantOut, RestaurantUpdate, RestaurantLi
 from app.schemas.review import ReviewOut
 
 router = APIRouter()
+
+POSITIVE_SENTIMENT_TERMS = {
+    "amazing", "awesome", "attentive", "best", "clean", "cozy", "delicious",
+    "excellent", "exceptional", "fantastic", "favorite", "flavorful", "fresh",
+    "friendly", "great", "impeccable", "impressed", "incredible", "love",
+    "loved", "lovely", "perfect", "phenomenal", "quick", "recommend",
+    "satisfying", "stellar", "superb", "tasty", "warm", "wonderful",
+}
+NEGATIVE_SENTIMENT_TERMS = {
+    "awful", "bad", "bland", "cold", "confusing", "crowded", "disappointing",
+    "dirty", "dry", "expensive", "forgetful", "greasy", "hate", "horrible",
+    "mediocre", "noisy", "overpriced", "rude", "salty", "slow", "stale",
+    "terrible", "tough", "underwhelming", "unfriendly", "worst",
+}
+THEME_STOPWORDS = {
+    "a", "an", "and", "are", "as", "at", "be", "but", "by", "for", "from",
+    "had", "has", "have", "i", "if", "in", "is", "it", "its", "my", "of",
+    "on", "or", "our", "so", "that", "the", "their", "them", "there", "this",
+    "to", "too", "very", "was", "we", "were", "with", "you", "your",
+}
+
+
+def _tokenize_review_text(text: str) -> list[str]:
+    return re.findall(r"[a-z']+", (text or "").lower())
+
+
+def _sentiment_label(score: float) -> str:
+    if score >= 0.2:
+        return "positive"
+    if score <= -0.2:
+        return "negative"
+    return "neutral"
+
+
+def _analyze_review_sentiment(review: Review) -> tuple[float, str, list[str], list[str]]:
+    tokens = _tokenize_review_text(review.comment or "")
+    positive_hits = [token for token in tokens if token in POSITIVE_SENTIMENT_TERMS]
+    negative_hits = [token for token in tokens if token in NEGATIVE_SENTIMENT_TERMS]
+
+    matched_terms = len(positive_hits) + len(negative_hits)
+    lexical_score = (
+        (len(positive_hits) - len(negative_hits)) / matched_terms
+        if matched_terms
+        else 0.0
+    )
+    rating_score = ((review.rating or 3) - 3) / 2
+    score = round((lexical_score * 0.7) + (rating_score * 0.3), 2)
+    return score, _sentiment_label(score), positive_hits, negative_hits
+
+
+def _summarize_sentiment(reviews: list[Review], restaurant_name_map: dict[int, str]) -> dict:
+    distribution = {"positive": 0, "neutral": 0, "negative": 0}
+    positive_terms = Counter()
+    negative_terms = Counter()
+    scores: list[float] = []
+    per_restaurant: dict[int, dict] = {}
+
+    for review in reviews:
+        score, label, positive_hits, negative_hits = _analyze_review_sentiment(review)
+        distribution[label] += 1
+        scores.append(score)
+        positive_terms.update(
+            token for token in positive_hits if token not in THEME_STOPWORDS and len(token) > 2
+        )
+        negative_terms.update(
+            token for token in negative_hits if token not in THEME_STOPWORDS and len(token) > 2
+        )
+
+        restaurant_summary = per_restaurant.setdefault(
+            review.restaurant_id,
+            {
+                "restaurant_id": review.restaurant_id,
+                "restaurant_name": restaurant_name_map.get(review.restaurant_id, "Unknown"),
+                "review_count": 0,
+                "scores": [],
+            },
+        )
+        restaurant_summary["review_count"] += 1
+        restaurant_summary["scores"].append(score)
+
+    average_score = round(sum(scores) / len(scores), 2) if scores else 0.0
+    restaurant_breakdown = []
+    for summary in per_restaurant.values():
+        avg_score = round(sum(summary["scores"]) / len(summary["scores"]), 2)
+        restaurant_breakdown.append({
+            "restaurant_id": summary["restaurant_id"],
+            "restaurant_name": summary["restaurant_name"],
+            "review_count": summary["review_count"],
+            "average_score": avg_score,
+            "label": _sentiment_label(avg_score),
+        })
+
+    restaurant_breakdown.sort(key=lambda item: (-item["review_count"], item["restaurant_name"]))
+
+    return {
+        "overall_label": _sentiment_label(average_score),
+        "average_score": average_score,
+        "distribution": distribution,
+        "total_reviews_analyzed": len(scores),
+        "top_positive_themes": [
+            {"term": term, "count": count}
+            for term, count in positive_terms.most_common(5)
+        ],
+        "top_negative_themes": [
+            {"term": term, "count": count}
+            for term, count in negative_terms.most_common(5)
+        ],
+        "restaurant_breakdown": restaurant_breakdown,
+    }
 
 
 @router.put("/claim/{restaurant_id}", response_model=RestaurantOut, summary="Claim an existing restaurant listing")
@@ -45,7 +157,16 @@ def owner_analytics(
     if not restaurants:
         return {"total_restaurants": 0, "total_reviews": 0, "avg_rating": 0.0,
                 "ratings_distribution": {1: 0, 2: 0, 3: 0, 4: 0, 5: 0},
-                "recent_reviews": []}
+                "recent_reviews": [],
+                "sentiment_analysis": {
+                    "overall_label": "neutral",
+                    "average_score": 0.0,
+                    "distribution": {"positive": 0, "neutral": 0, "negative": 0},
+                    "total_reviews_analyzed": 0,
+                    "top_positive_themes": [],
+                    "top_negative_themes": [],
+                    "restaurant_breakdown": [],
+                }}
 
     rest_ids = [r.id for r in restaurants]
 
@@ -85,6 +206,7 @@ def owner_analytics(
         "avg_rating": avg_rating,
         "ratings_distribution": distribution,
         "recent_reviews": recent,
+        "sentiment_analysis": _summarize_sentiment(all_reviews, rest_name_map),
     }
 
 
@@ -170,7 +292,7 @@ def owner_dashboard(
         .one()
     )
 
-    # Rating distribution (1–5 star counts)
+    # Rating distribution (1-5 star counts)
     dist_rows = (
         db.query(Review.rating, func.count(Review.id).label("cnt"))
         .filter(Review.restaurant_id.in_(restaurant_ids))

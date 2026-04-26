@@ -1,16 +1,40 @@
-// components/ChatWidget.jsx — Floating AI chatbot with session + restaurant cards
 import { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import api from '../services/api';
 import { useAuth } from '../context/AuthContext';
-import { MessageCircle, Bot, Trash2, X, UtensilsCrossed, Send, MapPin } from 'lucide-react';
+import {
+  MessageCircle,
+  Bot,
+  Trash2,
+  X,
+  UtensilsCrossed,
+  Send,
+  MapPin,
+  ExternalLink,
+} from 'lucide-react';
 
 const PRICE_LABELS = ['', '$', '$$', '$$$', '$$$$'];
 
 function RestaurantRecommendation({ restaurant }) {
+  const isExternal =
+    restaurant.is_external ||
+    restaurant.source === 'web' ||
+    !restaurant.id ||
+    String(restaurant.id).startsWith('web-');
+  const Wrapper = isExternal ? 'a' : Link;
+  const wrapperProps = isExternal
+    ? {
+        href: restaurant.website || restaurant.source_url,
+        target: '_blank',
+        rel: 'noopener noreferrer',
+      }
+    : {
+        to: `/restaurants/${restaurant.id}`,
+      };
+
   return (
-    <Link
-      to={`/restaurants/${restaurant.id}`}
+    <Wrapper
+      {...wrapperProps}
       style={{
         display: 'block',
         background: 'var(--clr-bg-elevated)',
@@ -27,22 +51,38 @@ function RestaurantRecommendation({ restaurant }) {
     >
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
         <span style={{ fontWeight: 600, fontSize: '0.875rem' }}>{restaurant.name}</span>
-        <span style={{ fontSize: '0.75rem', color: 'var(--clr-gold, #f5a623)', whiteSpace: 'nowrap', marginLeft: '8px' }}>
-          ★ {restaurant.avg_rating?.toFixed(1)}
-        </span>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginLeft: '8px' }}>
+          {typeof restaurant.avg_rating === 'number' && (
+            <span style={{ fontSize: '0.75rem', color: 'var(--clr-gold, #f5a623)', whiteSpace: 'nowrap' }}>
+              * {restaurant.avg_rating.toFixed(1)}
+            </span>
+          )}
+          {isExternal && <ExternalLink size={12} style={{ color: 'var(--clr-text-muted)' }} />}
+        </div>
       </div>
+
       <div style={{ display: 'flex', gap: '8px', marginTop: '4px', flexWrap: 'wrap' }}>
         {restaurant.cuisine_type && (
           <span style={{ fontSize: '0.75rem', color: 'var(--clr-text-muted)' }}>{restaurant.cuisine_type}</span>
         )}
-        {restaurant.pricing_tier && (
-          <span style={{ fontSize: '0.75rem', color: 'var(--clr-text-muted)' }}>{PRICE_LABELS[restaurant.pricing_tier]}</span>
+        {(restaurant.pricing_tier || restaurant.price_label) && (
+          <span style={{ fontSize: '0.75rem', color: 'var(--clr-text-muted)' }}>
+            {restaurant.price_label || PRICE_LABELS[restaurant.pricing_tier]}
+          </span>
         )}
         {restaurant.city && (
-          <span style={{ fontSize: '0.75rem', color: 'var(--clr-text-muted)', display: 'flex', alignItems: 'center', gap: '2px' }}><MapPin size={11} /> {restaurant.city}</span>
+          <span style={{ fontSize: '0.75rem', color: 'var(--clr-text-muted)', display: 'flex', alignItems: 'center', gap: '2px' }}>
+            <MapPin size={11} /> {restaurant.city}
+          </span>
         )}
       </div>
-    </Link>
+
+      {restaurant.description && (
+        <p style={{ marginTop: '6px', fontSize: '0.75rem', color: 'var(--clr-text-secondary)', lineHeight: 1.5 }}>
+          {restaurant.description}
+        </p>
+      )}
+    </Wrapper>
   );
 }
 
@@ -53,7 +93,6 @@ export default function ChatWidget() {
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
   const messagesEndRef = useRef(null);
-  // Persist session_id for the lifetime of the chat (reset on "new chat")
   const sessionIdRef = useRef(null);
 
   const scrollToBottom = () => {
@@ -65,7 +104,6 @@ export default function ChatWidget() {
   const sendMessage = async (text) => {
     if (!text.trim()) return;
 
-    // Generate session_id on first message
     if (!sessionIdRef.current) {
       sessionIdRef.current = crypto.randomUUID();
     }
@@ -117,7 +155,6 @@ export default function ChatWidget() {
 
   return (
     <>
-      {/* Chat Panel */}
       {open && (
         <div className="chat-panel">
           <div className="chat-header">
@@ -155,8 +192,11 @@ export default function ChatWidget() {
                 </div>
                 {msg.role === 'assistant' && msg.restaurants?.length > 0 && (
                   <div style={{ paddingLeft: '8px' }}>
-                    {msg.restaurants.map((r) => (
-                      <RestaurantRecommendation key={r.id} restaurant={r} />
+                    {msg.restaurants.map((restaurant) => (
+                      <RestaurantRecommendation
+                        key={restaurant.id || restaurant.source_url || restaurant.name}
+                        restaurant={restaurant}
+                      />
                     ))}
                   </div>
                 )}
@@ -164,13 +204,12 @@ export default function ChatWidget() {
             ))}
             {loading && (
               <div className="chat-bubble assistant" style={{ opacity: 0.6 }}>
-                <span className="typing-dots">Thinking…</span>
+                <span className="typing-dots">Thinking...</span>
               </div>
             )}
             <div ref={messagesEndRef} />
           </div>
 
-          {/* Quick Actions */}
           {messages.length === 0 && (
             <div className="chat-quick-actions">
               {quickActions.map((action) => (
@@ -186,12 +225,11 @@ export default function ChatWidget() {
             </div>
           )}
 
-          {/* Input */}
           <form className="chat-input-area" onSubmit={handleSubmit}>
             <input
               type="text"
               className="form-input"
-              placeholder={isAuthenticated ? 'Ask me anything…' : 'Log in to chat…'}
+              placeholder={isAuthenticated ? 'Ask me anything...' : 'Log in to chat...'}
               value={input}
               onChange={(e) => setInput(e.target.value)}
               disabled={loading || !isAuthenticated}
@@ -209,7 +247,6 @@ export default function ChatWidget() {
         </div>
       )}
 
-      {/* FAB */}
       <button
         className="chat-fab"
         onClick={() => setOpen(!open)}

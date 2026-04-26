@@ -1,42 +1,25 @@
 """
-AI Assistant service — LangGraph (create_react_agent) + OpenAI (gpt-4o-mini) + Tavily.
-
-LangChain 1.x no longer ships AgentExecutor; the recommended path is
-langgraph.prebuilt.create_react_agent which builds a ReAct agent as a
-compiled graph.
-
-Flow per chat() call:
-  1. Load user preferences from DB
-  2. Load conversation history from DB (last 10 turns) as LangChain messages
-  3. Build LangGraph agent with tools:
-       - search_restaurants  (queries local MySQL DB)
-       - tavily_web_search   (web search, only if TAVILY_API_KEY set)
-  4. Run agent with [history…, HumanMessage(message)]
-  5. Persist user + assistant messages to ConversationHistory table
-  6. Scan result messages for tool outputs to surface restaurant data
-  7. Return { response, session_id, restaurants }
+AI assistant service backed by LangGraph + OpenAI with a local DB search tool
+and a Tavily-powered web fallback for restaurants missing from the database.
 """
 
 import json
-import os
+import re
 from typing import Optional
 
-from langchain_openai import ChatOpenAI
+from langchain_core.messages import AIMessage, HumanMessage, ToolMessage
 from langchain_core.tools import StructuredTool
-from langchain_core.messages import HumanMessage, AIMessage, ToolMessage
+from langchain_openai import ChatOpenAI
 from langgraph.prebuilt import create_react_agent
 from pydantic import BaseModel, Field
 from sqlalchemy.orm import Session
 
 from app.config import settings
+from app.models.conversation import ConversationHistory, MessageRole
 from app.models.restaurant import Restaurant
 from app.models.user import UserPreferences
-from app.models.conversation import ConversationHistory, MessageRole
 
 
-# ---------------------------------------------------------------------------
-# Pydantic input schema for the search tool
-# ---------------------------------------------------------------------------
 class SearchRestaurantsInput(BaseModel):
     cuisine: Optional[str] = Field(None, description="Cuisine type, e.g. Italian, Mexican, Japanese")
     city: Optional[str] = Field(None, description="City name to search in")
@@ -46,9 +29,14 @@ class SearchRestaurantsInput(BaseModel):
     dietary: Optional[str] = Field(None, description="Dietary restriction e.g. vegan, halal, gluten-free")
 
 
-# ---------------------------------------------------------------------------
-# AIService
-# ---------------------------------------------------------------------------
+class SearchWebRestaurantsInput(BaseModel):
+    query: str = Field(
+        ...,
+        description="Natural-language restaurant query. Include the restaurant name or the cuisine, vibe, and city.",
+    )
+    city: Optional[str] = Field(None, description="Optional city to narrow the web search.")
+
+
 class AIService:
     def __init__(self, db: Session, user_id: int):
         self.db = db
@@ -59,9 +47,6 @@ class AIService:
             api_key=settings.OPENAI_API_KEY,
         )
 
-    # ------------------------------------------------------------------
-    # Preferences
-    # ------------------------------------------------------------------
     def _load_preferences(self) -> dict:
         prefs = (
             self.db.query(UserPreferences)
@@ -79,9 +64,6 @@ class AIService:
             "sort_preference": prefs.sort_preference.value if prefs.sort_preference else None,
         }
 
-    # ------------------------------------------------------------------
-    # Conversation history
-    # ------------------------------------------------------------------
     def _get_history(self, session_id: str, limit: int = 10) -> list:
         rows = (
             self.db.query(ConversationHistory)
@@ -93,6 +75,7 @@ class AIService:
             .limit(limit)
             .all()
         )
+
         messages = []
         for row in rows:
             if row.role == MessageRole.user:
@@ -111,9 +94,6 @@ class AIService:
         self.db.add(entry)
         self.db.commit()
 
-    # ------------------------------------------------------------------
-    # Tools
-    # ------------------------------------------------------------------
     def _build_search_restaurants_tool(self) -> StructuredTool:
         db = self.db
 
@@ -126,57 +106,62 @@ class AIService:
             dietary: Optional[str] = None,
         ) -> str:
             """Search for restaurants in the local database."""
-            from sqlalchemy import or_, cast, String as SAString
+            from sqlalchemy import String as SAString, cast, or_
 
-            q = db.query(Restaurant).filter(Restaurant.is_active == True)
+            query = db.query(Restaurant).filter(Restaurant.is_active == True)
 
             if cuisine:
-                q = q.filter(Restaurant.cuisine_type.ilike(f"%{cuisine}%"))
+                query = query.filter(Restaurant.cuisine_type.ilike(f"%{cuisine}%"))
             if city:
-                q = q.filter(Restaurant.city.ilike(f"%{city}%"))
+                query = query.filter(Restaurant.city.ilike(f"%{city}%"))
             if price_tier:
-                q = q.filter(Restaurant.pricing_tier == price_tier)
+                query = query.filter(Restaurant.pricing_tier == price_tier)
             if keyword:
-                q = q.filter(
+                query = query.filter(
                     or_(
                         Restaurant.name.ilike(f"%{keyword}%"),
                         Restaurant.description.ilike(f"%{keyword}%"),
                     )
                 )
             if ambiance:
-                q = q.filter(
+                query = query.filter(
                     or_(
                         Restaurant.description.ilike(f"%{ambiance}%"),
                         cast(Restaurant.amenities, SAString).ilike(f"%{ambiance}%"),
                     )
                 )
             if dietary:
-                q = q.filter(
+                query = query.filter(
                     or_(
                         Restaurant.description.ilike(f"%{dietary}%"),
                         cast(Restaurant.amenities, SAString).ilike(f"%{dietary}%"),
                     )
                 )
 
-            results = q.order_by(Restaurant.avg_rating.desc()).limit(8).all()
+            results = query.order_by(Restaurant.avg_rating.desc()).limit(8).all()
 
             if not results:
-                return json.dumps({"results": [], "message": "No restaurants found matching the criteria."})
+                return json.dumps({
+                    "results": [],
+                    "message": "No restaurants found matching the criteria.",
+                })
 
             restaurants = []
-            for r in results:
-                price_label = ["", "$", "$$", "$$$", "$$$$"][r.pricing_tier or 2]
+            for restaurant in results:
+                price_label = ["", "$", "$$", "$$$", "$$$$"][restaurant.pricing_tier or 2]
                 restaurants.append({
-                    "id": r.id,
-                    "name": r.name,
-                    "cuisine_type": r.cuisine_type or "Various",
-                    "avg_rating": float(r.avg_rating or 0),
-                    "review_count": r.review_count or 0,
-                    "pricing_tier": r.pricing_tier,
+                    "id": restaurant.id,
+                    "name": restaurant.name,
+                    "cuisine_type": restaurant.cuisine_type or "Various",
+                    "avg_rating": float(restaurant.avg_rating or 0),
+                    "review_count": restaurant.review_count or 0,
+                    "pricing_tier": restaurant.pricing_tier,
                     "price_label": price_label,
-                    "city": r.city or "",
-                    "description": (r.description or "")[:120],
-                    "amenities": r.amenities or [],
+                    "city": restaurant.city or "",
+                    "description": (restaurant.description or "")[:120],
+                    "amenities": restaurant.amenities or [],
+                    "source": "database",
+                    "is_external": False,
                 })
             return json.dumps({"results": restaurants})
 
@@ -184,10 +169,8 @@ class AIService:
             func=search_restaurants,
             name="search_restaurants",
             description=(
-                "Search for restaurants in the local database. "
-                "Use this to find matching restaurants based on cuisine, city, price tier, "
-                "keywords, ambiance, or dietary restrictions. "
-                "Always call this before making specific restaurant recommendations."
+                "Search for restaurants in the local database. Always call this first for "
+                "restaurant-related queries before deciding whether a web search is needed."
             ),
             args_schema=SearchRestaurantsInput,
         )
@@ -195,23 +178,69 @@ class AIService:
     def _build_tavily_tool(self):
         if not settings.TAVILY_API_KEY:
             return None
+
         try:
-            os.environ["TAVILY_API_KEY"] = settings.TAVILY_API_KEY
-            from langchain_community.tools.tavily_search import TavilySearchResults
-            return TavilySearchResults(
-                max_results=3,
+            from tavily import TavilyClient
+
+            tavily_client = TavilyClient(api_key=settings.TAVILY_API_KEY)
+
+            def clean_title(title: str) -> str:
+                cleaned = re.split(r"\s+[|\-:]\s+", (title or "").strip(), maxsplit=1)[0].strip()
+                return cleaned or (title or "Restaurant result")
+
+            def search_web_restaurants(query: str, city: Optional[str] = None) -> str:
+                """Search the web for restaurants that are not present in the local database."""
+                search_query = query.strip()
+                if city and city.lower() not in search_query.lower():
+                    search_query = f"{search_query} in {city}"
+
+                response = tavily_client.search(
+                    query=f"{search_query} restaurant",
+                    search_depth="advanced",
+                    max_results=5,
+                    include_answer=True,
+                    include_raw_content=False,
+                )
+
+                results = []
+                for index, item in enumerate(response.get("results", []), start=1):
+                    title = clean_title(item.get("title") or "")
+                    content = (item.get("content") or "").strip()
+                    results.append({
+                        "id": f"web-{index}-{abs(hash(item.get('url') or title))}",
+                        "name": title,
+                        "cuisine_type": None,
+                        "avg_rating": None,
+                        "review_count": None,
+                        "pricing_tier": None,
+                        "price_label": None,
+                        "city": city or "",
+                        "description": content[:220],
+                        "amenities": [],
+                        "website": item.get("url"),
+                        "source_url": item.get("url"),
+                        "source": "web",
+                        "is_external": True,
+                    })
+
+                return json.dumps({
+                    "results": results,
+                    "answer": response.get("answer"),
+                })
+
+            return StructuredTool.from_function(
+                func=search_web_restaurants,
+                name="search_web_restaurants",
                 description=(
-                    "Search the web for current information about restaurants, "
-                    "hours, events, trending spots, or any real-world context. "
-                    "Use this when local database results are insufficient."
+                    "Search the web with Tavily for restaurants or restaurant details that are "
+                    "missing from the local database. Use this when local search returns no matches, "
+                    "too few matches, or the user asks about a specific place not in the app."
                 ),
+                args_schema=SearchWebRestaurantsInput,
             )
         except Exception:
             return None
 
-    # ------------------------------------------------------------------
-    # System prompt
-    # ------------------------------------------------------------------
     def _build_system_prompt(self, prefs: dict) -> str:
         pref_lines = []
         if prefs.get("cuisine_preferences"):
@@ -224,81 +253,90 @@ class AIService:
         if prefs.get("ambiance_preferences"):
             pref_lines.append(f"- Preferred ambiance: {', '.join(prefs['ambiance_preferences'])}")
         if prefs.get("preferred_locations"):
-            pref_lines.append(f"- Preferred locations: {', '.join(str(l) for l in prefs['preferred_locations'])}")
+            pref_lines.append(f"- Preferred locations: {', '.join(str(location) for location in prefs['preferred_locations'])}")
 
         pref_section = (
             "The user has the following saved preferences:\n" + "\n".join(pref_lines)
             if pref_lines
             else "The user has not set any preferences yet."
         )
+        rules = [
+            "1. Always call search_restaurants immediately for restaurant-related requests and do not ask clarifying questions first.",
+            "2. Search broadly. Do not pass cuisine, dietary, or price preferences into the tool unless the user explicitly asked for them in this message.",
+            "3. If local search returns no strong matches, too few useful matches, or the user asks about a restaurant that is not in the app, call search_web_restaurants.",
+            "4. Use search_web_restaurants for current real-world info such as specific restaurants, recent openings, hours, or places missing from the database.",
+            "5. If you use web results, clearly say they came from the web and may not yet exist in the local app database.",
+            "6. If the user says yes, sure, go ahead, or a similar follow-up, call a search tool again with a broader or different keyword instead of failing.",
+            "7. If no city is mentioned, omit the city filter and search the whole database.",
+            "8. Preferences are for ranking and recommending, not for filtering the search query.",
+            "9. Format each recommendation with the restaurant name, rating if known, price if known, and one sentence on why it suits the user.",
+            "10. Keep responses conversational and warm, not robotic or overly formal.",
+            "11. Never ask whether the user has preferences because you already know them from the section above.",
+        ]
 
-        return f"""You are a friendly and knowledgeable restaurant discovery assistant for a Yelp-like platform.
-Your job is to help users find great restaurants based on their queries and preferences.
+        return (
+            "You are a friendly and knowledgeable restaurant discovery assistant for a Yelp-like platform.\n"
+            "Your job is to help users find great restaurants based on their queries and preferences.\n\n"
+            f"{pref_section}\n\n"
+            "IMPORTANT RULES:\n"
+            + "\n".join(rules)
+        )
 
-{pref_section}
-
-IMPORTANT RULES:
-1. ALWAYS call search_restaurants immediately for any restaurant-related query — never ask clarifying questions first.
-2. Search BROADLY: do NOT pass cuisine, dietary, or price filters from the user's preferences into the tool. Instead, search with only a keyword or city if the user mentioned one. Return a wide set of results and then YOU pick the best matches based on preferences.
-3. If the user says "yes", "sure", "go ahead", or similar follow-ups, call search_restaurants again with a broader or different keyword to find more options — do not error out.
-4. If no city is mentioned, omit the city filter and search the whole database.
-5. Preferences are for RANKING and RECOMMENDING, not for filtering the search query.
-6. Format each recommendation: restaurant name, rating (★), price ($-$$$$), and one sentence on why it suits the user.
-7. Keep responses conversational and warm — never robotic or overly formal.
-8. NEVER ask "do you have any preferences?" — you already know them from the section above.
-"""
-
-    # ------------------------------------------------------------------
-    # Main chat method
-    # ------------------------------------------------------------------
     async def chat(self, session_id: str, message: str) -> dict:
         prefs = self._load_preferences()
         history = self._get_history(session_id)
 
-        # Build tools
         tools = [self._build_search_restaurants_tool()]
         tavily = self._build_tavily_tool()
         if tavily:
             tools.append(tavily)
 
-        system_prompt = self._build_system_prompt(prefs)
-
-        # Build agent using LangGraph's create_react_agent
         agent = create_react_agent(
             model=self.llm,
             tools=tools,
-            prompt=system_prompt,
+            prompt=self._build_system_prompt(prefs),
         )
 
-        # Compose message list: history + new human message
-        input_messages = history + [HumanMessage(content=message)]
+        result = await agent.ainvoke({"messages": history + [HumanMessage(content=message)]})
 
-        result = await agent.ainvoke({"messages": input_messages})
-
-        # Extract final AI response (last AIMessage in result)
         response_text = ""
-        for msg in reversed(result.get("messages", [])):
-            if isinstance(msg, AIMessage) and msg.content:
-                response_text = msg.content if isinstance(msg.content, str) else str(msg.content)
+        for agent_message in reversed(result.get("messages", [])):
+            if isinstance(agent_message, AIMessage) and agent_message.content:
+                response_text = (
+                    agent_message.content
+                    if isinstance(agent_message.content, str)
+                    else str(agent_message.content)
+                )
                 break
         if not response_text:
             response_text = "I'm sorry, I couldn't process your request."
 
-        # Save messages to DB
         self._save_message(session_id, MessageRole.user, message)
         self._save_message(session_id, MessageRole.assistant, response_text)
 
-        # Extract restaurants from ToolMessage outputs
         restaurants = []
-        for msg in result.get("messages", []):
-            if isinstance(msg, ToolMessage) and msg.name == "search_restaurants":
-                try:
-                    parsed = json.loads(msg.content)
-                    if "results" in parsed and parsed["results"]:
-                        restaurants = parsed["results"]
-                        break
-                except (json.JSONDecodeError, TypeError):
-                    pass
+        seen_restaurants = set()
+        for tool_message in result.get("messages", []):
+            if not isinstance(tool_message, ToolMessage):
+                continue
+            if tool_message.name not in {"search_restaurants", "search_web_restaurants"}:
+                continue
+
+            try:
+                parsed = json.loads(tool_message.content)
+            except (json.JSONDecodeError, TypeError):
+                continue
+
+            for restaurant in parsed.get("results", []):
+                dedupe_key = (
+                    str(restaurant.get("id") or ""),
+                    restaurant.get("name"),
+                    restaurant.get("source_url"),
+                )
+                if dedupe_key in seen_restaurants:
+                    continue
+                restaurants.append(restaurant)
+                seen_restaurants.add(dedupe_key)
 
         return {
             "response": response_text,
