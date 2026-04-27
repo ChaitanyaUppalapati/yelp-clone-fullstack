@@ -1,0 +1,80 @@
+# Use this file INSTEAD of mongodb.yaml when recreating the cluster
+# to reattach the existing EBS volume and keep all MongoDB data.
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: mongo-data-restored
+  namespace: yelp
+spec:
+  capacity:
+    storage: 10Gi
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: ebs-gp3
+  csi:
+    driver: ebs.csi.aws.com
+    volumeHandle: vol-030e2cefed6998e84
+    fsType: ext4
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mongo-data-mongodb-0
+  namespace: yelp
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: ebs-gp3
+  volumeName: mongo-data-restored
+  resources:
+    requests:
+      storage: 10Gi
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: mongodb
+  namespace: yelp
+spec:
+  serviceName: mongodb-service
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mongodb
+  template:
+    metadata:
+      labels:
+        app: mongodb
+    spec:
+      containers:
+        - name: mongodb
+          image: mongo:7
+          ports:
+            - containerPort: 27017
+          volumeMounts:
+            - name: mongo-data
+              mountPath: /data/db
+          resources:
+            requests:
+              cpu: "200m"
+              memory: "512Mi"
+            limits:
+              cpu: "1000m"
+              memory: "1Gi"
+      volumes:
+        - name: mongo-data
+          persistentVolumeClaim:
+            claimName: mongo-data-mongodb-0
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mongodb-service
+  namespace: yelp
+spec:
+  clusterIP: None
+  selector:
+    app: mongodb
+  ports:
+    - port: 27017

@@ -157,7 +157,7 @@ export default function RestaurantDetailPage() {
 
             <div className="detail-meta">
               <span><StarRating rating={parseFloat(restaurant.avg_rating)} /> {parseFloat(restaurant.avg_rating).toFixed(1)}</span>
-              <span>({restaurant.review_count} reviews)</span>
+              <span>({reviews.length || restaurant.review_count || 0} reviews)</span>
               {restaurant.cuisine_type && <span className="badge badge-primary">{restaurant.cuisine_type}</span>}
               {restaurant.pricing_tier && <span className="price-tier">{PRICE_LABELS[restaurant.pricing_tier]}</span>}
             </div>

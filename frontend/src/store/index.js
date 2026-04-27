@@ -12,6 +12,7 @@ export const store = configureStore({
     reviews: reviewReducer,
     favorites: favoritesReducer,
   },
+  devTools: true,
 });
 
 export default store;
