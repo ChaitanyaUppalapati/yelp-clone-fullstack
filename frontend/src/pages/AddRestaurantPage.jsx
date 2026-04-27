@@ -53,7 +53,8 @@ export default function AddRestaurantPage() {
       const res = await api.post('/restaurants/', payload);
       navigate(`/restaurants/${res.data.id}`);
     } catch (err) {
-      setError(err.response?.data?.detail || 'Failed to add restaurant.');
+      const detail = err.response?.data?.detail;
+      setError(Array.isArray(detail) ? detail.map((e) => e.msg).join(', ') : detail || 'Failed to add restaurant.');
     } finally {
       setLoading(false);
     }

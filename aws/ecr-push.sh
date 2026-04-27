@@ -40,14 +40,14 @@ for entry in "${SERVICES[@]}"; do
         --image-scanning-configuration scanOnPush=true \
         --tags Key=project,Value=yelp-clone
 
-  echo "==> Building yelp/${NAME}"
-  docker build \
-    -f "${CONTEXT}/Dockerfile" \
-    -t "${REPO}:latest" \
-    .
+  echo "==> Building yelp/${NAME} (linux/amd64)"
+  if [[ "$NAME" == "frontend" ]]; then
+    docker buildx build --platform linux/amd64 -f "${CONTEXT}/Dockerfile" -t "${REPO}:latest" --push "${CONTEXT}"
+  else
+    docker buildx build --platform linux/amd64 -f "${CONTEXT}/Dockerfile" -t "${REPO}:latest" --push backend/
+  fi
 
-  echo "==> Pushing yelp/${NAME}"
-  docker push "${REPO}:latest"
+  echo "==> Pushed yelp/${NAME}"
 done
 
 echo ""

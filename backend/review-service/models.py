@@ -18,6 +18,7 @@ class ReviewOut(BaseModel):
     id: str
     restaurant_id: str
     user_id: str
+    user_name: Optional[str] = None
     rating: int
     comment: Optional[str] = None
     photos: Optional[List[str]] = None
@@ -28,4 +29,5 @@ class ReviewOut(BaseModel):
     def from_doc(cls, doc: dict) -> "ReviewOut":
         doc = dict(doc)
         doc["id"] = str(doc.pop("_id", doc.get("id", "")))
+        doc.pop("user_doc", None)
         return cls(**doc)

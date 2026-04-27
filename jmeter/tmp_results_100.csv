@@ -1,0 +1,1201 @@
+timeStamp,elapsed,label,responseCode,responseMessage,threadName,dataType,success,failureMessage,bytes,sentBytes,grpThreads,allThreads,URL,Latency,IdleTime,Connect
+1777162916608,16,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-1,text,true,,587,137,1,3,http://localhost:8002/restaurants/?q=ramen,16,0,10
+1777162916651,3,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-2,text,true,,587,137,1,3,http://localhost:8002/restaurants/?q=ramen,3,0,0
+1777162916749,4,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-3,text,true,,587,137,1,5,http://localhost:8002/restaurants/?q=ramen,4,0,1
+1777162916608,198,POST /auth/login,200,OK,Login Load Test 1-1,text,true,,316,249,3,6,http://localhost:8001/auth/login,198,0,10
+1777162916608,198,Login for Token,200,OK,Review Submission Load Test 3-1,text,true,,316,249,3,6,http://localhost:8001/auth/login,198,0,10
+1777162916807,3,POST /reviews/,201,Created,Review Submission Load Test 3-1,text,true,,380,440,3,5,http://localhost:8004/reviews/,3,0,0
+1777162916850,3,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-4,text,true,,587,137,1,5,http://localhost:8002/restaurants/?q=ramen,3,0,0
+1777162916682,186,POST /auth/login,200,OK,Login Load Test 1-2,text,true,,316,249,2,4,http://localhost:8001/auth/login,186,0,1
+1777162916689,188,Login for Token,200,OK,Review Submission Load Test 3-2,text,true,,316,249,2,3,http://localhost:8001/auth/login,188,0,1
+1777162916877,3,POST /reviews/,201,Created,Review Submission Load Test 3-2,text,true,,380,440,2,3,http://localhost:8004/reviews/,3,0,1
+1777162916950,4,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-5,text,true,,587,137,1,5,http://localhost:8002/restaurants/?q=ramen,4,0,0
+1777162917050,2,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-6,text,true,,587,137,1,7,http://localhost:8002/restaurants/?q=ramen,2,0,0
+1777162916885,182,Login for Token,200,OK,Review Submission Load Test 3-4,text,true,,316,249,3,6,http://localhost:8001/auth/login,182,0,1
+1777162917067,3,POST /reviews/,201,Created,Review Submission Load Test 3-4,text,true,,380,440,3,6,http://localhost:8004/reviews/,3,0,0
+1777162916885,185,POST /auth/login,200,OK,Login Load Test 1-4,text,true,,316,249,3,6,http://localhost:8001/auth/login,185,0,1
+1777162917149,4,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-7,text,true,,587,137,1,7,http://localhost:8002/restaurants/?q=ramen,4,0,1
+1777162916984,185,POST /auth/login,200,OK,Login Load Test 1-5,text,true,,316,249,3,6,http://localhost:8001/auth/login,185,0,1
+1777162916782,389,POST /auth/login,200,OK,Login Load Test 1-3,text,true,,316,249,2,5,http://localhost:8001/auth/login,389,0,0
+1777162916787,385,Login for Token,200,OK,Review Submission Load Test 3-3,text,true,,316,249,3,4,http://localhost:8001/auth/login,385,0,0
+1777162917173,3,POST /reviews/,201,Created,Review Submission Load Test 3-3,text,true,,380,440,3,4,http://localhost:8004/reviews/,3,0,0
+1777162916990,259,Login for Token,200,OK,Review Submission Load Test 3-5,text,true,,316,250,3,6,http://localhost:8001/auth/login,259,0,0
+1777162917248,3,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-8,text,true,,587,137,1,6,http://localhost:8002/restaurants/?q=ramen,3,0,0
+1777162917249,2,POST /reviews/,201,Created,Review Submission Load Test 3-5,text,true,,380,440,3,5,http://localhost:8004/reviews/,2,0,0
+1777162917085,183,POST /auth/login,200,OK,Login Load Test 1-6,text,true,,316,250,2,4,http://localhost:8001/auth/login,183,0,0
+1777162917089,263,Login for Token,200,OK,Review Submission Load Test 3-6,text,true,,316,250,3,6,http://localhost:8001/auth/login,263,0,0
+1777162917349,4,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-9,text,true,,587,137,1,6,http://localhost:8002/restaurants/?q=ramen,4,0,1
+1777162917352,2,POST /reviews/,201,Created,Review Submission Load Test 3-6,text,true,,380,440,3,5,http://localhost:8004/reviews/,2,0,0
+1777162917184,181,POST /auth/login,200,OK,Login Load Test 1-7,text,true,,316,250,2,4,http://localhost:8001/auth/login,181,0,0
+1777162917189,242,Login for Token,200,OK,Review Submission Load Test 3-7,text,true,,316,250,3,5,http://localhost:8001/auth/login,242,0,0
+1777162917431,3,POST /reviews/,201,Created,Review Submission Load Test 3-7,text,true,,380,440,3,5,http://localhost:8004/reviews/,3,0,1
+1777162917447,2,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-10,text,true,,587,137,1,5,http://localhost:8002/restaurants/?q=ramen,2,0,0
+1777162917549,4,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-11,text,true,,587,137,1,7,http://localhost:8002/restaurants/?q=ramen,4,0,1
+1777162917285,357,POST /auth/login,200,OK,Login Load Test 1-8,text,true,,316,250,4,8,http://localhost:8001/auth/login,357,0,1
+1777162917286,356,Login for Token,200,OK,Review Submission Load Test 3-8,text,true,,316,250,4,7,http://localhost:8001/auth/login,356,0,0
+1777162917643,3,POST /reviews/,201,Created,Review Submission Load Test 3-8,text,true,,380,440,4,7,http://localhost:8004/reviews/,3,0,0
+1777162917648,4,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-12,text,true,,587,137,1,7,http://localhost:8002/restaurants/?q=ramen,4,0,0
+1777162917481,181,POST /auth/login,200,OK,Login Load Test 1-10,text,true,,316,250,3,6,http://localhost:8001/auth/login,181,0,0
+1777162917487,182,Login for Token,200,OK,Review Submission Load Test 3-10,text,true,,316,250,3,5,http://localhost:8001/auth/login,182,0,1
+1777162917669,3,POST /reviews/,201,Created,Review Submission Load Test 3-10,text,true,,380,440,3,5,http://localhost:8004/reviews/,3,0,0
+1777162917382,360,POST /auth/login,200,OK,Login Load Test 1-9,text,true,,316,250,3,6,http://localhost:8001/auth/login,360,0,1
+1777162917384,359,Login for Token,200,OK,Review Submission Load Test 3-9,text,true,,316,250,3,5,http://localhost:8001/auth/login,359,0,0
+1777162917744,3,POST /reviews/,201,Created,Review Submission Load Test 3-9,text,true,,380,440,3,5,http://localhost:8004/reviews/,3,0,0
+1777162917748,3,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-13,text,true,,587,137,1,5,http://localhost:8002/restaurants/?q=ramen,3,0,0
+1777162917849,4,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-14,text,true,,587,137,1,7,http://localhost:8002/restaurants/?q=ramen,4,0,0
+1777162917684,186,POST /auth/login,200,OK,Login Load Test 1-12,text,true,,316,250,3,6,http://localhost:8001/auth/login,186,0,0
+1777162917687,185,Login for Token,200,OK,Review Submission Load Test 3-12,text,true,,316,250,3,5,http://localhost:8001/auth/login,185,0,1
+1777162917873,2,POST /reviews/,201,Created,Review Submission Load Test 3-12,text,true,,380,440,3,5,http://localhost:8004/reviews/,2,0,0
+1777162917949,4,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-15,text,true,,587,137,1,7,http://localhost:8002/restaurants/?q=ramen,3,0,0
+1777162917786,185,POST /auth/login,200,OK,Login Load Test 1-13,text,true,,316,250,3,6,http://localhost:8001/auth/login,185,0,0
+1777162917583,422,POST /auth/login,200,OK,Login Load Test 1-11,text,true,,316,250,3,7,http://localhost:8001/auth/login,422,0,1
+1777162917584,421,Login for Token,200,OK,Review Submission Load Test 3-11,text,true,,316,250,4,6,http://localhost:8001/auth/login,421,0,0
+1777162918006,2,POST /reviews/,201,Created,Review Submission Load Test 3-11,text,true,,380,440,4,6,http://localhost:8004/reviews/,2,0,0
+1777162918049,4,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-16,text,true,,587,137,1,6,http://localhost:8002/restaurants/?q=ramen,4,0,0
+1777162917882,186,Login for Token,200,OK,Review Submission Load Test 3-14,text,true,,316,250,3,5,http://localhost:8001/auth/login,186,0,1
+1777162917886,184,POST /auth/login,200,OK,Login Load Test 1-14,text,true,,316,250,2,5,http://localhost:8001/auth/login,184,0,1
+1777162918068,3,POST /reviews/,201,Created,Review Submission Load Test 3-14,text,true,,380,440,3,4,http://localhost:8004/reviews/,3,0,1
+1777162917788,364,Login for Token,200,OK,Review Submission Load Test 3-13,text,true,,316,250,3,6,http://localhost:8001/auth/login,364,0,0
+1777162918148,4,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-17,text,true,,587,137,1,6,http://localhost:8002/restaurants/?q=ramen,4,0,0
+1777162918152,3,POST /reviews/,201,Created,Review Submission Load Test 3-13,text,true,,380,440,3,5,http://localhost:8004/reviews/,3,0,0
+1777162918247,4,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-18,text,true,,587,137,1,7,http://localhost:8002/restaurants/?q=ramen,4,0,1
+1777162918083,179,Login for Token,200,OK,Review Submission Load Test 3-16,text,true,,316,250,3,6,http://localhost:8001/auth/login,179,0,0
+1777162918262,3,POST /reviews/,201,Created,Review Submission Load Test 3-16,text,true,,380,440,3,6,http://localhost:8004/reviews/,3,0,0
+1777162918348,4,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-19,text,true,,587,137,1,8,http://localhost:8002/restaurants/?q=ramen,4,0,0
+1777162918180,184,POST /auth/login,200,OK,Login Load Test 1-17,text,true,,316,250,4,7,http://localhost:8001/auth/login,184,0,1
+1777162917983,383,POST /auth/login,200,OK,Login Load Test 1-15,text,true,,316,250,3,6,http://localhost:8001/auth/login,383,0,0
+1777162917985,381,Login for Token,200,OK,Review Submission Load Test 3-15,text,true,,316,250,3,5,http://localhost:8001/auth/login,381,0,0
+1777162918367,2,POST /reviews/,201,Created,Review Submission Load Test 3-15,text,true,,380,440,3,5,http://localhost:8004/reviews/,2,0,0
+1777162918185,185,Login for Token,200,OK,Review Submission Load Test 3-17,text,true,,316,250,2,4,http://localhost:8001/auth/login,185,0,1
+1777162918370,2,POST /reviews/,201,Created,Review Submission Load Test 3-17,text,true,,380,440,2,4,http://localhost:8004/reviews/,2,0,0
+1777162918083,364,POST /auth/login,200,OK,Login Load Test 1-16,text,true,,316,250,3,6,http://localhost:8001/auth/login,364,0,1
+1777162918447,3,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-20,text,true,,587,137,1,5,http://localhost:8002/restaurants/?q=ramen,3,0,0
+1777162918547,4,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-21,text,true,,587,137,1,7,http://localhost:8002/restaurants/?q=ramen,4,0,0
+1777162918382,184,Login for Token,200,OK,Review Submission Load Test 3-19,text,true,,316,250,3,6,http://localhost:8001/auth/login,184,0,0
+1777162918382,186,POST /auth/login,200,OK,Login Load Test 1-19,text,true,,316,250,3,6,http://localhost:8001/auth/login,186,0,0
+1777162918567,2,POST /reviews/,201,Created,Review Submission Load Test 3-19,text,true,,380,440,3,5,http://localhost:8004/reviews/,2,0,0
+1777162918647,4,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-22,text,true,,587,137,1,7,http://localhost:8002/restaurants/?q=ramen,4,0,1
+1777162918283,447,POST /auth/login,200,OK,Login Load Test 1-18,text,true,,316,250,4,8,http://localhost:8001/auth/login,447,0,1
+1777162918283,448,Login for Token,200,OK,Review Submission Load Test 3-18,text,true,,316,250,4,7,http://localhost:8001/auth/login,448,0,1
+1777162918731,2,POST /reviews/,201,Created,Review Submission Load Test 3-18,text,true,,380,440,4,7,http://localhost:8004/reviews/,2,0,0
+1777162918747,3,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-23,text,true,,587,137,1,7,http://localhost:8002/restaurants/?q=ramen,3,0,0
+1777162918584,184,POST /auth/login,200,OK,Login Load Test 1-21,text,true,,316,250,3,6,http://localhost:8001/auth/login,184,0,1
+1777162918584,186,Login for Token,200,OK,Review Submission Load Test 3-21,text,true,,316,250,3,5,http://localhost:8001/auth/login,186,0,1
+1777162918771,2,POST /reviews/,201,Created,Review Submission Load Test 3-21,text,true,,380,440,3,5,http://localhost:8004/reviews/,2,0,0
+1777162918843,4,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-24,text,true,,587,137,1,7,http://localhost:8002/restaurants/?q=ramen,4,0,0
+1777162918483,369,POST /auth/login,200,OK,Login Load Test 1-20,text,true,,316,250,3,6,http://localhost:8001/auth/login,369,0,1
+1777162918484,369,Login for Token,200,OK,Review Submission Load Test 3-20,text,true,,316,250,3,5,http://localhost:8001/auth/login,369,0,0
+1777162918853,2,POST /reviews/,201,Created,Review Submission Load Test 3-20,text,true,,380,440,3,5,http://localhost:8004/reviews/,2,0,0
+1777162918947,3,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-25,text,true,,587,137,1,7,http://localhost:8002/restaurants/?q=ramen,3,0,0
+1777162918785,186,POST /auth/login,200,OK,Login Load Test 1-23,text,true,,316,250,3,6,http://localhost:8001/auth/login,186,0,0
+1777162918784,188,Login for Token,200,OK,Review Submission Load Test 3-23,text,true,,316,250,3,5,http://localhost:8001/auth/login,188,0,1
+1777162918973,2,POST /reviews/,201,Created,Review Submission Load Test 3-23,text,true,,380,440,3,5,http://localhost:8004/reviews/,2,0,0
+1777162919045,3,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-26,text,true,,587,137,1,7,http://localhost:8002/restaurants/?q=ramen,3,0,0
+1777162918682,409,Login for Token,200,OK,Review Submission Load Test 3-22,text,true,,316,250,4,8,http://localhost:8001/auth/login,409,0,0
+1777162918682,410,POST /auth/login,200,OK,Login Load Test 1-22,text,true,,316,250,4,8,http://localhost:8001/auth/login,410,0,0
+1777162919092,3,POST /reviews/,201,Created,Review Submission Load Test 3-22,text,true,,380,440,4,7,http://localhost:8004/reviews/,3,0,0
+1777162919144,4,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-27,text,true,,587,137,1,7,http://localhost:8002/restaurants/?q=ramen,4,0,0
+1777162918982,187,POST /auth/login,200,OK,Login Load Test 1-25,text,true,,316,250,3,6,http://localhost:8001/auth/login,187,0,0
+1777162918985,186,Login for Token,200,OK,Review Submission Load Test 3-25,text,true,,316,250,3,5,http://localhost:8001/auth/login,186,0,0
+1777162919171,3,POST /reviews/,201,Created,Review Submission Load Test 3-25,text,true,,380,440,3,5,http://localhost:8004/reviews/,3,0,0
+1777162918883,367,POST /auth/login,200,OK,Login Load Test 1-24,text,true,,316,250,3,7,http://localhost:8001/auth/login,367,0,1
+1777162918884,367,Login for Token,200,OK,Review Submission Load Test 3-24,text,true,,316,250,3,6,http://localhost:8001/auth/login,367,0,0
+1777162919247,4,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-28,text,true,,587,137,1,6,http://localhost:8002/restaurants/?q=ramen,4,0,0
+1777162919251,3,POST /reviews/,201,Created,Review Submission Load Test 3-24,text,true,,380,440,3,5,http://localhost:8004/reviews/,3,0,0
+1777162919347,3,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-29,text,true,,587,137,1,7,http://localhost:8002/restaurants/?q=ramen,3,0,0
+1777162919182,184,Login for Token,200,OK,Review Submission Load Test 3-27,text,true,,316,250,3,6,http://localhost:8001/auth/login,184,0,0
+1777162919182,186,POST /auth/login,200,OK,Login Load Test 1-27,text,true,,316,250,3,6,http://localhost:8001/auth/login,186,0,0
+1777162919367,3,POST /reviews/,201,Created,Review Submission Load Test 3-27,text,true,,380,440,3,5,http://localhost:8004/reviews/,3,0,0
+1777162919447,4,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-30,text,true,,587,137,1,7,http://localhost:8002/restaurants/?q=ramen,4,0,0
+1777162919082,373,POST /auth/login,200,OK,Login Load Test 1-26,text,true,,316,250,3,6,http://localhost:8001/auth/login,373,0,0
+1777162919082,373,Login for Token,200,OK,Review Submission Load Test 3-26,text,true,,316,250,3,5,http://localhost:8001/auth/login,373,0,0
+1777162919456,2,POST /reviews/,201,Created,Review Submission Load Test 3-26,text,true,,380,440,3,5,http://localhost:8004/reviews/,2,0,0
+1777162919547,3,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-31,text,true,,587,137,1,7,http://localhost:8002/restaurants/?q=ramen,3,0,0
+1777162919382,183,Login for Token,200,OK,Review Submission Load Test 3-29,text,true,,316,250,3,6,http://localhost:8001/auth/login,183,0,0
+1777162919382,185,POST /auth/login,200,OK,Login Load Test 1-29,text,true,,316,250,3,6,http://localhost:8001/auth/login,185,0,0
+1777162919566,3,POST /reviews/,201,Created,Review Submission Load Test 3-29,text,true,,380,440,3,5,http://localhost:8004/reviews/,3,0,0
+1777162919282,364,Login for Token,200,OK,Review Submission Load Test 3-28,text,true,,316,250,3,6,http://localhost:8001/auth/login,364,0,0
+1777162919282,365,POST /auth/login,200,OK,Login Load Test 1-28,text,true,,316,250,3,7,http://localhost:8001/auth/login,365,0,1
+1777162919647,2,POST /reviews/,201,Created,Review Submission Load Test 3-28,text,true,,380,440,3,6,http://localhost:8004/reviews/,2,0,0
+1777162919647,3,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-32,text,true,,587,137,1,5,http://localhost:8002/restaurants/?q=ramen,3,0,0
+1777162919743,3,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-33,text,true,,587,137,1,7,http://localhost:8002/restaurants/?q=ramen,3,0,0
+1777162919482,367,POST /auth/login,200,OK,Login Load Test 1-30,text,true,,316,250,4,9,http://localhost:8001/auth/login,367,0,0
+1777162919483,367,Login for Token,200,OK,Review Submission Load Test 3-30,text,true,,316,250,4,8,http://localhost:8001/auth/login,367,0,0
+1777162919847,4,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-34,text,true,,587,137,1,8,http://localhost:8002/restaurants/?q=ramen,4,0,0
+1777162919850,2,POST /reviews/,201,Created,Review Submission Load Test 3-30,text,true,,380,440,4,7,http://localhost:8004/reviews/,2,0,0
+1777162919581,369,POST /auth/login,200,OK,Login Load Test 1-31,text,true,,316,250,4,9,http://localhost:8001/auth/login,369,0,0
+1777162919582,369,Login for Token,200,OK,Review Submission Load Test 3-31,text,true,,316,250,4,8,http://localhost:8001/auth/login,369,0,0
+1777162919947,4,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-35,text,true,,587,137,1,8,http://localhost:8002/restaurants/?q=ramen,4,0,0
+1777162919951,2,POST /reviews/,201,Created,Review Submission Load Test 3-31,text,true,,380,440,4,7,http://localhost:8004/reviews/,2,0,0
+1777162919780,187,POST /auth/login,200,OK,Login Load Test 1-33,text,true,,316,250,3,6,http://localhost:8001/auth/login,187,0,1
+1777162919784,248,Login for Token,200,OK,Review Submission Load Test 3-33,text,true,,316,250,4,7,http://localhost:8001/auth/login,248,0,0
+1777162919681,366,POST /auth/login,200,OK,Login Load Test 1-32,text,true,,316,250,3,8,http://localhost:8001/auth/login,366,0,1
+1777162919683,365,Login for Token,200,OK,Review Submission Load Test 3-32,text,true,,316,250,4,7,http://localhost:8001/auth/login,365,0,0
+1777162920047,3,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-36,text,true,,587,137,1,7,http://localhost:8002/restaurants/?q=ramen,3,0,1
+1777162920048,2,POST /reviews/,201,Created,Review Submission Load Test 3-32,text,true,,380,440,4,6,http://localhost:8004/reviews/,2,0,1
+1777162920034,18,POST /reviews/,201,Created,Review Submission Load Test 3-33,text,true,,380,440,3,5,http://localhost:8004/reviews/,18,0,0
+1777162920148,4,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-37,text,true,,587,137,1,7,http://localhost:8002/restaurants/?q=ramen,4,0,0
+1777162920247,4,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-38,text,true,,587,137,1,9,http://localhost:8002/restaurants/?q=ramen,4,0,1
+1777162919882,431,Login for Token,200,OK,Review Submission Load Test 3-34,text,true,,316,250,5,10,http://localhost:8001/auth/login,431,0,0
+1777162919882,431,POST /auth/login,200,OK,Login Load Test 1-34,text,true,,316,250,5,10,http://localhost:8001/auth/login,431,0,1
+1777162920313,2,POST /reviews/,201,Created,Review Submission Load Test 3-34,text,true,,380,440,5,9,http://localhost:8004/reviews/,2,0,0
+1777162919982,364,POST /auth/login,200,OK,Login Load Test 1-35,text,true,,316,250,4,9,http://localhost:8001/auth/login,364,0,0
+1777162919982,364,Login for Token,200,OK,Review Submission Load Test 3-35,text,true,,316,250,4,8,http://localhost:8001/auth/login,364,0,0
+1777162920346,3,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-39,text,true,,587,137,1,8,http://localhost:8002/restaurants/?q=ramen,3,0,0
+1777162920347,3,POST /reviews/,201,Created,Review Submission Load Test 3-35,text,true,,380,440,4,7,http://localhost:8004/reviews/,3,0,0
+1777162920081,362,Login for Token,200,OK,Review Submission Load Test 3-36,text,true,,316,250,4,9,http://localhost:8001/auth/login,362,0,0
+1777162920082,362,POST /auth/login,200,OK,Login Load Test 1-36,text,true,,316,250,4,9,http://localhost:8001/auth/login,362,0,0
+1777162920444,2,POST /reviews/,201,Created,Review Submission Load Test 3-36,text,true,,380,440,4,8,http://localhost:8004/reviews/,2,0,0
+1777162920444,2,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-40,text,true,,587,137,1,7,http://localhost:8002/restaurants/?q=ramen,2,0,0
+1777162920545,3,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-41,text,true,,587,137,1,9,http://localhost:8002/restaurants/?q=ramen,3,0,1
+1777162920182,369,Login for Token,200,OK,Review Submission Load Test 3-37,text,true,,316,250,4,8,http://localhost:8001/auth/login,369,0,0
+1777162920183,368,POST /auth/login,200,OK,Login Load Test 1-37,text,true,,316,250,4,8,http://localhost:8001/auth/login,368,0,0
+1777162920552,2,POST /reviews/,201,Created,Review Submission Load Test 3-37,text,true,,380,440,4,7,http://localhost:8004/reviews/,2,0,0
+1777162920380,187,POST /auth/login,200,OK,Login Load Test 1-39,text,true,,316,250,3,6,http://localhost:8001/auth/login,187,0,0
+1777162920382,248,Login for Token,200,OK,Review Submission Load Test 3-39,text,true,,316,250,4,7,http://localhost:8001/auth/login,248,0,0
+1777162920631,3,POST /reviews/,201,Created,Review Submission Load Test 3-39,text,true,,380,440,4,7,http://localhost:8004/reviews/,3,0,0
+1777162920642,2,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-42,text,true,,587,137,1,7,http://localhost:8002/restaurants/?q=ramen,2,0,0
+1777162920283,402,POST /auth/login,200,OK,Login Load Test 1-38,text,true,,316,250,4,8,http://localhost:8001/auth/login,402,0,0
+1777162920279,407,Login for Token,200,OK,Review Submission Load Test 3-38,text,true,,316,250,4,7,http://localhost:8001/auth/login,407,0,0
+1777162920686,2,POST /reviews/,201,Created,Review Submission Load Test 3-38,text,true,,380,440,4,7,http://localhost:8004/reviews/,2,0,0
+1777162920484,253,Login for Token,200,OK,Review Submission Load Test 3-40,text,true,,316,250,3,6,http://localhost:8001/auth/login,253,0,0
+1777162920737,2,POST /reviews/,201,Created,Review Submission Load Test 3-40,text,true,,380,440,3,6,http://localhost:8004/reviews/,2,0,0
+1777162920746,2,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-43,text,true,,587,137,1,6,http://localhost:8002/restaurants/?q=ramen,2,0,0
+1777162920577,189,POST /auth/login,200,OK,Login Load Test 1-41,text,true,,316,250,3,5,http://localhost:8001/auth/login,189,0,1
+1777162920583,231,Login for Token,200,OK,Review Submission Load Test 3-41,text,true,,316,250,3,6,http://localhost:8001/auth/login,231,0,1
+1777162920815,2,POST /reviews/,201,Created,Review Submission Load Test 3-41,text,true,,380,440,3,6,http://localhost:8004/reviews/,2,0,0
+1777162920848,2,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-44,text,true,,587,137,1,6,http://localhost:8002/restaurants/?q=ramen,2,0,0
+1777162920944,2,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-45,text,true,,587,137,1,8,http://localhost:8002/restaurants/?q=ramen,2,0,0
+1777162920777,186,Login for Token,200,OK,Review Submission Load Test 3-43,text,true,,316,250,3,7,http://localhost:8001/auth/login,186,0,0
+1777162920776,190,POST /auth/login,200,OK,Login Load Test 1-43,text,true,,316,250,4,7,http://localhost:8001/auth/login,190,0,0
+1777162920963,3,POST /reviews/,201,Created,Review Submission Load Test 3-43,text,true,,380,440,3,7,http://localhost:8004/reviews/,3,0,0
+1777162921047,2,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-46,text,true,,587,137,1,8,http://localhost:8002/restaurants/?q=ramen,2,0,0
+1777162920875,188,POST /auth/login,200,OK,Login Load Test 1-44,text,true,,316,250,4,7,http://localhost:8001/auth/login,188,0,0
+1777162920883,263,Login for Token,200,OK,Review Submission Load Test 3-44,text,true,,316,250,4,8,http://localhost:8001/auth/login,263,0,0
+1777162921147,2,POST /reviews/,201,Created,Review Submission Load Test 3-44,text,true,,380,440,4,9,http://localhost:8004/reviews/,2,0,0
+1777162921148,2,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-47,text,true,,587,137,1,8,http://localhost:8002/restaurants/?q=ramen,2,0,0
+1777162920979,181,POST /auth/login,200,OK,Login Load Test 1-45,text,true,,316,250,4,7,http://localhost:8001/auth/login,181,0,0
+1777162920483,753,POST /auth/login,200,OK,Login Load Test 1-40,text,true,,316,250,4,8,http://localhost:8001/auth/login,753,0,0
+1777162920683,553,Login for Token,200,OK,Review Submission Load Test 3-42,text,true,,316,250,4,8,http://localhost:8001/auth/login,553,0,1
+1777162920680,557,POST /auth/login,200,OK,Login Load Test 1-42,text,true,,316,250,3,7,http://localhost:8001/auth/login,557,0,0
+1777162921236,3,POST /reviews/,201,Created,Review Submission Load Test 3-42,text,true,,380,440,4,6,http://localhost:8004/reviews/,3,0,0
+1777162920981,264,Login for Token,200,OK,Review Submission Load Test 3-45,text,true,,316,250,3,5,http://localhost:8001/auth/login,264,0,1
+1777162921246,2,POST /reviews/,201,Created,Review Submission Load Test 3-45,text,true,,380,440,3,6,http://localhost:8004/reviews/,2,0,0
+1777162921248,2,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-48,text,true,,587,137,1,5,http://localhost:8002/restaurants/?q=ramen,2,0,0
+1777162921348,3,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-49,text,true,,587,137,1,7,http://localhost:8002/restaurants/?q=ramen,3,0,0
+1777162921178,183,POST /auth/login,200,OK,Login Load Test 1-47,text,true,,316,250,3,6,http://localhost:8001/auth/login,183,0,1
+1777162921447,4,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-50,text,true,,587,137,1,8,http://localhost:8002/restaurants/?q=ramen,4,0,1
+1777162921280,185,Login for Token,200,OK,Review Submission Load Test 3-48,text,true,,316,250,4,7,http://localhost:8001/auth/login,185,0,1
+1777162921277,189,POST /auth/login,200,OK,Login Load Test 1-48,text,true,,316,250,3,7,http://localhost:8001/auth/login,189,0,1
+1777162921465,3,POST /reviews/,201,Created,Review Submission Load Test 3-48,text,true,,380,440,4,6,http://localhost:8004/reviews/,3,0,0
+1777162921078,431,POST /auth/login,200,OK,Login Load Test 1-46,text,true,,316,250,3,7,http://localhost:8001/auth/login,431,0,1
+1777162921081,429,Login for Token,200,OK,Review Submission Load Test 3-46,text,true,,316,250,4,6,http://localhost:8001/auth/login,429,0,1
+1777162921510,3,POST /reviews/,201,Created,Review Submission Load Test 3-46,text,true,,380,440,4,6,http://localhost:8004/reviews/,3,0,0
+1777162921180,368,Login for Token,200,OK,Review Submission Load Test 3-47,text,true,,316,250,3,6,http://localhost:8001/auth/login,368,0,0
+1777162921548,3,POST /reviews/,201,Created,Review Submission Load Test 3-47,text,true,,380,440,3,6,http://localhost:8004/reviews/,3,0,1
+1777162921547,4,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-51,text,true,,587,137,1,6,http://localhost:8002/restaurants/?q=ramen,4,0,1
+1777162921648,4,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-52,text,true,,587,137,1,7,http://localhost:8002/restaurants/?q=ramen,4,0,0
+1777162921474,188,POST /auth/login,200,OK,Login Load Test 1-50,text,true,,316,250,3,6,http://localhost:8001/auth/login,188,0,0
+1777162921481,215,Login for Token,200,OK,Review Submission Load Test 3-50,text,true,,316,251,4,7,http://localhost:8001/auth/login,215,0,0
+1777162921698,2,POST /reviews/,201,Created,Review Submission Load Test 3-50,text,true,,380,440,4,7,http://localhost:8004/reviews/,2,0,0
+1777162921748,2,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-53,text,true,,587,137,1,7,http://localhost:8002/restaurants/?q=ramen,2,0,0
+1777162921574,183,POST /auth/login,200,OK,Login Load Test 1-51,text,true,,316,251,3,6,http://localhost:8001/auth/login,183,0,0
+1777162921379,454,POST /auth/login,200,OK,Login Load Test 1-49,text,true,,316,250,3,7,http://localhost:8001/auth/login,454,0,1
+1777162921381,452,Login for Token,200,OK,Review Submission Load Test 3-49,text,true,,316,250,4,6,http://localhost:8001/auth/login,452,0,1
+1777162921835,2,POST /reviews/,201,Created,Review Submission Load Test 3-49,text,true,,380,440,4,6,http://localhost:8004/reviews/,2,0,0
+1777162921848,2,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-54,text,true,,587,137,1,6,http://localhost:8002/restaurants/?q=ramen,2,0,0
+1777162921948,2,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-55,text,true,,587,137,1,8,http://localhost:8002/restaurants/?q=ramen,2,0,0
+1777162921778,189,POST /auth/login,200,OK,Login Load Test 1-53,text,true,,316,251,3,7,http://localhost:8001/auth/login,189,0,0
+1777162921780,187,Login for Token,200,OK,Review Submission Load Test 3-53,text,true,,316,251,4,7,http://localhost:8001/auth/login,187,0,0
+1777162921967,2,POST /reviews/,201,Created,Review Submission Load Test 3-53,text,true,,380,440,4,6,http://localhost:8004/reviews/,2,0,1
+1777162921582,440,Login for Token,200,OK,Review Submission Load Test 3-51,text,true,,316,251,4,7,http://localhost:8001/auth/login,440,0,0
+1777162922024,2,POST /reviews/,201,Created,Review Submission Load Test 3-51,text,true,,380,440,4,7,http://localhost:8004/reviews/,2,0,0
+1777162921677,372,POST /auth/login,200,OK,Login Load Test 1-52,text,true,,316,251,3,7,http://localhost:8001/auth/login,372,0,0
+1777162921678,371,Login for Token,200,OK,Review Submission Load Test 3-52,text,true,,316,251,3,6,http://localhost:8001/auth/login,371,0,0
+1777162922048,2,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-56,text,true,,587,137,1,6,http://localhost:8002/restaurants/?q=ramen,2,0,0
+1777162922050,2,POST /reviews/,201,Created,Review Submission Load Test 3-52,text,true,,380,440,3,5,http://localhost:8004/reviews/,2,0,0
+1777162922145,2,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-57,text,true,,587,137,1,7,http://localhost:8002/restaurants/?q=ramen,2,0,0
+1777162921976,190,POST /auth/login,200,OK,Login Load Test 1-55,text,true,,316,251,3,6,http://localhost:8001/auth/login,189,0,1
+1777162921981,225,Login for Token,200,OK,Review Submission Load Test 3-55,text,true,,316,251,4,7,http://localhost:8001/auth/login,225,0,1
+1777162922207,2,POST /reviews/,201,Created,Review Submission Load Test 3-55,text,true,,380,440,4,7,http://localhost:8004/reviews/,2,0,0
+1777162922244,2,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-58,text,true,,587,137,1,7,http://localhost:8002/restaurants/?q=ramen,2,0,1
+1777162922075,187,POST /auth/login,200,OK,Login Load Test 1-56,text,true,,316,251,3,6,http://localhost:8001/auth/login,187,0,0
+1777162921881,457,Login for Token,200,OK,Review Submission Load Test 3-54,text,true,,316,251,4,7,http://localhost:8001/auth/login,457,0,1
+1777162921878,461,POST /auth/login,200,OK,Login Load Test 1-54,text,true,,316,251,3,7,http://localhost:8001/auth/login,461,0,0
+1777162922339,3,POST /reviews/,201,Created,Review Submission Load Test 3-54,text,true,,380,440,4,6,http://localhost:8004/reviews/,3,0,0
+1777162922081,269,Login for Token,200,OK,Review Submission Load Test 3-56,text,true,,316,251,3,6,http://localhost:8001/auth/login,269,0,1
+1777162922348,3,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-59,text,true,,587,137,1,6,http://localhost:8002/restaurants/?q=ramen,3,0,0
+1777162922351,2,POST /reviews/,201,Created,Review Submission Load Test 3-56,text,true,,380,440,3,5,http://localhost:8004/reviews/,2,0,0
+1777162922448,3,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-60,text,true,,587,137,1,7,http://localhost:8002/restaurants/?q=ramen,3,0,0
+1777162922547,3,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-61,text,true,,587,137,1,9,http://localhost:8002/restaurants/?q=ramen,3,0,1
+1777162922381,182,Login for Token,200,OK,Review Submission Load Test 3-59,text,true,,316,251,4,8,http://localhost:8001/auth/login,182,0,1
+1777162922379,186,POST /auth/login,200,OK,Login Load Test 1-59,text,true,,316,251,4,8,http://localhost:8001/auth/login,186,0,0
+1777162922563,3,POST /reviews/,201,Created,Review Submission Load Test 3-59,text,true,,380,440,4,7,http://localhost:8004/reviews/,3,0,0
+1777162922175,396,POST /auth/login,200,OK,Login Load Test 1-57,text,true,,316,251,3,6,http://localhost:8001/auth/login,396,0,0
+1777162922181,391,Login for Token,200,OK,Review Submission Load Test 3-57,text,true,,316,251,3,5,http://localhost:8001/auth/login,391,0,0
+1777162922572,3,POST /reviews/,201,Created,Review Submission Load Test 3-57,text,true,,380,440,3,5,http://localhost:8004/reviews/,3,0,1
+1777162922280,366,Login for Token,200,OK,Review Submission Load Test 3-58,text,true,,316,251,3,6,http://localhost:8001/auth/login,366,0,1
+1777162922280,367,POST /auth/login,200,OK,Login Load Test 1-58,text,true,,316,251,3,6,http://localhost:8001/auth/login,367,0,0
+1777162922647,3,POST /reviews/,201,Created,Review Submission Load Test 3-58,text,true,,380,440,3,6,http://localhost:8004/reviews/,3,0,0
+1777162922648,4,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-62,text,true,,587,137,1,5,http://localhost:8002/restaurants/?q=ramen,4,0,1
+1777162922749,4,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-63,text,true,,587,137,1,7,http://localhost:8002/restaurants/?q=ramen,4,0,0
+1777162922577,185,POST /auth/login,200,OK,Login Load Test 1-61,text,true,,316,251,3,6,http://localhost:8001/auth/login,185,0,1
+1777162922580,185,Login for Token,200,OK,Review Submission Load Test 3-61,text,true,,316,251,3,5,http://localhost:8001/auth/login,185,0,0
+1777162922766,2,POST /reviews/,201,Created,Review Submission Load Test 3-61,text,true,,380,440,3,5,http://localhost:8004/reviews/,2,0,0
+1777162922847,4,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-64,text,true,,587,137,1,7,http://localhost:8002/restaurants/?q=ramen,4,0,1
+1777162922679,185,POST /auth/login,200,OK,Login Load Test 1-62,text,true,,316,251,3,6,http://localhost:8001/auth/login,185,0,1
+1777162922481,447,Login for Token,200,OK,Review Submission Load Test 3-60,text,true,,316,251,4,7,http://localhost:8001/auth/login,447,0,1
+1777162922482,446,POST /auth/login,200,OK,Login Load Test 1-60,text,true,,316,251,3,7,http://localhost:8001/auth/login,446,0,0
+1777162922928,3,POST /reviews/,201,Created,Review Submission Load Test 3-60,text,true,,380,440,4,6,http://localhost:8004/reviews/,3,0,0
+1777162922948,3,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-65,text,true,,587,137,1,6,http://localhost:8002/restaurants/?q=ramen,3,0,0
+1777162922780,184,POST /auth/login,200,OK,Login Load Test 1-63,text,true,,316,251,2,5,http://localhost:8001/auth/login,184,0,0
+1777162922780,186,Login for Token,200,OK,Review Submission Load Test 3-63,text,true,,316,251,3,4,http://localhost:8001/auth/login,186,0,0
+1777162922966,2,POST /reviews/,201,Created,Review Submission Load Test 3-63,text,true,,380,440,3,4,http://localhost:8004/reviews/,2,0,0
+1777162923048,4,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-66,text,true,,587,137,1,6,http://localhost:8002/restaurants/?q=ramen,4,0,0
+1777162922682,431,Login for Token,200,OK,Review Submission Load Test 3-62,text,true,,316,251,4,7,http://localhost:8001/auth/login,431,0,0
+1777162923114,2,POST /reviews/,201,Created,Review Submission Load Test 3-62,text,true,,380,440,4,7,http://localhost:8004/reviews/,2,0,0
+1777162923148,3,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-67,text,true,,587,137,1,7,http://localhost:8002/restaurants/?q=ramen,3,0,0
+1777162922981,182,POST /auth/login,200,OK,Login Load Test 1-65,text,true,,316,251,3,6,http://localhost:8001/auth/login,182,0,0
+1777162922981,185,Login for Token,200,OK,Review Submission Load Test 3-65,text,true,,316,251,3,5,http://localhost:8001/auth/login,185,0,0
+1777162923166,3,POST /reviews/,201,Created,Review Submission Load Test 3-65,text,true,,380,440,3,5,http://localhost:8004/reviews/,3,0,1
+1777162922880,366,POST /auth/login,200,OK,Login Load Test 1-64,text,true,,316,251,3,6,http://localhost:8001/auth/login,366,0,0
+1777162922881,366,Login for Token,200,OK,Review Submission Load Test 3-64,text,true,,316,251,3,5,http://localhost:8001/auth/login,366,0,0
+1777162923247,3,POST /reviews/,201,Created,Review Submission Load Test 3-64,text,true,,380,440,3,6,http://localhost:8004/reviews/,3,0,0
+1777162923247,3,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-68,text,true,,587,137,1,5,http://localhost:8002/restaurants/?q=ramen,3,0,1
+1777162923347,4,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-69,text,true,,587,137,1,7,http://localhost:8002/restaurants/?q=ramen,4,0,0
+1777162923179,182,POST /auth/login,200,OK,Login Load Test 1-67,text,true,,316,251,3,6,http://localhost:8001/auth/login,182,0,0
+1777162923448,3,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-70,text,true,,587,137,1,8,http://localhost:8002/restaurants/?q=ramen,3,0,0
+1777162923280,184,Login for Token,200,OK,Review Submission Load Test 3-68,text,true,,316,251,4,7,http://localhost:8001/auth/login,184,0,0
+1777162923277,189,POST /auth/login,200,OK,Login Load Test 1-68,text,true,,316,251,3,7,http://localhost:8001/auth/login,189,0,1
+1777162923464,3,POST /reviews/,201,Created,Review Submission Load Test 3-68,text,true,,380,440,4,6,http://localhost:8004/reviews/,3,0,0
+1777162923074,398,POST /auth/login,200,OK,Login Load Test 1-66,text,true,,316,251,2,5,http://localhost:8001/auth/login,398,0,1
+1777162923080,392,Login for Token,200,OK,Review Submission Load Test 3-66,text,true,,316,251,3,4,http://localhost:8001/auth/login,392,0,1
+1777162923472,3,POST /reviews/,201,Created,Review Submission Load Test 3-66,text,true,,380,440,3,4,http://localhost:8004/reviews/,3,0,0
+1777162923180,364,Login for Token,200,OK,Review Submission Load Test 3-67,text,true,,316,251,3,5,http://localhost:8001/auth/login,364,0,1
+1777162923545,3,POST /reviews/,201,Created,Review Submission Load Test 3-67,text,true,,380,440,3,6,http://localhost:8004/reviews/,3,0,0
+1777162923546,3,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-71,text,true,,587,137,1,5,http://localhost:8002/restaurants/?q=ramen,3,0,0
+1777162923647,4,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-72,text,true,,587,137,1,7,http://localhost:8002/restaurants/?q=ramen,4,0,1
+1777162923479,184,Login for Token,200,OK,Review Submission Load Test 3-70,text,true,,316,251,3,6,http://localhost:8001/auth/login,184,0,0
+1777162923479,185,POST /auth/login,200,OK,Login Load Test 1-70,text,true,,316,251,3,6,http://localhost:8001/auth/login,185,0,0
+1777162923663,2,POST /reviews/,201,Created,Review Submission Load Test 3-70,text,true,,380,440,3,5,http://localhost:8004/reviews/,2,0,0
+1777162923748,4,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-73,text,true,,587,137,1,7,http://localhost:8002/restaurants/?q=ramen,4,0,0
+1777162923577,188,POST /auth/login,200,OK,Login Load Test 1-71,text,true,,316,251,3,6,http://localhost:8001/auth/login,188,0,0
+1777162923381,449,POST /auth/login,200,OK,Login Load Test 1-69,text,true,,316,251,3,7,http://localhost:8001/auth/login,449,0,0
+1777162923380,451,Login for Token,200,OK,Review Submission Load Test 3-69,text,true,,316,251,4,6,http://localhost:8001/auth/login,451,0,1
+1777162923831,3,POST /reviews/,201,Created,Review Submission Load Test 3-69,text,true,,380,440,4,6,http://localhost:8004/reviews/,3,0,1
+1777162923581,266,Login for Token,200,OK,Review Submission Load Test 3-71,text,true,,316,251,3,5,http://localhost:8001/auth/login,266,0,0
+1777162923848,2,POST /reviews/,201,Created,Review Submission Load Test 3-71,text,true,,380,440,3,6,http://localhost:8004/reviews/,2,0,0
+1777162923848,3,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-74,text,true,,587,137,1,5,http://localhost:8002/restaurants/?q=ramen,3,0,0
+1777162923680,184,POST /auth/login,200,OK,Login Load Test 1-72,text,true,,316,251,2,4,http://localhost:8001/auth/login,184,0,0
+1777162923948,3,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-75,text,true,,587,137,1,6,http://localhost:8002/restaurants/?q=ramen,3,0,0
+1777162924045,5,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-76,text,true,,587,137,1,8,http://localhost:8002/restaurants/?q=ramen,5,0,0
+1777162923880,186,POST /auth/login,200,OK,Login Load Test 1-74,text,true,,316,251,3,7,http://localhost:8001/auth/login,186,0,1
+1777162923881,186,Login for Token,200,OK,Review Submission Load Test 3-74,text,true,,316,251,4,6,http://localhost:8001/auth/login,186,0,0
+1777162924067,3,POST /reviews/,201,Created,Review Submission Load Test 3-74,text,true,,380,440,4,6,http://localhost:8004/reviews/,3,0,0
+1777162923779,362,POST /auth/login,200,OK,Login Load Test 1-73,text,true,,316,251,3,7,http://localhost:8001/auth/login,362,0,0
+1777162923780,362,Login for Token,200,OK,Review Submission Load Test 3-73,text,true,,316,251,4,6,http://localhost:8001/auth/login,362,0,0
+1777162924143,3,POST /reviews/,201,Created,Review Submission Load Test 3-73,text,true,,380,440,4,6,http://localhost:8004/reviews/,3,0,0
+1777162924149,3,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-77,text,true,,587,137,1,6,http://localhost:8002/restaurants/?q=ramen,3,0,0
+1777162924249,3,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-78,text,true,,587,137,1,8,http://localhost:8002/restaurants/?q=ramen,3,0,0
+1777162924078,184,Login for Token,200,OK,Review Submission Load Test 3-76,text,true,,316,251,4,7,http://localhost:8001/auth/login,184,0,0
+1777162924078,186,POST /auth/login,200,OK,Login Load Test 1-76,text,true,,316,251,3,7,http://localhost:8001/auth/login,186,0,0
+1777162924262,3,POST /reviews/,201,Created,Review Submission Load Test 3-76,text,true,,380,440,4,6,http://localhost:8004/reviews/,3,0,0
+1777162924347,3,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-79,text,true,,587,137,1,8,http://localhost:8002/restaurants/?q=ramen,3,0,0
+1777162924174,186,Login for Token,200,OK,Review Submission Load Test 3-77,text,true,,316,251,4,7,http://localhost:8001/auth/login,186,0,1
+1777162924360,3,POST /reviews/,201,Created,Review Submission Load Test 3-77,text,true,,380,440,4,7,http://localhost:8004/reviews/,3,0,0
+1777162923681,737,Login for Token,200,OK,Review Submission Load Test 3-72,text,true,,316,251,4,8,http://localhost:8001/auth/login,737,0,0
+1777162923981,437,Login for Token,200,OK,Review Submission Load Test 3-75,text,true,,316,251,4,8,http://localhost:8001/auth/login,437,0,0
+1777162923974,445,POST /auth/login,200,OK,Login Load Test 1-75,text,true,,316,251,4,8,http://localhost:8001/auth/login,445,0,1
+1777162924418,3,POST /reviews/,201,Created,Review Submission Load Test 3-72,text,true,,380,440,4,7,http://localhost:8004/reviews/,3,0,0
+1777162924419,2,POST /reviews/,201,Created,Review Submission Load Test 3-75,text,true,,380,440,3,6,http://localhost:8004/reviews/,2,0,0
+1777162924176,273,POST /auth/login,200,OK,Login Load Test 1-77,text,true,,316,251,3,6,http://localhost:8001/auth/login,273,0,0
+1777162924448,3,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-80,text,true,,587,137,1,5,http://localhost:8002/restaurants/?q=ramen,3,0,0
+1777162924276,188,POST /auth/login,200,OK,Login Load Test 1-78,text,true,,316,251,2,4,http://localhost:8001/auth/login,188,0,1
+1777162924280,268,Login for Token,200,OK,Review Submission Load Test 3-78,text,true,,316,251,3,6,http://localhost:8001/auth/login,268,0,0
+1777162924548,3,POST /reviews/,201,Created,Review Submission Load Test 3-78,text,true,,380,440,3,6,http://localhost:8004/reviews/,3,0,0
+1777162924548,3,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-81,text,true,,587,137,1,6,http://localhost:8002/restaurants/?q=ramen,3,0,0
+1777162924643,4,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-82,text,true,,587,137,1,7,http://localhost:8002/restaurants/?q=ramen,4,0,1
+1777162924475,185,Login for Token,200,OK,Review Submission Load Test 3-80,text,true,,316,251,3,6,http://localhost:8001/auth/login,185,0,0
+1777162924660,3,POST /reviews/,201,Created,Review Submission Load Test 3-80,text,true,,380,440,3,6,http://localhost:8004/reviews/,3,0,1
+1777162924743,3,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-83,text,true,,587,137,1,8,http://localhost:8002/restaurants/?q=ramen,3,0,0
+1777162924578,184,POST /auth/login,200,OK,Login Load Test 1-81,text,true,,316,251,4,7,http://localhost:8001/auth/login,184,0,0
+1777162924578,187,Login for Token,200,OK,Review Submission Load Test 3-81,text,true,,316,251,3,6,http://localhost:8001/auth/login,187,0,0
+1777162924765,3,POST /reviews/,201,Created,Review Submission Load Test 3-81,text,true,,380,440,3,6,http://localhost:8004/reviews/,3,0,0
+1777162924376,408,POST /auth/login,200,OK,Login Load Test 1-79,text,true,,316,251,4,7,http://localhost:8001/auth/login,408,0,1
+1777162924380,405,Login for Token,200,OK,Review Submission Load Test 3-79,text,true,,316,251,3,6,http://localhost:8001/auth/login,405,0,0
+1777162924785,2,POST /reviews/,201,Created,Review Submission Load Test 3-79,text,true,,380,440,3,6,http://localhost:8004/reviews/,2,0,0
+1777162924476,368,POST /auth/login,200,OK,Login Load Test 1-80,text,true,,316,251,3,6,http://localhost:8001/auth/login,368,0,1
+1777162924844,4,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-84,text,true,,587,137,1,5,http://localhost:8002/restaurants/?q=ramen,4,0,1
+1777162924947,4,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-85,text,true,,587,137,1,7,http://localhost:8002/restaurants/?q=ramen,4,0,1
+1777162924777,189,POST /auth/login,200,OK,Login Load Test 1-83,text,true,,316,251,3,6,http://localhost:8001/auth/login,189,0,0
+1777162924779,193,Login for Token,200,OK,Review Submission Load Test 3-83,text,true,,316,251,3,5,http://localhost:8001/auth/login,193,0,1
+1777162924972,3,POST /reviews/,201,Created,Review Submission Load Test 3-83,text,true,,380,440,3,5,http://localhost:8004/reviews/,3,0,0
+1777162925047,2,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-86,text,true,,587,137,1,7,http://localhost:8002/restaurants/?q=ramen,2,0,0
+1777162924875,185,POST /auth/login,200,OK,Login Load Test 1-84,text,true,,316,251,3,6,http://localhost:8001/auth/login,185,0,1
+1777162924677,453,POST /auth/login,200,OK,Login Load Test 1-82,text,true,,316,251,3,7,http://localhost:8001/auth/login,453,0,0
+1777162924679,451,Login for Token,200,OK,Review Submission Load Test 3-82,text,true,,316,251,4,6,http://localhost:8001/auth/login,451,0,0
+1777162925131,3,POST /reviews/,201,Created,Review Submission Load Test 3-82,text,true,,380,440,4,6,http://localhost:8004/reviews/,3,0,0
+1777162925147,4,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-87,text,true,,587,137,1,6,http://localhost:8002/restaurants/?q=ramen,4,0,1
+1777162924975,182,POST /auth/login,200,OK,Login Load Test 1-85,text,true,,316,251,2,5,http://localhost:8001/auth/login,182,0,0
+1777162924980,183,Login for Token,200,OK,Review Submission Load Test 3-85,text,true,,316,251,3,4,http://localhost:8001/auth/login,183,0,0
+1777162925163,4,POST /reviews/,201,Created,Review Submission Load Test 3-85,text,true,,380,440,3,4,http://localhost:8004/reviews/,4,0,1
+1777162925249,2,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-88,text,true,,587,137,1,6,http://localhost:8002/restaurants/?q=ramen,2,0,0
+1777162924880,434,Login for Token,200,OK,Review Submission Load Test 3-84,text,true,,316,251,4,7,http://localhost:8001/auth/login,434,0,0
+1777162925314,2,POST /reviews/,201,Created,Review Submission Load Test 3-84,text,true,,380,440,4,7,http://localhost:8004/reviews/,2,0,1
+1777162925349,3,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-89,text,true,,587,137,1,7,http://localhost:8002/restaurants/?q=ramen,3,0,0
+1777162925172,186,POST /auth/login,200,OK,Login Load Test 1-87,text,true,,316,251,3,6,http://localhost:8001/auth/login,186,0,1
+1777162925176,184,Login for Token,200,OK,Review Submission Load Test 3-87,text,true,,316,251,3,5,http://localhost:8001/auth/login,184,0,0
+1777162925360,2,POST /reviews/,201,Created,Review Submission Load Test 3-87,text,true,,380,440,3,5,http://localhost:8004/reviews/,2,0,0
+1777162925076,366,Login for Token,200,OK,Review Submission Load Test 3-86,text,true,,316,251,3,6,http://localhost:8001/auth/login,366,0,0
+1777162925075,368,POST /auth/login,200,OK,Login Load Test 1-86,text,true,,316,251,3,6,http://localhost:8001/auth/login,368,0,1
+1777162925442,3,POST /reviews/,201,Created,Review Submission Load Test 3-86,text,true,,380,440,3,5,http://localhost:8004/reviews/,3,0,0
+1777162925446,3,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-90,text,true,,587,137,1,5,http://localhost:8002/restaurants/?q=ramen,3,0,0
+1777162925548,4,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-91,text,true,,587,137,1,7,http://localhost:8002/restaurants/?q=ramen,4,0,0
+1777162925376,183,Login for Token,200,OK,Review Submission Load Test 3-89,text,true,,316,251,3,6,http://localhost:8001/auth/login,183,0,0
+1777162925559,3,POST /reviews/,201,Created,Review Submission Load Test 3-89,text,true,,380,440,3,6,http://localhost:8004/reviews/,3,0,0
+1777162925376,186,POST /auth/login,200,OK,Login Load Test 1-89,text,true,,316,251,3,6,http://localhost:8001/auth/login,186,0,0
+1777162925649,4,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-92,text,true,,587,137,1,7,http://localhost:8002/restaurants/?q=ramen,4,0,0
+1777162925277,398,Login for Token,200,OK,Review Submission Load Test 3-88,text,true,,316,251,4,8,http://localhost:8001/auth/login,398,0,0
+1777162925277,398,POST /auth/login,200,OK,Login Load Test 1-88,text,true,,316,251,4,8,http://localhost:8001/auth/login,398,0,0
+1777162925675,3,POST /reviews/,201,Created,Review Submission Load Test 3-88,text,true,,380,440,4,7,http://localhost:8004/reviews/,3,0,0
+1777162925749,3,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-93,text,true,,587,137,1,7,http://localhost:8002/restaurants/?q=ramen,3,0,0
+1777162925577,183,POST /auth/login,200,OK,Login Load Test 1-91,text,true,,316,251,3,6,http://localhost:8001/auth/login,183,0,0
+1777162925577,185,Login for Token,200,OK,Review Submission Load Test 3-91,text,true,,316,251,3,5,http://localhost:8001/auth/login,185,0,0
+1777162925762,3,POST /reviews/,201,Created,Review Submission Load Test 3-91,text,true,,380,440,3,5,http://localhost:8004/reviews/,3,0,0
+1777162925478,366,Login for Token,200,OK,Review Submission Load Test 3-90,text,true,,316,251,3,6,http://localhost:8001/auth/login,366,0,1
+1777162925478,367,POST /auth/login,200,OK,Login Load Test 1-90,text,true,,316,251,3,6,http://localhost:8001/auth/login,367,0,0
+1777162925844,3,POST /reviews/,201,Created,Review Submission Load Test 3-90,text,true,,380,440,3,5,http://localhost:8004/reviews/,3,0,0
+1777162925848,3,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-94,text,true,,587,137,1,5,http://localhost:8002/restaurants/?q=ramen,3,0,0
+1777162925945,3,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-95,text,true,,587,137,1,7,http://localhost:8002/restaurants/?q=ramen,3,0,1
+1777162925772,187,POST /auth/login,200,OK,Login Load Test 1-93,text,true,,316,251,3,6,http://localhost:8001/auth/login,187,0,0
+1777162925779,185,Login for Token,200,OK,Review Submission Load Test 3-93,text,true,,316,251,3,5,http://localhost:8001/auth/login,185,0,0
+1777162925964,3,POST /reviews/,201,Created,Review Submission Load Test 3-93,text,true,,380,440,3,5,http://localhost:8004/reviews/,3,0,1
+1777162925672,375,POST /auth/login,200,OK,Login Load Test 1-92,text,true,,316,251,3,6,http://localhost:8001/auth/login,375,0,0
+1777162925675,373,Login for Token,200,OK,Review Submission Load Test 3-92,text,true,,316,251,3,5,http://localhost:8001/auth/login,373,0,0
+1777162926048,2,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-96,text,true,,587,137,1,6,http://localhost:8002/restaurants/?q=ramen,2,0,0
+1777162926048,2,POST /reviews/,201,Created,Review Submission Load Test 3-92,text,true,,380,440,3,5,http://localhost:8004/reviews/,2,0,0
+1777162925872,191,POST /auth/login,200,OK,Login Load Test 1-94,text,true,,316,251,2,4,http://localhost:8001/auth/login,191,0,1
+1777162925879,268,Login for Token,200,OK,Review Submission Load Test 3-94,text,true,,316,251,3,6,http://localhost:8001/auth/login,268,0,0
+1777162926147,2,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-97,text,true,,587,137,1,6,http://localhost:8002/restaurants/?q=ramen,2,0,0
+1777162926148,2,POST /reviews/,201,Created,Review Submission Load Test 3-94,text,true,,380,440,3,5,http://localhost:8004/reviews/,2,0,0
+1777162925976,192,POST /auth/login,200,OK,Login Load Test 1-95,text,true,,316,251,2,4,http://localhost:8001/auth/login,192,0,0
+1777162926249,2,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-98,text,true,,587,137,1,6,http://localhost:8002/restaurants/?q=ramen,2,0,1
+1777162926074,188,POST /auth/login,200,OK,Login Load Test 1-96,text,true,,316,251,2,5,http://localhost:8001/auth/login,188,0,1
+1777162926078,187,Login for Token,200,OK,Review Submission Load Test 3-96,text,true,,316,251,3,4,http://localhost:8001/auth/login,187,0,0
+1777162926265,2,POST /reviews/,201,Created,Review Submission Load Test 3-96,text,true,,380,440,3,4,http://localhost:8004/reviews/,2,0,0
+1777162926347,4,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-99,text,true,,587,137,1,6,http://localhost:8002/restaurants/?q=ramen,4,0,1
+1777162925977,376,Login for Token,200,OK,Review Submission Load Test 3-95,text,true,,316,251,3,5,http://localhost:8001/auth/login,376,0,0
+1777162926353,2,POST /reviews/,201,Created,Review Submission Load Test 3-95,text,true,,380,440,3,5,http://localhost:8004/reviews/,2,0,0
+1777162926174,187,POST /auth/login,200,OK,Login Load Test 1-97,text,true,,316,251,2,4,http://localhost:8001/auth/login,187,0,0
+1777162926443,3,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-100,text,true,,587,137,1,6,http://localhost:8002/restaurants/?q=ramen,3,0,0
+1777162926276,184,POST /auth/login,200,OK,Login Load Test 1-98,text,true,,316,251,2,5,http://localhost:8001/auth/login,184,0,0
+1777162926276,186,Login for Token,200,OK,Review Submission Load Test 3-98,text,true,,316,251,3,4,http://localhost:8001/auth/login,186,0,0
+1777162926462,3,POST /reviews/,201,Created,Review Submission Load Test 3-98,text,true,,380,440,3,4,http://localhost:8004/reviews/,3,0,1
+1777162926175,372,Login for Token,200,OK,Review Submission Load Test 3-97,text,true,,316,251,3,5,http://localhost:8001/auth/login,372,0,0
+1777162926547,3,POST /reviews/,201,Created,Review Submission Load Test 3-97,text,true,,380,440,3,5,http://localhost:8004/reviews/,3,0,0
+1777162926470,188,POST /auth/login,200,OK,Login Load Test 1-100,text,true,,316,251,2,4,http://localhost:8001/auth/login,188,0,0
+1777162926477,187,Login for Token,200,OK,Review Submission Load Test 3-100,text,true,,316,251,2,3,http://localhost:8001/auth/login,187,0,1
+1777162926664,3,POST /reviews/,201,Created,Review Submission Load Test 3-100,text,true,,380,440,2,3,http://localhost:8004/reviews/,3,0,1
+1777162926374,363,POST /auth/login,200,OK,Login Load Test 1-99,text,true,,316,251,1,2,http://localhost:8001/auth/login,363,0,0
+1777162926374,363,Login for Token,200,OK,Review Submission Load Test 3-99,text,true,,316,251,1,1,http://localhost:8001/auth/login,363,0,1
+1777162926738,2,POST /reviews/,201,Created,Review Submission Load Test 3-99,text,true,,380,440,1,1,http://localhost:8004/reviews/,2,0,0
+1777221406115,19,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-1,text,true,,587,137,1,3,http://localhost:8002/restaurants/?q=ramen,19,0,10
+1777221406263,5,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-2,text,true,,587,137,1,3,http://localhost:8002/restaurants/?q=ramen,5,0,1
+1777221406115,192,POST /auth/login,200,OK,Login Load Test 1-1,text,true,,316,249,2,4,http://localhost:8001/auth/login,192,0,10
+1777221406115,192,Login for Token,200,OK,Review Submission Load Test 3-1,text,true,,316,249,2,4,http://localhost:8001/auth/login,192,0,10
+1777221406308,11,POST /reviews/,201,Created,Review Submission Load Test 3-1,text,true,,380,440,2,3,http://localhost:8004/reviews/,11,0,0
+1777221406462,4,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-3,text,true,,587,137,1,3,http://localhost:8002/restaurants/?q=ramen,4,0,1
+1777221406297,352,POST /auth/login,200,OK,Login Load Test 1-2,text,true,,316,249,2,4,http://localhost:8001/auth/login,352,0,1
+1777221406299,351,Login for Token,200,OK,Review Submission Load Test 3-2,text,true,,316,249,2,3,http://localhost:8001/auth/login,351,0,0
+1777221406651,2,POST /reviews/,201,Created,Review Submission Load Test 3-2,text,true,,380,440,2,3,http://localhost:8004/reviews/,2,0,0
+1777221406661,4,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-4,text,true,,587,137,1,3,http://localhost:8002/restaurants/?q=ramen,4,0,1
+1777221406497,181,POST /auth/login,200,OK,Login Load Test 1-3,text,true,,316,249,1,2,http://localhost:8001/auth/login,181,0,0
+1777221406497,185,Login for Token,200,OK,Review Submission Load Test 3-3,text,true,,316,249,1,1,http://localhost:8001/auth/login,185,0,0
+1777221406683,3,POST /reviews/,201,Created,Review Submission Load Test 3-3,text,true,,380,440,1,1,http://localhost:8004/reviews/,3,0,0
+1777221406860,4,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-5,text,true,,587,137,1,3,http://localhost:8002/restaurants/?q=ramen,4,0,1
+1777221406694,334,Login for Token,200,OK,Review Submission Load Test 3-4,text,true,,316,249,2,4,http://localhost:8001/auth/login,334,0,0
+1777221406695,334,POST /auth/login,200,OK,Login Load Test 1-4,text,true,,316,249,2,4,http://localhost:8001/auth/login,334,0,0
+1777221407029,3,POST /reviews/,201,Created,Review Submission Load Test 3-4,text,true,,380,440,2,3,http://localhost:8004/reviews/,3,0,0
+1777221407059,3,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-6,text,true,,587,137,1,3,http://localhost:8002/restaurants/?q=ramen,3,0,0
+1777221406894,172,POST /auth/login,200,OK,Login Load Test 1-5,text,true,,316,249,1,2,http://localhost:8001/auth/login,172,0,1
+1777221406896,353,Login for Token,200,OK,Review Submission Load Test 3-5,text,true,,316,250,2,3,http://localhost:8001/auth/login,353,0,0
+1777221407250,3,POST /reviews/,201,Created,Review Submission Load Test 3-5,text,true,,380,440,2,3,http://localhost:8004/reviews/,3,0,0
+1777221407264,4,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-7,text,true,,587,137,1,3,http://localhost:8002/restaurants/?q=ramen,4,0,0
+1777221407092,188,Login for Token,200,OK,Review Submission Load Test 3-6,text,true,,316,250,1,2,http://localhost:8001/auth/login,188,0,1
+1777221407096,187,POST /auth/login,200,OK,Login Load Test 1-6,text,true,,316,250,1,2,http://localhost:8001/auth/login,187,0,1
+1777221407280,4,POST /reviews/,201,Created,Review Submission Load Test 3-6,text,true,,380,440,1,1,http://localhost:8004/reviews/,4,0,0
+1777221407461,2,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-8,text,true,,587,137,1,3,http://localhost:8002/restaurants/?q=ramen,2,0,0
+1777221407295,176,POST /auth/login,200,OK,Login Load Test 1-7,text,true,,316,250,1,2,http://localhost:8001/auth/login,176,0,0
+1777221407295,177,Login for Token,200,OK,Review Submission Load Test 3-7,text,true,,316,250,1,1,http://localhost:8001/auth/login,177,0,0
+1777221407472,2,POST /reviews/,201,Created,Review Submission Load Test 3-7,text,true,,380,440,1,1,http://localhost:8004/reviews/,2,0,1
+1777221407659,2,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-9,text,true,,587,137,1,3,http://localhost:8002/restaurants/?q=ramen,2,0,0
+1777221407494,361,POST /auth/login,200,OK,Login Load Test 1-8,text,true,,316,250,2,4,http://localhost:8001/auth/login,361,0,0
+1777221407494,361,Login for Token,200,OK,Review Submission Load Test 3-8,text,true,,316,250,2,3,http://localhost:8001/auth/login,361,0,1
+1777221407855,3,POST /reviews/,201,Created,Review Submission Load Test 3-8,text,true,,380,440,2,3,http://localhost:8004/reviews/,3,0,1
+1777221407861,2,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-10,text,true,,587,137,1,3,http://localhost:8002/restaurants/?q=ramen,2,0,0
+1777221407696,181,Login for Token,200,OK,Review Submission Load Test 3-9,text,true,,316,250,1,2,http://localhost:8001/auth/login,181,0,0
+1777221407694,186,POST /auth/login,200,OK,Login Load Test 1-9,text,true,,316,250,1,2,http://localhost:8001/auth/login,186,0,1
+1777221407877,3,POST /reviews/,201,Created,Review Submission Load Test 3-9,text,true,,380,440,1,2,http://localhost:8004/reviews/,3,0,1
+1777221408063,2,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-11,text,true,,587,137,1,3,http://localhost:8002/restaurants/?q=ramen,2,0,1
+1777221407893,172,POST /auth/login,200,OK,Login Load Test 1-10,text,true,,316,250,1,3,http://localhost:8001/auth/login,172,0,1
+1777221407893,173,Login for Token,200,OK,Review Submission Load Test 3-10,text,true,,316,250,1,3,http://localhost:8001/auth/login,173,0,1
+1777221408066,2,POST /reviews/,201,Created,Review Submission Load Test 3-10,text,true,,380,440,1,1,http://localhost:8004/reviews/,2,0,0
+1777221408262,3,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-12,text,true,,587,137,1,3,http://localhost:8002/restaurants/?q=ramen,3,0,1
+1777221408095,173,POST /auth/login,200,OK,Login Load Test 1-11,text,true,,316,250,1,2,http://localhost:8001/auth/login,173,0,0
+1777221408097,172,Login for Token,200,OK,Review Submission Load Test 3-11,text,true,,316,250,1,1,http://localhost:8001/auth/login,172,0,1
+1777221408270,3,POST /reviews/,201,Created,Review Submission Load Test 3-11,text,true,,380,440,1,1,http://localhost:8004/reviews/,3,0,0
+1777221408463,4,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-13,text,true,,587,137,1,3,http://localhost:8002/restaurants/?q=ramen,4,0,1
+1777221408294,174,POST /auth/login,200,OK,Login Load Test 1-12,text,true,,316,250,1,2,http://localhost:8001/auth/login,174,0,0
+1777221408295,173,Login for Token,200,OK,Review Submission Load Test 3-12,text,true,,316,250,1,1,http://localhost:8001/auth/login,173,0,0
+1777221408469,2,POST /reviews/,201,Created,Review Submission Load Test 3-12,text,true,,380,440,1,1,http://localhost:8004/reviews/,2,0,0
+1777221408659,4,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-14,text,true,,587,137,1,3,http://localhost:8002/restaurants/?q=ramen,4,0,0
+1777221408493,173,Login for Token,200,OK,Review Submission Load Test 3-13,text,true,,316,250,1,2,http://localhost:8001/auth/login,173,0,0
+1777221408495,172,POST /auth/login,200,OK,Login Load Test 1-13,text,true,,316,250,1,2,http://localhost:8001/auth/login,172,0,1
+1777221408666,4,POST /reviews/,201,Created,Review Submission Load Test 3-13,text,true,,380,440,1,1,http://localhost:8004/reviews/,4,0,0
+1777221408694,172,POST /auth/login,200,OK,Login Load Test 1-14,text,true,,316,250,1,3,http://localhost:8001/auth/login,172,0,0
+1777221408861,5,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-15,text,true,,587,137,1,3,http://localhost:8002/restaurants/?q=ramen,5,0,1
+1777221408694,172,Login for Token,200,OK,Review Submission Load Test 3-14,text,true,,316,250,1,3,http://localhost:8001/auth/login,172,0,0
+1777221408866,3,POST /reviews/,201,Created,Review Submission Load Test 3-14,text,true,,380,440,1,1,http://localhost:8004/reviews/,3,0,0
+1777221409060,4,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-16,text,true,,587,137,1,3,http://localhost:8002/restaurants/?q=ramen,4,0,0
+1777221408895,174,POST /auth/login,200,OK,Login Load Test 1-15,text,true,,316,250,1,2,http://localhost:8001/auth/login,174,0,0
+1777221408895,174,Login for Token,200,OK,Review Submission Load Test 3-15,text,true,,316,250,1,1,http://localhost:8001/auth/login,174,0,1
+1777221409069,4,POST /reviews/,201,Created,Review Submission Load Test 3-15,text,true,,380,440,1,1,http://localhost:8004/reviews/,4,0,1
+1777221409262,4,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-17,text,true,,587,137,1,3,http://localhost:8002/restaurants/?q=ramen,4,0,0
+1777221409093,173,POST /auth/login,200,OK,Login Load Test 1-16,text,true,,316,250,1,3,http://localhost:8001/auth/login,173,0,0
+1777221409096,173,Login for Token,200,OK,Review Submission Load Test 3-16,text,true,,316,250,1,1,http://localhost:8001/auth/login,173,0,1
+1777221409269,3,POST /reviews/,201,Created,Review Submission Load Test 3-16,text,true,,380,440,1,1,http://localhost:8004/reviews/,3,0,0
+1777221409291,173,POST /auth/login,200,OK,Login Load Test 1-17,text,true,,316,250,1,3,http://localhost:8001/auth/login,173,0,0
+1777221409461,4,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-18,text,true,,587,137,1,2,http://localhost:8002/restaurants/?q=ramen,4,0,1
+1777221409295,172,Login for Token,200,OK,Review Submission Load Test 3-17,text,true,,316,250,1,1,http://localhost:8001/auth/login,172,0,0
+1777221409467,3,POST /reviews/,201,Created,Review Submission Load Test 3-17,text,true,,380,440,1,1,http://localhost:8004/reviews/,3,0,0
+1777221409657,2,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-19,text,true,,587,137,1,3,http://localhost:8002/restaurants/?q=ramen,2,0,0
+1777221409494,175,POST /auth/login,200,OK,Login Load Test 1-18,text,true,,316,250,1,2,http://localhost:8001/auth/login,175,0,0
+1777221409494,175,Login for Token,200,OK,Review Submission Load Test 3-18,text,true,,316,250,1,2,http://localhost:8001/auth/login,175,0,0
+1777221409669,2,POST /reviews/,201,Created,Review Submission Load Test 3-18,text,true,,380,440,1,1,http://localhost:8004/reviews/,2,0,0
+1777221409865,2,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-20,text,true,,587,137,1,3,http://localhost:8002/restaurants/?q=ramen,2,0,0
+1777221409691,187,POST /auth/login,200,OK,Login Load Test 1-19,text,true,,316,250,1,2,http://localhost:8001/auth/login,187,0,0
+1777221409696,186,Login for Token,200,OK,Review Submission Load Test 3-19,text,true,,316,250,1,1,http://localhost:8001/auth/login,186,0,0
+1777221409882,3,POST /reviews/,201,Created,Review Submission Load Test 3-19,text,true,,380,440,1,1,http://localhost:8004/reviews/,3,0,1
+1777221410061,2,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-21,text,true,,587,137,1,3,http://localhost:8002/restaurants/?q=ramen,2,0,0
+1777221409894,171,POST /auth/login,200,OK,Login Load Test 1-20,text,true,,316,250,1,2,http://localhost:8001/auth/login,171,0,0
+1777221409894,172,Login for Token,200,OK,Review Submission Load Test 3-20,text,true,,316,250,1,1,http://localhost:8001/auth/login,172,0,0
+1777221410066,2,POST /reviews/,201,Created,Review Submission Load Test 3-20,text,true,,380,440,1,1,http://localhost:8004/reviews/,2,0,0
+1777221410262,3,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-22,text,true,,587,137,1,3,http://localhost:8002/restaurants/?q=ramen,3,0,0
+1777221410094,174,Login for Token,200,OK,Review Submission Load Test 3-21,text,true,,316,250,1,2,http://localhost:8001/auth/login,174,0,0
+1777221410095,173,POST /auth/login,200,OK,Login Load Test 1-21,text,true,,316,250,1,2,http://localhost:8001/auth/login,173,0,0
+1777221410268,2,POST /reviews/,201,Created,Review Submission Load Test 3-21,text,true,,380,440,1,1,http://localhost:8004/reviews/,2,0,0
+1777221410464,3,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-23,text,true,,587,137,1,3,http://localhost:8002/restaurants/?q=ramen,3,0,1
+1777221410292,178,POST /auth/login,200,OK,Login Load Test 1-22,text,true,,316,250,1,2,http://localhost:8001/auth/login,178,0,1
+1777221410292,181,Login for Token,200,OK,Review Submission Load Test 3-22,text,true,,316,250,1,1,http://localhost:8001/auth/login,181,0,1
+1777221410473,2,POST /reviews/,201,Created,Review Submission Load Test 3-22,text,true,,380,440,1,1,http://localhost:8004/reviews/,2,0,1
+1777221410491,172,Login for Token,200,OK,Review Submission Load Test 3-23,text,true,,316,250,1,3,http://localhost:8001/auth/login,172,0,1
+1777221410661,3,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-24,text,true,,587,137,1,3,http://localhost:8002/restaurants/?q=ramen,3,0,0
+1777221410664,3,POST /reviews/,201,Created,Review Submission Load Test 3-23,text,true,,380,440,1,2,http://localhost:8004/reviews/,3,0,0
+1777221410496,172,POST /auth/login,200,OK,Login Load Test 1-23,text,true,,316,250,1,1,http://localhost:8001/auth/login,172,0,0
+1777221410860,4,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-25,text,true,,587,137,1,3,http://localhost:8002/restaurants/?q=ramen,4,0,1
+1777221410692,174,POST /auth/login,200,OK,Login Load Test 1-24,text,true,,316,250,1,2,http://localhost:8001/auth/login,174,0,1
+1777221410694,174,Login for Token,200,OK,Review Submission Load Test 3-24,text,true,,316,250,1,1,http://localhost:8001/auth/login,174,0,0
+1777221410868,2,POST /reviews/,201,Created,Review Submission Load Test 3-24,text,true,,380,440,1,1,http://localhost:8004/reviews/,2,0,0
+1777221410890,173,POST /auth/login,200,OK,Login Load Test 1-25,text,true,,316,250,1,3,http://localhost:8001/auth/login,173,0,0
+1777221410890,173,Login for Token,200,OK,Review Submission Load Test 3-25,text,true,,316,250,1,2,http://localhost:8001/auth/login,173,0,1
+1777221411060,4,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-26,text,true,,587,137,1,2,http://localhost:8002/restaurants/?q=ramen,4,0,0
+1777221411064,2,POST /reviews/,201,Created,Review Submission Load Test 3-25,text,true,,380,440,1,1,http://localhost:8004/reviews/,2,0,0
+1777221411091,174,POST /auth/login,200,OK,Login Load Test 1-26,text,true,,316,250,1,3,http://localhost:8001/auth/login,174,0,0
+1777221411091,174,Login for Token,200,OK,Review Submission Load Test 3-26,text,true,,316,250,1,3,http://localhost:8001/auth/login,174,0,0
+1777221411261,4,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-27,text,true,,587,137,1,2,http://localhost:8002/restaurants/?q=ramen,4,0,0
+1777221411265,3,POST /reviews/,201,Created,Review Submission Load Test 3-26,text,true,,380,440,1,1,http://localhost:8004/reviews/,3,0,0
+1777221411461,3,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-28,text,true,,587,137,1,3,http://localhost:8002/restaurants/?q=ramen,3,0,0
+1777221411294,174,POST /auth/login,200,OK,Login Load Test 1-27,text,true,,316,250,1,2,http://localhost:8001/auth/login,174,0,0
+1777221411294,174,Login for Token,200,OK,Review Submission Load Test 3-27,text,true,,316,250,1,2,http://localhost:8001/auth/login,174,0,0
+1777221411468,3,POST /reviews/,201,Created,Review Submission Load Test 3-27,text,true,,380,440,1,1,http://localhost:8004/reviews/,3,0,1
+1777221411657,4,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-29,text,true,,587,137,1,3,http://localhost:8002/restaurants/?q=ramen,4,0,0
+1777221411492,352,Login for Token,200,OK,Review Submission Load Test 3-28,text,true,,316,250,2,4,http://localhost:8001/auth/login,352,0,1
+1777221411492,353,POST /auth/login,200,OK,Login Load Test 1-28,text,true,,316,250,2,4,http://localhost:8001/auth/login,353,0,1
+1777221411844,3,POST /reviews/,201,Created,Review Submission Load Test 3-28,text,true,,380,440,2,3,http://localhost:8004/reviews/,3,0,1
+1777221411861,3,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-30,text,true,,587,137,1,3,http://localhost:8002/restaurants/?q=ramen,3,0,0
+1777221411691,187,POST /auth/login,200,OK,Login Load Test 1-29,text,true,,316,250,1,2,http://localhost:8001/auth/login,187,0,0
+1777221411694,186,Login for Token,200,OK,Review Submission Load Test 3-29,text,true,,316,250,1,1,http://localhost:8001/auth/login,186,0,0
+1777221411881,3,POST /reviews/,201,Created,Review Submission Load Test 3-29,text,true,,380,440,1,1,http://localhost:8004/reviews/,3,0,0
+1777221411891,171,POST /auth/login,200,OK,Login Load Test 1-30,text,true,,316,250,1,3,http://localhost:8001/auth/login,171,0,0
+1777221412061,4,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-31,text,true,,587,137,1,2,http://localhost:8002/restaurants/?q=ramen,4,0,0
+1777221411896,171,Login for Token,200,OK,Review Submission Load Test 3-30,text,true,,316,250,1,1,http://localhost:8001/auth/login,171,0,0
+1777221412067,2,POST /reviews/,201,Created,Review Submission Load Test 3-30,text,true,,380,440,1,1,http://localhost:8004/reviews/,2,0,0
+1777221412257,4,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-32,text,true,,587,137,1,3,http://localhost:8002/restaurants/?q=ramen,4,0,0
+1777221412091,173,POST /auth/login,200,OK,Login Load Test 1-31,text,true,,316,250,1,2,http://localhost:8001/auth/login,173,0,1
+1777221412092,172,Login for Token,200,OK,Review Submission Load Test 3-31,text,true,,316,250,1,2,http://localhost:8001/auth/login,172,0,0
+1777221412264,3,POST /reviews/,201,Created,Review Submission Load Test 3-31,text,true,,380,440,1,1,http://localhost:8004/reviews/,3,0,0
+1777221412461,4,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-33,text,true,,587,137,1,3,http://localhost:8002/restaurants/?q=ramen,4,0,1
+1777221412293,172,POST /auth/login,200,OK,Login Load Test 1-32,text,true,,316,250,1,3,http://localhost:8001/auth/login,172,0,0
+1777221412293,172,Login for Token,200,OK,Review Submission Load Test 3-32,text,true,,316,250,1,3,http://localhost:8001/auth/login,172,0,0
+1777221412465,2,POST /reviews/,201,Created,Review Submission Load Test 3-32,text,true,,380,440,1,1,http://localhost:8004/reviews/,2,0,0
+1777221412491,170,Login for Token,200,OK,Review Submission Load Test 3-33,text,true,,316,250,1,2,http://localhost:8001/auth/login,170,0,1
+1777221412662,3,POST /reviews/,201,Created,Review Submission Load Test 3-33,text,true,,380,440,1,3,http://localhost:8004/reviews/,3,0,0
+1777221412662,3,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-34,text,true,,587,137,1,2,http://localhost:8002/restaurants/?q=ramen,3,0,0
+1777221412493,352,POST /auth/login,200,OK,Login Load Test 1-33,text,true,,316,250,2,3,http://localhost:8001/auth/login,352,0,0
+1777221412861,3,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-35,text,true,,587,137,1,3,http://localhost:8002/restaurants/?q=ramen,3,0,0
+1777221412688,186,POST /auth/login,200,OK,Login Load Test 1-34,text,true,,316,250,1,2,http://localhost:8001/auth/login,186,0,0
+1777221412694,186,Login for Token,200,OK,Review Submission Load Test 3-34,text,true,,316,250,1,1,http://localhost:8001/auth/login,186,0,0
+1777221412880,3,POST /reviews/,201,Created,Review Submission Load Test 3-34,text,true,,380,440,1,1,http://localhost:8004/reviews/,3,0,0
+1777221412891,172,POST /auth/login,200,OK,Login Load Test 1-35,text,true,,316,250,1,3,http://localhost:8001/auth/login,172,0,0
+1777221412894,171,Login for Token,200,OK,Review Submission Load Test 3-35,text,true,,316,250,1,2,http://localhost:8001/auth/login,171,0,0
+1777221413061,4,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-36,text,true,,587,137,1,2,http://localhost:8002/restaurants/?q=ramen,4,0,0
+1777221413065,2,POST /reviews/,201,Created,Review Submission Load Test 3-35,text,true,,380,440,1,1,http://localhost:8004/reviews/,2,0,0
+1777221413260,3,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-37,text,true,,587,137,1,3,http://localhost:8002/restaurants/?q=ramen,3,0,1
+1777221413093,173,POST /auth/login,200,OK,Login Load Test 1-36,text,true,,316,250,1,2,http://localhost:8001/auth/login,173,0,0
+1777221413095,173,Login for Token,200,OK,Review Submission Load Test 3-36,text,true,,316,250,1,1,http://localhost:8001/auth/login,173,0,0
+1777221413268,3,POST /reviews/,201,Created,Review Submission Load Test 3-36,text,true,,380,440,1,1,http://localhost:8004/reviews/,3,0,0
+1777221413461,3,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-38,text,true,,587,137,1,3,http://localhost:8002/restaurants/?q=ramen,3,0,0
+1777221413292,173,POST /auth/login,200,OK,Login Load Test 1-37,text,true,,316,250,1,2,http://localhost:8001/auth/login,173,0,0
+1777221413294,173,Login for Token,200,OK,Review Submission Load Test 3-37,text,true,,316,250,1,1,http://localhost:8001/auth/login,173,0,0
+1777221413467,3,POST /reviews/,201,Created,Review Submission Load Test 3-37,text,true,,380,440,1,1,http://localhost:8004/reviews/,3,0,0
+1777221413658,3,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-39,text,true,,587,137,1,3,http://localhost:8002/restaurants/?q=ramen,3,0,0
+1777221413490,348,Login for Token,200,OK,Review Submission Load Test 3-38,text,true,,316,250,2,4,http://localhost:8001/auth/login,348,0,0
+1777221413490,349,POST /auth/login,200,OK,Login Load Test 1-38,text,true,,316,250,2,4,http://localhost:8001/auth/login,349,0,0
+1777221413839,2,POST /reviews/,201,Created,Review Submission Load Test 3-38,text,true,,380,440,2,3,http://localhost:8004/reviews/,2,0,0
+1777221413857,4,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-40,text,true,,587,137,1,3,http://localhost:8002/restaurants/?q=ramen,4,0,1
+1777221413688,186,POST /auth/login,200,OK,Login Load Test 1-39,text,true,,316,250,1,2,http://localhost:8001/auth/login,186,0,0
+1777221413692,186,Login for Token,200,OK,Review Submission Load Test 3-39,text,true,,316,250,1,1,http://localhost:8001/auth/login,186,0,0
+1777221413878,3,POST /reviews/,201,Created,Review Submission Load Test 3-39,text,true,,380,440,1,1,http://localhost:8004/reviews/,3,0,0
+1777221414056,4,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-41,text,true,,587,137,1,3,http://localhost:8002/restaurants/?q=ramen,4,0,1
+1777221413888,335,POST /auth/login,200,OK,Login Load Test 1-40,text,true,,316,250,2,4,http://localhost:8001/auth/login,335,0,0
+1777221413889,335,Login for Token,200,OK,Review Submission Load Test 3-40,text,true,,316,250,2,3,http://localhost:8001/auth/login,335,0,0
+1777221414225,4,POST /reviews/,201,Created,Review Submission Load Test 3-40,text,true,,380,440,2,3,http://localhost:8004/reviews/,4,0,0
+1777221414260,4,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-42,text,true,,587,137,1,3,http://localhost:8002/restaurants/?q=ramen,4,0,1
+1777221414089,353,POST /auth/login,200,OK,Login Load Test 1-41,text,true,,316,250,2,4,http://localhost:8001/auth/login,353,0,0
+1777221414091,352,Login for Token,200,OK,Review Submission Load Test 3-41,text,true,,316,250,2,3,http://localhost:8001/auth/login,352,0,0
+1777221414444,3,POST /reviews/,201,Created,Review Submission Load Test 3-41,text,true,,380,440,2,3,http://localhost:8004/reviews/,3,0,0
+1777221414460,3,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-43,text,true,,587,137,1,3,http://localhost:8002/restaurants/?q=ramen,3,0,0
+1777221414291,186,POST /auth/login,200,OK,Login Load Test 1-42,text,true,,316,250,1,2,http://localhost:8001/auth/login,186,0,0
+1777221414294,186,Login for Token,200,OK,Review Submission Load Test 3-42,text,true,,316,250,1,1,http://localhost:8001/auth/login,186,0,0
+1777221414480,3,POST /reviews/,201,Created,Review Submission Load Test 3-42,text,true,,380,440,1,1,http://localhost:8004/reviews/,3,0,0
+1777221414491,171,POST /auth/login,200,OK,Login Load Test 1-43,text,true,,316,250,1,3,http://localhost:8001/auth/login,171,0,0
+1777221414494,170,Login for Token,200,OK,Review Submission Load Test 3-43,text,true,,316,250,1,2,http://localhost:8001/auth/login,170,0,0
+1777221414661,3,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-44,text,true,,587,137,1,2,http://localhost:8002/restaurants/?q=ramen,3,0,0
+1777221414664,3,POST /reviews/,201,Created,Review Submission Load Test 3-43,text,true,,380,440,1,1,http://localhost:8004/reviews/,3,0,1
+1777221414688,173,POST /auth/login,200,OK,Login Load Test 1-44,text,true,,316,250,1,3,http://localhost:8001/auth/login,173,0,0
+1777221414690,172,Login for Token,200,OK,Review Submission Load Test 3-44,text,true,,316,250,1,2,http://localhost:8001/auth/login,172,0,1
+1777221414861,4,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-45,text,true,,587,137,1,2,http://localhost:8002/restaurants/?q=ramen,4,0,0
+1777221414863,2,POST /reviews/,201,Created,Review Submission Load Test 3-44,text,true,,380,440,1,1,http://localhost:8004/reviews/,2,0,0
+1777221414887,174,POST /auth/login,200,OK,Login Load Test 1-45,text,true,,316,250,1,3,http://localhost:8001/auth/login,174,0,0
+1777221415060,4,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-46,text,true,,587,137,1,2,http://localhost:8002/restaurants/?q=ramen,4,0,1
+1777221414892,173,Login for Token,200,OK,Review Submission Load Test 3-45,text,true,,316,250,1,1,http://localhost:8001/auth/login,173,0,0
+1777221415065,2,POST /reviews/,201,Created,Review Submission Load Test 3-45,text,true,,380,440,1,1,http://localhost:8004/reviews/,2,0,0
+1777221415090,172,POST /auth/login,200,OK,Login Load Test 1-46,text,true,,316,250,1,3,http://localhost:8001/auth/login,172,0,0
+1777221415090,173,Login for Token,200,OK,Review Submission Load Test 3-46,text,true,,316,250,1,2,http://localhost:8001/auth/login,173,0,1
+1777221415261,3,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-47,text,true,,587,137,1,2,http://localhost:8002/restaurants/?q=ramen,3,0,0
+1777221415263,2,POST /reviews/,201,Created,Review Submission Load Test 3-46,text,true,,380,440,1,1,http://localhost:8004/reviews/,2,0,0
+1777221415290,175,POST /auth/login,200,OK,Login Load Test 1-47,text,true,,316,250,1,3,http://localhost:8001/auth/login,175,0,0
+1777221415290,175,Login for Token,200,OK,Review Submission Load Test 3-47,text,true,,316,250,1,3,http://localhost:8001/auth/login,175,0,0
+1777221415462,4,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-48,text,true,,587,137,1,2,http://localhost:8002/restaurants/?q=ramen,4,0,0
+1777221415465,2,POST /reviews/,201,Created,Review Submission Load Test 3-47,text,true,,380,440,1,1,http://localhost:8004/reviews/,2,0,0
+1777221415486,174,POST /auth/login,200,OK,Login Load Test 1-48,text,true,,316,250,1,3,http://localhost:8001/auth/login,174,0,0
+1777221415658,4,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-49,text,true,,587,137,1,2,http://localhost:8002/restaurants/?q=ramen,4,0,1
+1777221415493,173,Login for Token,200,OK,Review Submission Load Test 3-48,text,true,,316,250,1,1,http://localhost:8001/auth/login,172,0,0
+1777221415666,3,POST /reviews/,201,Created,Review Submission Load Test 3-48,text,true,,380,440,1,1,http://localhost:8004/reviews/,3,0,0
+1777221415687,174,POST /auth/login,200,OK,Login Load Test 1-49,text,true,,316,250,1,3,http://localhost:8001/auth/login,174,0,0
+1777221415861,3,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-50,text,true,,587,137,1,2,http://localhost:8002/restaurants/?q=ramen,3,0,0
+1777221415694,172,Login for Token,200,OK,Review Submission Load Test 3-49,text,true,,316,250,1,1,http://localhost:8001/auth/login,172,0,0
+1777221415866,2,POST /reviews/,201,Created,Review Submission Load Test 3-49,text,true,,380,440,1,1,http://localhost:8004/reviews/,2,0,0
+1777221415890,174,POST /auth/login,200,OK,Login Load Test 1-50,text,true,,316,250,1,3,http://localhost:8001/auth/login,174,0,1
+1777221415891,173,Login for Token,200,OK,Review Submission Load Test 3-50,text,true,,316,251,1,3,http://localhost:8001/auth/login,173,0,1
+1777221416061,4,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-51,text,true,,587,137,1,2,http://localhost:8002/restaurants/?q=ramen,4,0,0
+1777221416064,3,POST /reviews/,201,Created,Review Submission Load Test 3-50,text,true,,380,440,1,1,http://localhost:8004/reviews/,3,0,0
+1777221416087,174,POST /auth/login,200,OK,Login Load Test 1-51,text,true,,316,251,1,3,http://localhost:8001/auth/login,174,0,1
+1777221416088,173,Login for Token,200,OK,Review Submission Load Test 3-51,text,true,,316,251,1,2,http://localhost:8001/auth/login,173,0,0
+1777221416261,2,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-52,text,true,,587,137,1,2,http://localhost:8002/restaurants/?q=ramen,2,0,0
+1777221416261,2,POST /reviews/,201,Created,Review Submission Load Test 3-51,text,true,,380,440,1,1,http://localhost:8004/reviews/,2,0,1
+1777221416461,3,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-53,text,true,,587,137,1,3,http://localhost:8002/restaurants/?q=ramen,3,0,0
+1777221416286,352,POST /auth/login,200,OK,Login Load Test 1-52,text,true,,316,251,2,4,http://localhost:8001/auth/login,352,0,0
+1777221416287,352,Login for Token,200,OK,Review Submission Load Test 3-52,text,true,,316,251,2,3,http://localhost:8001/auth/login,352,0,0
+1777221416639,3,POST /reviews/,201,Created,Review Submission Load Test 3-52,text,true,,380,440,2,3,http://localhost:8004/reviews/,3,0,0
+1777221416661,3,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-54,text,true,,587,137,1,3,http://localhost:8002/restaurants/?q=ramen,3,0,0
+1777221416486,186,POST /auth/login,200,OK,Login Load Test 1-53,text,true,,316,251,1,2,http://localhost:8001/auth/login,186,0,0
+1777221416492,186,Login for Token,200,OK,Review Submission Load Test 3-53,text,true,,316,251,1,1,http://localhost:8001/auth/login,186,0,0
+1777221416678,4,POST /reviews/,201,Created,Review Submission Load Test 3-53,text,true,,380,440,1,1,http://localhost:8004/reviews/,4,0,1
+1777221416686,170,POST /auth/login,200,OK,Login Load Test 1-54,text,true,,316,251,1,2,http://localhost:8001/auth/login,170,0,0
+1777221416688,170,Login for Token,200,OK,Review Submission Load Test 3-54,text,true,,316,251,1,1,http://localhost:8001/auth/login,170,0,0
+1777221416859,2,POST /reviews/,201,Created,Review Submission Load Test 3-54,text,true,,380,440,1,2,http://localhost:8004/reviews/,2,0,0
+1777221416860,3,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-55,text,true,,587,137,1,1,http://localhost:8002/restaurants/?q=ramen,3,0,1
+1777221416888,175,POST /auth/login,200,OK,Login Load Test 1-55,text,true,,316,251,1,3,http://localhost:8001/auth/login,175,0,0
+1777221416889,174,Login for Token,200,OK,Review Submission Load Test 3-55,text,true,,316,251,1,3,http://localhost:8001/auth/login,174,0,0
+1777221417061,4,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-56,text,true,,587,137,1,2,http://localhost:8002/restaurants/?q=ramen,4,0,0
+1777221417063,2,POST /reviews/,201,Created,Review Submission Load Test 3-55,text,true,,380,440,1,1,http://localhost:8004/reviews/,2,0,0
+1777221417090,174,POST /auth/login,200,OK,Login Load Test 1-56,text,true,,316,251,1,3,http://localhost:8001/auth/login,174,0,1
+1777221417091,173,Login for Token,200,OK,Review Submission Load Test 3-56,text,true,,316,251,1,3,http://localhost:8001/auth/login,173,0,0
+1777221417260,5,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-57,text,true,,587,137,1,2,http://localhost:8002/restaurants/?q=ramen,5,0,1
+1777221417264,2,POST /reviews/,201,Created,Review Submission Load Test 3-56,text,true,,380,440,1,1,http://localhost:8004/reviews/,2,0,0
+1777221417460,2,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-58,text,true,,587,137,1,3,http://localhost:8002/restaurants/?q=ramen,2,0,1
+1777221417286,181,POST /auth/login,200,OK,Login Load Test 1-57,text,true,,316,251,1,2,http://localhost:8001/auth/login,181,0,0
+1777221417292,182,Login for Token,200,OK,Review Submission Load Test 3-57,text,true,,316,251,1,1,http://localhost:8001/auth/login,182,0,0
+1777221417474,2,POST /reviews/,201,Created,Review Submission Load Test 3-57,text,true,,380,440,1,1,http://localhost:8004/reviews/,2,0,0
+1777221417661,2,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-59,text,true,,587,137,1,3,http://localhost:8002/restaurants/?q=ramen,2,0,0
+1777221417490,187,Login for Token,200,OK,Review Submission Load Test 3-58,text,true,,316,251,1,2,http://localhost:8001/auth/login,187,0,0
+1777221417490,188,POST /auth/login,200,OK,Login Load Test 1-58,text,true,,316,251,1,2,http://localhost:8001/auth/login,188,0,0
+1777221417677,2,POST /reviews/,201,Created,Review Submission Load Test 3-58,text,true,,380,440,1,1,http://localhost:8004/reviews/,2,0,0
+1777221417686,173,POST /auth/login,200,OK,Login Load Test 1-59,text,true,,316,251,1,3,http://localhost:8001/auth/login,173,0,0
+1777221417688,172,Login for Token,200,OK,Review Submission Load Test 3-59,text,true,,316,251,1,2,http://localhost:8001/auth/login,172,0,0
+1777221417858,2,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-60,text,true,,587,137,1,2,http://localhost:8002/restaurants/?q=ramen,2,0,1
+1777221417860,2,POST /reviews/,201,Created,Review Submission Load Test 3-59,text,true,,380,440,1,1,http://localhost:8004/reviews/,2,0,0
+1777221417888,174,POST /auth/login,200,OK,Login Load Test 1-60,text,true,,316,251,1,3,http://localhost:8001/auth/login,174,0,1
+1777221417888,174,Login for Token,200,OK,Review Submission Load Test 3-60,text,true,,316,251,1,3,http://localhost:8001/auth/login,174,0,1
+1777221418061,3,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-61,text,true,,587,137,1,2,http://localhost:8002/restaurants/?q=ramen,3,0,0
+1777221418062,3,POST /reviews/,201,Created,Review Submission Load Test 3-60,text,true,,380,440,1,1,http://localhost:8004/reviews/,3,0,0
+1777221418261,3,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-62,text,true,,587,137,1,3,http://localhost:8002/restaurants/?q=ramen,3,0,0
+1777221418088,348,POST /auth/login,200,OK,Login Load Test 1-61,text,true,,316,251,2,4,http://localhost:8001/auth/login,348,0,0
+1777221418089,347,Login for Token,200,OK,Review Submission Load Test 3-61,text,true,,316,251,2,3,http://localhost:8001/auth/login,347,0,0
+1777221418437,5,POST /reviews/,201,Created,Review Submission Load Test 3-61,text,true,,380,440,2,3,http://localhost:8004/reviews/,5,0,0
+1777221418461,2,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-63,text,true,,587,137,1,3,http://localhost:8002/restaurants/?q=ramen,2,0,0
+1777221418288,184,POST /auth/login,200,OK,Login Load Test 1-62,text,true,,316,251,1,2,http://localhost:8001/auth/login,184,0,0
+1777221418293,182,Login for Token,200,OK,Review Submission Load Test 3-62,text,true,,316,251,1,1,http://localhost:8001/auth/login,182,0,0
+1777221418476,3,POST /reviews/,201,Created,Review Submission Load Test 3-62,text,true,,380,440,1,1,http://localhost:8004/reviews/,3,0,0
+1777221418486,172,POST /auth/login,200,OK,Login Load Test 1-63,text,true,,316,251,1,2,http://localhost:8001/auth/login,172,0,0
+1777221418488,171,Login for Token,200,OK,Review Submission Load Test 3-63,text,true,,316,251,1,1,http://localhost:8001/auth/login,171,0,0
+1777221418659,4,POST /reviews/,201,Created,Review Submission Load Test 3-63,text,true,,380,440,1,2,http://localhost:8004/reviews/,4,0,0
+1777221418660,3,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-64,text,true,,587,137,1,1,http://localhost:8002/restaurants/?q=ramen,3,0,0
+1777221418858,4,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-65,text,true,,587,137,1,3,http://localhost:8002/restaurants/?q=ramen,4,0,1
+1777221418688,354,POST /auth/login,200,OK,Login Load Test 1-64,text,true,,316,251,2,4,http://localhost:8001/auth/login,354,0,0
+1777221418689,354,Login for Token,200,OK,Review Submission Load Test 3-64,text,true,,316,251,2,3,http://localhost:8001/auth/login,354,0,0
+1777221419043,3,POST /reviews/,201,Created,Review Submission Load Test 3-64,text,true,,380,440,2,3,http://localhost:8004/reviews/,3,0,1
+1777221419061,3,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-66,text,true,,587,137,1,3,http://localhost:8002/restaurants/?q=ramen,3,0,0
+1777221418884,188,POST /auth/login,200,OK,Login Load Test 1-65,text,true,,316,251,1,2,http://localhost:8001/auth/login,188,0,0
+1777221418889,188,Login for Token,200,OK,Review Submission Load Test 3-65,text,true,,316,251,1,1,http://localhost:8001/auth/login,188,0,1
+1777221419077,3,POST /reviews/,201,Created,Review Submission Load Test 3-65,text,true,,380,440,1,1,http://localhost:8004/reviews/,3,0,0
+1777221419087,171,POST /auth/login,200,OK,Login Load Test 1-66,text,true,,316,251,1,2,http://localhost:8001/auth/login,171,0,0
+1777221419088,171,Login for Token,200,OK,Review Submission Load Test 3-66,text,true,,316,251,1,1,http://localhost:8001/auth/login,171,0,0
+1777221419259,3,POST /reviews/,201,Created,Review Submission Load Test 3-66,text,true,,380,440,1,2,http://localhost:8004/reviews/,3,0,0
+1777221419261,2,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-67,text,true,,587,137,1,1,http://localhost:8002/restaurants/?q=ramen,2,0,0
+1777221419286,173,POST /auth/login,200,OK,Login Load Test 1-67,text,true,,316,251,1,3,http://localhost:8001/auth/login,173,0,0
+1777221419458,4,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-68,text,true,,587,137,1,2,http://localhost:8002/restaurants/?q=ramen,4,0,1
+1777221419291,173,Login for Token,200,OK,Review Submission Load Test 3-67,text,true,,316,251,1,1,http://localhost:8001/auth/login,173,0,1
+1777221419464,2,POST /reviews/,201,Created,Review Submission Load Test 3-67,text,true,,380,440,1,1,http://localhost:8004/reviews/,2,0,0
+1777221419661,4,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-69,text,true,,587,137,1,3,http://localhost:8002/restaurants/?q=ramen,4,0,0
+1777221419487,348,POST /auth/login,200,OK,Login Load Test 1-68,text,true,,316,251,2,4,http://localhost:8001/auth/login,348,0,0
+1777221419488,348,Login for Token,200,OK,Review Submission Load Test 3-68,text,true,,316,251,2,3,http://localhost:8001/auth/login,348,0,0
+1777221419836,3,POST /reviews/,201,Created,Review Submission Load Test 3-68,text,true,,380,440,2,3,http://localhost:8004/reviews/,3,0,0
+1777221419861,4,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-70,text,true,,587,137,1,3,http://localhost:8002/restaurants/?q=ramen,4,0,0
+1777221419683,185,POST /auth/login,200,OK,Login Load Test 1-69,text,true,,316,251,1,2,http://localhost:8001/auth/login,185,0,0
+1777221419691,185,Login for Token,200,OK,Review Submission Load Test 3-69,text,true,,316,251,1,1,http://localhost:8001/auth/login,185,0,0
+1777221419876,3,POST /reviews/,201,Created,Review Submission Load Test 3-69,text,true,,380,440,1,1,http://localhost:8004/reviews/,3,0,0
+1777221420062,2,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-71,text,true,,587,137,1,3,http://localhost:8002/restaurants/?q=ramen,2,0,0
+1777221419887,185,Login for Token,200,OK,Review Submission Load Test 3-70,text,true,,316,251,1,2,http://localhost:8001/auth/login,185,0,1
+1777221419887,186,POST /auth/login,200,OK,Login Load Test 1-70,text,true,,316,251,1,2,http://localhost:8001/auth/login,186,0,0
+1777221420073,2,POST /reviews/,201,Created,Review Submission Load Test 3-70,text,true,,380,440,1,1,http://localhost:8004/reviews/,2,0,0
+1777221420086,176,POST /auth/login,200,OK,Login Load Test 1-71,text,true,,316,251,1,3,http://localhost:8001/auth/login,176,0,0
+1777221420087,176,Login for Token,200,OK,Review Submission Load Test 3-71,text,true,,316,251,1,2,http://localhost:8001/auth/login,176,0,0
+1777221420261,2,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-72,text,true,,587,137,1,2,http://localhost:8002/restaurants/?q=ramen,2,0,0
+1777221420263,2,POST /reviews/,201,Created,Review Submission Load Test 3-71,text,true,,380,440,1,1,http://localhost:8004/reviews/,2,0,0
+1777221420283,179,POST /auth/login,200,OK,Login Load Test 1-72,text,true,,316,251,1,3,http://localhost:8001/auth/login,179,0,0
+1777221420461,2,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-73,text,true,,587,137,1,2,http://localhost:8002/restaurants/?q=ramen,2,0,0
+1777221420289,179,Login for Token,200,OK,Review Submission Load Test 3-72,text,true,,316,251,1,1,http://localhost:8001/auth/login,179,0,0
+1777221420469,2,POST /reviews/,201,Created,Review Submission Load Test 3-72,text,true,,380,440,1,1,http://localhost:8004/reviews/,2,0,0
+1777221420486,172,POST /auth/login,200,OK,Login Load Test 1-73,text,true,,316,251,1,3,http://localhost:8001/auth/login,172,0,0
+1777221420486,172,Login for Token,200,OK,Review Submission Load Test 3-73,text,true,,316,251,1,3,http://localhost:8001/auth/login,172,0,0
+1777221420658,3,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-74,text,true,,587,137,1,2,http://localhost:8002/restaurants/?q=ramen,3,0,0
+1777221420659,2,POST /reviews/,201,Created,Review Submission Load Test 3-73,text,true,,380,440,1,1,http://localhost:8004/reviews/,2,0,0
+1777221420686,174,POST /auth/login,200,OK,Login Load Test 1-74,text,true,,316,251,1,3,http://localhost:8001/auth/login,174,0,0
+1777221420860,3,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-75,text,true,,587,137,1,2,http://localhost:8002/restaurants/?q=ramen,3,0,0
+1777221420689,174,Login for Token,200,OK,Review Submission Load Test 3-74,text,true,,316,251,1,1,http://localhost:8001/auth/login,174,0,1
+1777221420864,3,POST /reviews/,201,Created,Review Submission Load Test 3-74,text,true,,380,440,1,1,http://localhost:8004/reviews/,3,0,0
+1777221420887,175,POST /auth/login,200,OK,Login Load Test 1-75,text,true,,316,251,1,3,http://localhost:8001/auth/login,175,0,1
+1777221420889,174,Login for Token,200,OK,Review Submission Load Test 3-75,text,true,,316,251,1,2,http://localhost:8001/auth/login,174,0,0
+1777221421061,3,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-76,text,true,,587,137,1,2,http://localhost:8002/restaurants/?q=ramen,3,0,0
+1777221421063,2,POST /reviews/,201,Created,Review Submission Load Test 3-75,text,true,,380,440,1,1,http://localhost:8004/reviews/,2,0,0
+1777221421085,173,POST /auth/login,200,OK,Login Load Test 1-76,text,true,,316,251,1,2,http://localhost:8001/auth/login,173,0,1
+1777221421089,172,Login for Token,200,OK,Review Submission Load Test 3-76,text,true,,316,251,1,2,http://localhost:8001/auth/login,172,0,0
+1777221421258,4,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-77,text,true,,587,137,1,2,http://localhost:8002/restaurants/?q=ramen,4,0,0
+1777221421260,3,POST /reviews/,201,Created,Review Submission Load Test 3-76,text,true,,380,440,1,1,http://localhost:8004/reviews/,3,0,0
+1777221421281,173,POST /auth/login,200,OK,Login Load Test 1-77,text,true,,316,251,1,2,http://localhost:8001/auth/login,173,0,0
+1777221421457,3,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-78,text,true,,587,137,1,2,http://localhost:8002/restaurants/?q=ramen,3,0,0
+1777221421288,172,Login for Token,200,OK,Review Submission Load Test 3-77,text,true,,316,251,1,1,http://localhost:8001/auth/login,172,0,0
+1777221421460,3,POST /reviews/,201,Created,Review Submission Load Test 3-77,text,true,,380,440,1,1,http://localhost:8004/reviews/,3,0,0
+1777221421485,174,POST /auth/login,200,OK,Login Load Test 1-78,text,true,,316,251,1,3,http://localhost:8001/auth/login,174,0,0
+1777221421485,174,Login for Token,200,OK,Review Submission Load Test 3-78,text,true,,316,251,1,3,http://localhost:8001/auth/login,174,0,0
+1777221421659,4,POST /reviews/,201,Created,Review Submission Load Test 3-78,text,true,,380,440,1,2,http://localhost:8004/reviews/,4,0,0
+1777221421659,4,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-79,text,true,,587,137,1,2,http://localhost:8002/restaurants/?q=ramen,4,0,0
+1777221421860,4,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-80,text,true,,587,137,1,3,http://localhost:8002/restaurants/?q=ramen,4,0,0
+1777221421685,335,Login for Token,200,OK,Review Submission Load Test 3-79,text,true,,316,251,2,4,http://localhost:8001/auth/login,335,0,0
+1777221421686,335,POST /auth/login,200,OK,Login Load Test 1-79,text,true,,316,251,2,4,http://localhost:8001/auth/login,335,0,0
+1777221422021,2,POST /reviews/,201,Created,Review Submission Load Test 3-79,text,true,,380,440,2,3,http://localhost:8004/reviews/,2,0,0
+1777221422054,4,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-81,text,true,,587,137,1,3,http://localhost:8002/restaurants/?q=ramen,4,0,1
+1777221421885,353,POST /auth/login,200,OK,Login Load Test 1-80,text,true,,316,251,2,4,http://localhost:8001/auth/login,353,0,0
+1777221421885,354,Login for Token,200,OK,Review Submission Load Test 3-80,text,true,,316,251,2,3,http://localhost:8001/auth/login,354,0,0
+1777221422239,3,POST /reviews/,201,Created,Review Submission Load Test 3-80,text,true,,380,440,2,3,http://localhost:8004/reviews/,3,0,0
+1777221422259,4,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-82,text,true,,587,137,1,3,http://localhost:8002/restaurants/?q=ramen,4,0,1
+1777221422085,187,Login for Token,200,OK,Review Submission Load Test 3-81,text,true,,316,251,1,2,http://localhost:8001/auth/login,187,0,0
+1777221422085,187,POST /auth/login,200,OK,Login Load Test 1-81,text,true,,316,251,1,2,http://localhost:8001/auth/login,187,0,0
+1777221422272,2,POST /reviews/,201,Created,Review Submission Load Test 3-81,text,true,,380,440,1,1,http://localhost:8004/reviews/,2,0,0
+1777221422285,172,POST /auth/login,200,OK,Login Load Test 1-82,text,true,,316,251,1,2,http://localhost:8001/auth/login,172,0,0
+1777221422285,172,Login for Token,200,OK,Review Submission Load Test 3-82,text,true,,316,251,1,2,http://localhost:8001/auth/login,172,0,0
+1777221422458,3,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-83,text,true,,587,137,1,2,http://localhost:8002/restaurants/?q=ramen,3,0,0
+1777221422457,5,POST /reviews/,201,Created,Review Submission Load Test 3-82,text,true,,380,440,1,1,http://localhost:8004/reviews/,5,0,1
+1777221422485,173,POST /auth/login,200,OK,Login Load Test 1-83,text,true,,316,251,1,2,http://localhost:8001/auth/login,173,0,1
+1777221422485,173,Login for Token,200,OK,Review Submission Load Test 3-83,text,true,,316,251,1,2,http://localhost:8001/auth/login,173,0,0
+1777221422658,4,POST /reviews/,201,Created,Review Submission Load Test 3-83,text,true,,380,440,1,2,http://localhost:8004/reviews/,4,0,0
+1777221422658,4,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-84,text,true,,587,137,1,1,http://localhost:8002/restaurants/?q=ramen,4,0,1
+1777221422860,4,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-85,text,true,,587,137,1,3,http://localhost:8002/restaurants/?q=ramen,4,0,0
+1777221422686,181,POST /auth/login,200,OK,Login Load Test 1-84,text,true,,316,251,1,2,http://localhost:8001/auth/login,181,0,1
+1777221422688,179,Login for Token,200,OK,Review Submission Load Test 3-84,text,true,,316,251,1,2,http://localhost:8001/auth/login,179,0,0
+1777221422867,3,POST /reviews/,201,Created,Review Submission Load Test 3-84,text,true,,380,440,1,1,http://localhost:8004/reviews/,3,0,0
+1777221423059,4,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-86,text,true,,587,137,1,3,http://localhost:8002/restaurants/?q=ramen,4,0,1
+1777221422885,350,POST /auth/login,200,OK,Login Load Test 1-85,text,true,,316,251,2,4,http://localhost:8001/auth/login,350,0,0
+1777221422885,351,Login for Token,200,OK,Review Submission Load Test 3-85,text,true,,316,251,2,3,http://localhost:8001/auth/login,351,0,1
+1777221423237,3,POST /reviews/,201,Created,Review Submission Load Test 3-85,text,true,,380,440,2,3,http://localhost:8004/reviews/,3,0,0
+1777221423260,3,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-87,text,true,,587,137,1,3,http://localhost:8002/restaurants/?q=ramen,3,0,0
+1777221423085,182,POST /auth/login,200,OK,Login Load Test 1-86,text,true,,316,251,1,2,http://localhost:8001/auth/login,182,0,0
+1777221423085,183,Login for Token,200,OK,Review Submission Load Test 3-86,text,true,,316,251,1,1,http://localhost:8001/auth/login,183,0,0
+1777221423268,3,POST /reviews/,201,Created,Review Submission Load Test 3-86,text,true,,380,440,1,1,http://localhost:8004/reviews/,3,0,0
+1777221423285,169,Login for Token,200,OK,Review Submission Load Test 3-87,text,true,,316,251,1,2,http://localhost:8001/auth/login,169,0,0
+1777221423455,2,POST /reviews/,201,Created,Review Submission Load Test 3-87,text,true,,380,440,1,3,http://localhost:8004/reviews/,2,0,0
+1777221423455,3,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-88,text,true,,587,137,1,2,http://localhost:8002/restaurants/?q=ramen,3,0,0
+1777221423286,352,POST /auth/login,200,OK,Login Load Test 1-87,text,true,,316,251,2,3,http://localhost:8001/auth/login,352,0,1
+1777221423659,4,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-89,text,true,,587,137,1,3,http://localhost:8002/restaurants/?q=ramen,4,0,1
+1777221423485,186,POST /auth/login,200,OK,Login Load Test 1-88,text,true,,316,251,1,2,http://localhost:8001/auth/login,186,0,0
+1777221423485,187,Login for Token,200,OK,Review Submission Load Test 3-88,text,true,,316,251,1,1,http://localhost:8001/auth/login,187,0,0
+1777221423672,3,POST /reviews/,201,Created,Review Submission Load Test 3-88,text,true,,380,440,1,1,http://localhost:8004/reviews/,3,0,0
+1777221423685,171,POST /auth/login,200,OK,Login Load Test 1-89,text,true,,316,251,1,2,http://localhost:8001/auth/login,171,0,0
+1777221423685,171,Login for Token,200,OK,Review Submission Load Test 3-89,text,true,,316,251,1,2,http://localhost:8001/auth/login,171,0,0
+1777221423857,3,POST /reviews/,201,Created,Review Submission Load Test 3-89,text,true,,380,440,1,2,http://localhost:8004/reviews/,3,0,0
+1777221423857,3,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-90,text,true,,587,137,1,1,http://localhost:8002/restaurants/?q=ramen,3,0,0
+1777221423885,173,POST /auth/login,200,OK,Login Load Test 1-90,text,true,,316,251,1,2,http://localhost:8001/auth/login,173,0,0
+1777221423887,172,Login for Token,200,OK,Review Submission Load Test 3-90,text,true,,316,251,1,2,http://localhost:8001/auth/login,172,0,0
+1777221424060,3,POST /reviews/,201,Created,Review Submission Load Test 3-90,text,true,,380,440,1,2,http://localhost:8004/reviews/,3,0,0
+1777221424059,4,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-91,text,true,,587,137,1,1,http://localhost:8002/restaurants/?q=ramen,4,0,0
+1777221424260,3,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-92,text,true,,587,137,1,3,http://localhost:8002/restaurants/?q=ramen,3,0,0
+1777221424084,354,Login for Token,200,OK,Review Submission Load Test 3-91,text,true,,316,251,2,4,http://localhost:8001/auth/login,354,0,1
+1777221424084,354,POST /auth/login,200,OK,Login Load Test 1-91,text,true,,316,251,2,4,http://localhost:8001/auth/login,354,0,0
+1777221424438,3,POST /reviews/,201,Created,Review Submission Load Test 3-91,text,true,,380,440,2,3,http://localhost:8004/reviews/,3,0,0
+1777221424457,3,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-93,text,true,,587,137,1,3,http://localhost:8002/restaurants/?q=ramen,3,0,1
+1777221424280,187,Login for Token,200,OK,Review Submission Load Test 3-92,text,true,,316,251,1,2,http://localhost:8001/auth/login,187,0,1
+1777221424282,187,POST /auth/login,200,OK,Login Load Test 1-92,text,true,,316,251,1,2,http://localhost:8001/auth/login,187,0,0
+1777221424468,2,POST /reviews/,201,Created,Review Submission Load Test 3-92,text,true,,380,440,1,1,http://localhost:8004/reviews/,2,0,0
+1777221424485,173,POST /auth/login,200,OK,Login Load Test 1-93,text,true,,316,251,1,3,http://localhost:8001/auth/login,173,0,0
+1777221424487,172,Login for Token,200,OK,Review Submission Load Test 3-93,text,true,,316,251,1,2,http://localhost:8001/auth/login,172,0,0
+1777221424656,4,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-94,text,true,,587,137,1,2,http://localhost:8002/restaurants/?q=ramen,4,0,1
+1777221424659,2,POST /reviews/,201,Created,Review Submission Load Test 3-93,text,true,,380,440,1,1,http://localhost:8004/reviews/,2,0,0
+1777221424680,172,POST /auth/login,200,OK,Login Load Test 1-94,text,true,,316,251,1,2,http://localhost:8001/auth/login,172,0,0
+1777221424680,172,Login for Token,200,OK,Review Submission Load Test 3-94,text,true,,316,251,1,2,http://localhost:8001/auth/login,172,0,0
+1777221424852,4,POST /reviews/,201,Created,Review Submission Load Test 3-94,text,true,,380,440,1,2,http://localhost:8004/reviews/,4,0,0
+1777221424855,4,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-95,text,true,,587,137,1,1,http://localhost:8002/restaurants/?q=ramen,4,0,1
+1777221424885,173,POST /auth/login,200,OK,Login Load Test 1-95,text,true,,316,251,1,3,http://localhost:8001/auth/login,173,0,0
+1777221424887,172,Login for Token,200,OK,Review Submission Load Test 3-95,text,true,,316,251,1,2,http://localhost:8001/auth/login,172,0,0
+1777221425056,4,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-96,text,true,,587,137,1,2,http://localhost:8002/restaurants/?q=ramen,4,0,0
+1777221425059,3,POST /reviews/,201,Created,Review Submission Load Test 3-95,text,true,,380,440,1,1,http://localhost:8004/reviews/,3,0,0
+1777221425084,173,POST /auth/login,200,OK,Login Load Test 1-96,text,true,,316,251,1,2,http://localhost:8001/auth/login,173,0,0
+1777221425084,173,Login for Token,200,OK,Review Submission Load Test 3-96,text,true,,316,251,1,2,http://localhost:8001/auth/login,173,0,0
+1777221425258,3,POST /reviews/,201,Created,Review Submission Load Test 3-96,text,true,,380,440,1,2,http://localhost:8004/reviews/,3,0,0
+1777221425258,3,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-97,text,true,,587,137,1,1,http://localhost:8002/restaurants/?q=ramen,3,0,0
+1777221425284,175,Login for Token,200,OK,Review Submission Load Test 3-97,text,true,,316,251,1,2,http://localhost:8001/auth/login,175,0,0
+1777221425285,174,POST /auth/login,200,OK,Login Load Test 1-97,text,true,,316,251,1,3,http://localhost:8001/auth/login,174,0,1
+1777221425459,3,POST /reviews/,201,Created,Review Submission Load Test 3-97,text,true,,380,440,1,2,http://localhost:8004/reviews/,3,0,1
+1777221425460,3,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-98,text,true,,587,137,1,1,http://localhost:8002/restaurants/?q=ramen,3,0,0
+1777221425485,174,Login for Token,200,OK,Review Submission Load Test 3-98,text,true,,316,251,1,3,http://localhost:8001/auth/login,174,0,0
+1777221425486,173,POST /auth/login,200,OK,Login Load Test 1-98,text,true,,316,251,1,3,http://localhost:8001/auth/login,173,0,0
+1777221425659,3,POST /reviews/,201,Created,Review Submission Load Test 3-98,text,true,,380,440,1,2,http://localhost:8004/reviews/,3,0,0
+1777221425659,3,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-99,text,true,,587,137,1,1,http://localhost:8002/restaurants/?q=ramen,3,0,0
+1777221425685,175,POST /auth/login,200,OK,Login Load Test 1-99,text,true,,316,251,1,3,http://localhost:8001/auth/login,175,0,0
+1777221425685,175,Login for Token,200,OK,Review Submission Load Test 3-99,text,true,,316,251,1,3,http://localhost:8001/auth/login,175,0,0
+1777221425860,3,POST /reviews/,201,Created,Review Submission Load Test 3-99,text,true,,380,440,1,2,http://localhost:8004/reviews/,3,0,1
+1777221425860,4,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-100,text,true,,587,137,1,1,http://localhost:8002/restaurants/?q=ramen,4,0,0
+1777221425885,174,POST /auth/login,200,OK,Login Load Test 1-100,text,true,,316,251,1,2,http://localhost:8001/auth/login,174,0,0
+1777221425885,174,Login for Token,200,OK,Review Submission Load Test 3-100,text,true,,316,251,1,2,http://localhost:8001/auth/login,174,0,1
+1777221426059,4,POST /reviews/,201,Created,Review Submission Load Test 3-100,text,true,,380,440,1,1,http://localhost:8004/reviews/,4,0,0
+1777221897973,16,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-1,text,true,,587,137,1,3,http://localhost:8002/restaurants/?q=ramen,16,0,8
+1777221898136,4,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-2,text,true,,587,137,1,3,http://localhost:8002/restaurants/?q=ramen,4,0,0
+1777221897973,189,POST /auth/login,200,OK,Login Load Test 1-1,text,true,,316,249,2,4,http://localhost:8001/auth/login,189,0,8
+1777221897973,189,Login for Token,200,OK,Review Submission Load Test 3-1,text,true,,316,249,2,4,http://localhost:8001/auth/login,189,0,8
+1777221898163,3,POST /reviews/,201,Created,Review Submission Load Test 3-1,text,true,,380,440,2,3,http://localhost:8004/reviews/,3,0,0
+1777221898149,174,POST /auth/login,200,OK,Login Load Test 1-2,text,true,,316,249,1,2,http://localhost:8001/auth/login,174,0,1
+1777221898151,173,Login for Token,200,OK,Review Submission Load Test 3-2,text,true,,316,249,1,1,http://localhost:8001/auth/login,173,0,1
+1777221898325,3,POST /reviews/,201,Created,Review Submission Load Test 3-2,text,true,,380,440,1,1,http://localhost:8004/reviews/,3,0,0
+1777221898333,3,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-3,text,true,,587,137,1,1,http://localhost:8002/restaurants/?q=ramen,3,0,0
+1777221898344,171,POST /auth/login,200,OK,Login Load Test 1-3,text,true,,316,249,1,2,http://localhost:8001/auth/login,171,0,0
+1777221898350,171,Login for Token,200,OK,Review Submission Load Test 3-3,text,true,,316,249,1,1,http://localhost:8001/auth/login,171,0,1
+1777221898522,3,POST /reviews/,201,Created,Review Submission Load Test 3-3,text,true,,380,440,1,1,http://localhost:8004/reviews/,3,0,0
+1777221898535,3,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-4,text,true,,587,137,1,1,http://localhost:8002/restaurants/?q=ramen,3,0,1
+1777221898549,173,POST /auth/login,200,OK,Login Load Test 1-4,text,true,,316,249,1,2,http://localhost:8001/auth/login,173,0,0
+1777221898549,173,Login for Token,200,OK,Review Submission Load Test 3-4,text,true,,316,249,1,2,http://localhost:8001/auth/login,173,0,0
+1777221898723,3,POST /reviews/,201,Created,Review Submission Load Test 3-4,text,true,,380,440,1,1,http://localhost:8004/reviews/,3,0,0
+1777221898733,2,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-5,text,true,,587,137,1,1,http://localhost:8002/restaurants/?q=ramen,2,0,0
+1777221898747,174,POST /auth/login,200,OK,Login Load Test 1-5,text,true,,316,249,1,2,http://localhost:8001/auth/login,174,0,1
+1777221898749,174,Login for Token,200,OK,Review Submission Load Test 3-5,text,true,,316,250,1,1,http://localhost:8001/auth/login,174,0,0
+1777221898923,3,POST /reviews/,201,Created,Review Submission Load Test 3-5,text,true,,380,440,1,1,http://localhost:8004/reviews/,3,0,0
+1777221898933,2,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-6,text,true,,587,137,1,1,http://localhost:8002/restaurants/?q=ramen,2,0,0
+1777221898950,169,POST /auth/login,200,OK,Login Load Test 1-6,text,true,,316,250,1,2,http://localhost:8001/auth/login,169,0,0
+1777221899135,4,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-7,text,true,,587,137,1,2,http://localhost:8002/restaurants/?q=ramen,4,0,0
+1777221898951,342,Login for Token,200,OK,Review Submission Load Test 3-6,text,true,,316,250,2,3,http://localhost:8001/auth/login,342,0,0
+1777221899294,3,POST /reviews/,201,Created,Review Submission Load Test 3-6,text,true,,380,440,2,3,http://localhost:8004/reviews/,3,0,0
+1777221899333,4,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-8,text,true,,587,137,1,3,http://localhost:8002/restaurants/?q=ramen,3,0,0
+1777221899149,344,POST /auth/login,200,OK,Login Load Test 1-7,text,true,,316,250,2,4,http://localhost:8001/auth/login,344,0,0
+1777221899150,344,Login for Token,200,OK,Review Submission Load Test 3-7,text,true,,316,250,2,3,http://localhost:8001/auth/login,344,0,0
+1777221899494,3,POST /reviews/,201,Created,Review Submission Load Test 3-7,text,true,,380,440,2,3,http://localhost:8004/reviews/,3,0,0
+1777221899533,4,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-9,text,true,,587,137,1,3,http://localhost:8002/restaurants/?q=ramen,4,0,0
+1777221899348,355,POST /auth/login,200,OK,Login Load Test 1-8,text,true,,316,250,2,4,http://localhost:8001/auth/login,355,0,1
+1777221899349,355,Login for Token,200,OK,Review Submission Load Test 3-8,text,true,,316,250,2,3,http://localhost:8001/auth/login,355,0,1
+1777221899705,3,POST /reviews/,201,Created,Review Submission Load Test 3-8,text,true,,380,440,2,3,http://localhost:8004/reviews/,3,0,0
+1777221899544,185,POST /auth/login,200,OK,Login Load Test 1-9,text,true,,316,250,1,2,http://localhost:8001/auth/login,185,0,0
+1777221899551,185,Login for Token,200,OK,Review Submission Load Test 3-9,text,true,,316,250,1,2,http://localhost:8001/auth/login,185,0,0
+1777221899733,4,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-10,text,true,,587,137,1,2,http://localhost:8002/restaurants/?q=ramen,3,0,1
+1777221899737,3,POST /reviews/,201,Created,Review Submission Load Test 3-9,text,true,,380,440,1,1,http://localhost:8004/reviews/,3,0,0
+1777221899750,171,POST /auth/login,200,OK,Login Load Test 1-10,text,true,,316,250,1,2,http://localhost:8001/auth/login,171,0,0
+1777221899749,172,Login for Token,200,OK,Review Submission Load Test 3-10,text,true,,316,250,1,2,http://localhost:8001/auth/login,172,0,1
+1777221899921,4,POST /reviews/,201,Created,Review Submission Load Test 3-10,text,true,,380,440,1,1,http://localhost:8004/reviews/,4,0,1
+1777221899931,3,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-11,text,true,,587,137,1,1,http://localhost:8002/restaurants/?q=ramen,3,0,0
+1777221899948,174,Login for Token,200,OK,Review Submission Load Test 3-11,text,true,,316,250,1,2,http://localhost:8001/auth/login,174,0,1
+1777221899950,173,POST /auth/login,200,OK,Login Load Test 1-11,text,true,,316,250,1,2,http://localhost:8001/auth/login,173,0,0
+1777221900123,3,POST /reviews/,201,Created,Review Submission Load Test 3-11,text,true,,380,440,1,1,http://localhost:8004/reviews/,3,0,0
+1777221900133,4,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-12,text,true,,587,137,1,1,http://localhost:8002/restaurants/?q=ramen,4,0,1
+1777221900149,171,Login for Token,200,OK,Review Submission Load Test 3-12,text,true,,316,250,1,2,http://localhost:8001/auth/login,171,0,0
+1777221900150,171,POST /auth/login,200,OK,Login Load Test 1-12,text,true,,316,250,1,2,http://localhost:8001/auth/login,171,0,0
+1777221900321,3,POST /reviews/,201,Created,Review Submission Load Test 3-12,text,true,,380,440,1,1,http://localhost:8004/reviews/,3,0,0
+1777221900329,4,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-13,text,true,,587,137,1,1,http://localhost:8002/restaurants/?q=ramen,4,0,0
+1777221900343,172,Login for Token,200,OK,Review Submission Load Test 3-13,text,true,,316,250,1,2,http://localhost:8001/auth/login,172,0,1
+1777221900346,170,POST /auth/login,200,OK,Login Load Test 1-13,text,true,,316,250,1,2,http://localhost:8001/auth/login,170,0,0
+1777221900515,3,POST /reviews/,201,Created,Review Submission Load Test 3-13,text,true,,380,440,1,1,http://localhost:8004/reviews/,3,0,1
+1777221900532,4,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-14,text,true,,587,137,1,1,http://localhost:8002/restaurants/?q=ramen,4,0,0
+1777221900548,177,POST /auth/login,200,OK,Login Load Test 1-14,text,true,,316,250,1,2,http://localhost:8001/auth/login,177,0,1
+1777221900545,180,Login for Token,200,OK,Review Submission Load Test 3-14,text,true,,316,250,1,2,http://localhost:8001/auth/login,180,0,0
+1777221900726,1,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-15,text,true,,587,137,1,2,http://localhost:8002/restaurants/?q=ramen,1,0,0
+1777221900725,3,POST /reviews/,201,Created,Review Submission Load Test 3-14,text,true,,380,440,1,2,http://localhost:8004/reviews/,3,0,1
+1777221900746,172,POST /auth/login,200,OK,Login Load Test 1-15,text,true,,316,250,1,2,http://localhost:8001/auth/login,172,0,1
+1777221900746,172,Login for Token,200,OK,Review Submission Load Test 3-15,text,true,,316,250,1,2,http://localhost:8001/auth/login,172,0,1
+1777221900919,3,POST /reviews/,201,Created,Review Submission Load Test 3-15,text,true,,380,440,1,1,http://localhost:8004/reviews/,3,0,0
+1777221900928,5,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-16,text,true,,587,137,1,1,http://localhost:8002/restaurants/?q=ramen,5,0,0
+1777221901126,2,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-17,text,true,,587,137,1,3,http://localhost:8002/restaurants/?q=ramen,2,0,0
+1777221900942,188,POST /auth/login,200,OK,Login Load Test 1-16,text,true,,316,250,1,2,http://localhost:8001/auth/login,188,0,1
+1777221900950,186,Login for Token,200,OK,Review Submission Load Test 3-16,text,true,,316,250,1,1,http://localhost:8001/auth/login,186,0,0
+1777221901136,3,POST /reviews/,201,Created,Review Submission Load Test 3-16,text,true,,380,440,1,1,http://localhost:8004/reviews/,3,0,1
+1777221901149,171,POST /auth/login,200,OK,Login Load Test 1-17,text,true,,316,250,1,2,http://localhost:8001/auth/login,171,0,0
+1777221901151,171,Login for Token,200,OK,Review Submission Load Test 3-17,text,true,,316,250,1,2,http://localhost:8001/auth/login,171,0,0
+1777221901322,2,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-18,text,true,,587,137,1,2,http://localhost:8002/restaurants/?q=ramen,2,0,0
+1777221901322,2,POST /reviews/,201,Created,Review Submission Load Test 3-17,text,true,,380,440,1,2,http://localhost:8004/reviews/,2,0,0
+1777221901347,173,POST /auth/login,200,OK,Login Load Test 1-18,text,true,,316,250,1,3,http://localhost:8001/auth/login,173,0,1
+1777221901349,172,Login for Token,200,OK,Review Submission Load Test 3-18,text,true,,316,250,1,2,http://localhost:8001/auth/login,172,0,0
+1777221901521,3,POST /reviews/,201,Created,Review Submission Load Test 3-18,text,true,,380,440,1,2,http://localhost:8004/reviews/,3,0,1
+1777221901521,3,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-19,text,true,,587,137,1,2,http://localhost:8002/restaurants/?q=ramen,3,0,0
+1777221901547,173,POST /auth/login,200,OK,Login Load Test 1-19,text,true,,316,250,1,2,http://localhost:8001/auth/login,173,0,0
+1777221901549,173,Login for Token,200,OK,Review Submission Load Test 3-19,text,true,,316,250,1,1,http://localhost:8001/auth/login,173,0,0
+1777221901722,3,POST /reviews/,201,Created,Review Submission Load Test 3-19,text,true,,380,440,1,2,http://localhost:8004/reviews/,3,0,1
+1777221901724,4,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-20,text,true,,587,137,1,1,http://localhost:8002/restaurants/?q=ramen,4,0,1
+1777221901745,175,POST /auth/login,200,OK,Login Load Test 1-20,text,true,,316,250,1,2,http://localhost:8001/auth/login,175,0,0
+1777221901746,174,Login for Token,200,OK,Review Submission Load Test 3-20,text,true,,316,250,1,1,http://localhost:8001/auth/login,174,0,0
+1777221901921,2,POST /reviews/,201,Created,Review Submission Load Test 3-20,text,true,,380,440,1,1,http://localhost:8004/reviews/,2,0,0
+1777221901924,2,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-21,text,true,,587,137,1,1,http://localhost:8002/restaurants/?q=ramen,2,0,0
+1777221901943,174,POST /auth/login,200,OK,Login Load Test 1-21,text,true,,316,250,1,2,http://localhost:8001/auth/login,174,0,1
+1777221901945,172,Login for Token,200,OK,Review Submission Load Test 3-21,text,true,,316,250,1,1,http://localhost:8001/auth/login,172,0,0
+1777221902118,3,POST /reviews/,201,Created,Review Submission Load Test 3-21,text,true,,380,440,1,1,http://localhost:8004/reviews/,3,0,0
+1777221902124,4,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-22,text,true,,587,137,1,1,http://localhost:8002/restaurants/?q=ramen,4,0,0
+1777221902143,174,POST /auth/login,200,OK,Login Load Test 1-22,text,true,,316,250,1,2,http://localhost:8001/auth/login,174,0,1
+1777221902149,173,Login for Token,200,OK,Review Submission Load Test 3-22,text,true,,316,250,1,1,http://localhost:8001/auth/login,173,0,0
+1777221902322,3,POST /reviews/,201,Created,Review Submission Load Test 3-22,text,true,,380,440,1,2,http://localhost:8004/reviews/,3,0,0
+1777221902324,3,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-23,text,true,,587,137,1,1,http://localhost:8002/restaurants/?q=ramen,3,0,1
+1777221902343,173,POST /auth/login,200,OK,Login Load Test 1-23,text,true,,316,250,1,2,http://localhost:8001/auth/login,173,0,0
+1777221902344,173,Login for Token,200,OK,Review Submission Load Test 3-23,text,true,,316,250,1,1,http://localhost:8001/auth/login,173,0,0
+1777221902517,4,POST /reviews/,201,Created,Review Submission Load Test 3-23,text,true,,380,440,1,1,http://localhost:8004/reviews/,4,0,0
+1777221902524,4,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-24,text,true,,587,137,1,1,http://localhost:8002/restaurants/?q=ramen,4,0,0
+1777221902548,176,POST /auth/login,200,OK,Login Load Test 1-24,text,true,,316,250,1,3,http://localhost:8001/auth/login,176,0,1
+1777221902548,176,Login for Token,200,OK,Review Submission Load Test 3-24,text,true,,316,250,1,3,http://localhost:8001/auth/login,176,0,1
+1777221902725,3,POST /reviews/,201,Created,Review Submission Load Test 3-24,text,true,,380,440,1,2,http://localhost:8004/reviews/,3,0,0
+1777221902725,3,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-25,text,true,,587,137,1,1,http://localhost:8002/restaurants/?q=ramen,3,0,0
+1777221902744,172,POST /auth/login,200,OK,Login Load Test 1-25,text,true,,316,250,1,2,http://localhost:8001/auth/login,172,0,0
+1777221902745,172,Login for Token,200,OK,Review Submission Load Test 3-25,text,true,,316,250,1,1,http://localhost:8001/auth/login,172,0,0
+1777221902917,3,POST /reviews/,201,Created,Review Submission Load Test 3-25,text,true,,380,440,1,1,http://localhost:8004/reviews/,3,0,0
+1777221902921,4,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-26,text,true,,587,137,1,1,http://localhost:8002/restaurants/?q=ramen,4,0,0
+1777221902947,175,POST /auth/login,200,OK,Login Load Test 1-26,text,true,,316,250,1,2,http://localhost:8001/auth/login,175,0,0
+1777221902947,175,Login for Token,200,OK,Review Submission Load Test 3-26,text,true,,316,250,1,2,http://localhost:8001/auth/login,175,0,0
+1777221903123,4,POST /reviews/,201,Created,Review Submission Load Test 3-26,text,true,,380,440,1,2,http://localhost:8004/reviews/,4,0,1
+1777221903124,4,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-27,text,true,,587,137,1,1,http://localhost:8002/restaurants/?q=ramen,4,0,1
+1777221903146,173,POST /auth/login,200,OK,Login Load Test 1-27,text,true,,316,250,1,2,http://localhost:8001/auth/login,173,0,0
+1777221903146,173,Login for Token,200,OK,Review Submission Load Test 3-27,text,true,,316,250,1,2,http://localhost:8001/auth/login,173,0,0
+1777221903319,4,POST /reviews/,201,Created,Review Submission Load Test 3-27,text,true,,380,440,1,1,http://localhost:8004/reviews/,4,0,1
+1777221903325,4,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-28,text,true,,587,137,1,1,http://localhost:8002/restaurants/?q=ramen,4,0,1
+1777221903526,3,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-29,text,true,,587,137,1,3,http://localhost:8002/restaurants/?q=ramen,3,0,0
+1777221903345,334,POST /auth/login,200,OK,Login Load Test 1-28,text,true,,316,250,2,4,http://localhost:8001/auth/login,334,0,1
+1777221903347,333,Login for Token,200,OK,Review Submission Load Test 3-28,text,true,,316,250,2,3,http://localhost:8001/auth/login,333,0,0
+1777221903681,2,POST /reviews/,201,Created,Review Submission Load Test 3-28,text,true,,380,440,2,3,http://localhost:8004/reviews/,2,0,0
+1777221903723,2,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-30,text,true,,587,137,1,3,http://localhost:8002/restaurants/?q=ramen,2,0,1
+1777221903548,337,Login for Token,200,OK,Review Submission Load Test 3-29,text,true,,316,250,2,4,http://localhost:8001/auth/login,337,0,0
+1777221903548,338,POST /auth/login,200,OK,Login Load Test 1-29,text,true,,316,250,2,4,http://localhost:8001/auth/login,338,0,0
+1777221903886,3,POST /reviews/,201,Created,Review Submission Load Test 3-29,text,true,,380,440,2,3,http://localhost:8004/reviews/,3,0,0
+1777221903924,4,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-31,text,true,,587,137,1,3,http://localhost:8002/restaurants/?q=ramen,4,0,1
+1777221903748,353,POST /auth/login,200,OK,Login Load Test 1-30,text,true,,316,250,2,4,http://localhost:8001/auth/login,353,0,1
+1777221903749,353,Login for Token,200,OK,Review Submission Load Test 3-30,text,true,,316,250,2,3,http://localhost:8001/auth/login,353,0,1
+1777221904102,3,POST /reviews/,201,Created,Review Submission Load Test 3-30,text,true,,380,440,2,3,http://localhost:8004/reviews/,3,0,1
+1777221903943,186,POST /auth/login,200,OK,Login Load Test 1-31,text,true,,316,250,1,3,http://localhost:8001/auth/login,186,0,0
+1777221904126,4,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-32,text,true,,587,137,1,2,http://localhost:8002/restaurants/?q=ramen,4,0,0
+1777221903951,187,Login for Token,200,OK,Review Submission Load Test 3-31,text,true,,316,250,1,1,http://localhost:8001/auth/login,187,0,1
+1777221904138,3,POST /reviews/,201,Created,Review Submission Load Test 3-31,text,true,,380,440,1,1,http://localhost:8004/reviews/,3,0,0
+1777221904326,4,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-33,text,true,,587,137,1,3,http://localhost:8002/restaurants/?q=ramen,4,0,0
+1777221904147,348,POST /auth/login,200,OK,Login Load Test 1-32,text,true,,316,250,2,4,http://localhost:8001/auth/login,348,0,1
+1777221904148,348,Login for Token,200,OK,Review Submission Load Test 3-32,text,true,,316,250,2,3,http://localhost:8001/auth/login,348,0,0
+1777221904497,3,POST /reviews/,201,Created,Review Submission Load Test 3-32,text,true,,380,440,2,3,http://localhost:8004/reviews/,3,0,0
+1777221904526,4,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-34,text,true,,587,137,1,3,http://localhost:8002/restaurants/?q=ramen,4,0,1
+1777221904347,185,POST /auth/login,200,OK,Login Load Test 1-33,text,true,,316,250,1,2,http://localhost:8001/auth/login,185,0,0
+1777221904347,186,Login for Token,200,OK,Review Submission Load Test 3-33,text,true,,316,250,1,1,http://localhost:8001/auth/login,186,0,0
+1777221904533,3,POST /reviews/,201,Created,Review Submission Load Test 3-33,text,true,,380,440,1,1,http://localhost:8004/reviews/,3,0,0
+1777221904541,171,POST /auth/login,200,OK,Login Load Test 1-34,text,true,,316,250,1,2,http://localhost:8001/auth/login,171,0,1
+1777221904548,170,Login for Token,200,OK,Review Submission Load Test 3-34,text,true,,316,250,1,1,http://localhost:8001/auth/login,170,0,0
+1777221904719,3,POST /reviews/,201,Created,Review Submission Load Test 3-34,text,true,,380,440,1,1,http://localhost:8004/reviews/,3,0,0
+1777221904725,4,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-35,text,true,,587,137,1,1,http://localhost:8002/restaurants/?q=ramen,4,0,0
+1777221904742,173,POST /auth/login,200,OK,Login Load Test 1-35,text,true,,316,250,1,2,http://localhost:8001/auth/login,173,0,0
+1777221904744,173,Login for Token,200,OK,Review Submission Load Test 3-35,text,true,,316,250,1,1,http://localhost:8001/auth/login,173,0,0
+1777221904917,3,POST /reviews/,201,Created,Review Submission Load Test 3-35,text,true,,380,440,1,1,http://localhost:8004/reviews/,3,0,0
+1777221904922,3,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-36,text,true,,587,137,1,1,http://localhost:8002/restaurants/?q=ramen,3,0,1
+1777221904945,173,POST /auth/login,200,OK,Login Load Test 1-36,text,true,,316,250,1,2,http://localhost:8001/auth/login,173,0,0
+1777221904946,172,Login for Token,200,OK,Review Submission Load Test 3-36,text,true,,316,250,1,2,http://localhost:8001/auth/login,172,0,0
+1777221905118,3,POST /reviews/,201,Created,Review Submission Load Test 3-36,text,true,,380,440,1,1,http://localhost:8004/reviews/,3,0,1
+1777221905127,4,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-37,text,true,,587,137,1,1,http://localhost:8002/restaurants/?q=ramen,4,0,1
+1777221905139,172,POST /auth/login,200,OK,Login Load Test 1-37,text,true,,316,250,1,2,http://localhost:8001/auth/login,172,0,0
+1777221905147,171,Login for Token,200,OK,Review Submission Load Test 3-37,text,true,,316,250,1,1,http://localhost:8001/auth/login,171,0,0
+1777221905318,3,POST /reviews/,201,Created,Review Submission Load Test 3-37,text,true,,380,440,1,1,http://localhost:8004/reviews/,3,0,1
+1777221905323,4,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-38,text,true,,587,137,1,1,http://localhost:8002/restaurants/?q=ramen,4,0,0
+1777221905343,173,POST /auth/login,200,OK,Login Load Test 1-38,text,true,,316,250,1,2,http://localhost:8001/auth/login,173,0,0
+1777221905346,173,Login for Token,200,OK,Review Submission Load Test 3-38,text,true,,316,250,1,1,http://localhost:8001/auth/login,173,0,0
+1777221905519,3,POST /reviews/,201,Created,Review Submission Load Test 3-38,text,true,,380,440,1,1,http://localhost:8004/reviews/,3,0,0
+1777221905525,4,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-39,text,true,,587,137,1,1,http://localhost:8002/restaurants/?q=ramen,4,0,1
+1777221905542,174,POST /auth/login,200,OK,Login Load Test 1-39,text,true,,316,250,1,2,http://localhost:8001/auth/login,174,0,1
+1777221905545,172,Login for Token,200,OK,Review Submission Load Test 3-39,text,true,,316,250,1,1,http://localhost:8001/auth/login,172,0,0
+1777221905717,2,POST /reviews/,201,Created,Review Submission Load Test 3-39,text,true,,380,440,1,1,http://localhost:8004/reviews/,2,0,1
+1777221905724,5,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-40,text,true,,587,137,1,1,http://localhost:8002/restaurants/?q=ramen,5,0,1
+1777221905926,4,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-41,text,true,,587,137,1,3,http://localhost:8002/restaurants/?q=ramen,4,0,1
+1777221905742,350,POST /auth/login,200,OK,Login Load Test 1-40,text,true,,316,250,2,4,http://localhost:8001/auth/login,350,0,0
+1777221905743,350,Login for Token,200,OK,Review Submission Load Test 3-40,text,true,,316,250,2,3,http://localhost:8001/auth/login,350,0,0
+1777221906093,3,POST /reviews/,201,Created,Review Submission Load Test 3-40,text,true,,380,440,2,3,http://localhost:8004/reviews/,3,0,0
+1777221905944,185,Login for Token,200,OK,Review Submission Load Test 3-41,text,true,,316,250,1,3,http://localhost:8001/auth/login,185,0,0
+1777221906126,4,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-42,text,true,,587,137,1,3,http://localhost:8002/restaurants/?q=ramen,4,0,1
+1777221905945,185,POST /auth/login,200,OK,Login Load Test 1-41,text,true,,316,250,1,3,http://localhost:8001/auth/login,185,0,0
+1777221906130,3,POST /reviews/,201,Created,Review Submission Load Test 3-41,text,true,,380,440,1,1,http://localhost:8004/reviews/,3,0,0
+1777221906143,171,POST /auth/login,200,OK,Login Load Test 1-42,text,true,,316,250,1,2,http://localhost:8001/auth/login,171,0,0
+1777221906145,170,Login for Token,200,OK,Review Submission Load Test 3-42,text,true,,316,250,1,1,http://localhost:8001/auth/login,170,0,0
+1777221906315,4,POST /reviews/,201,Created,Review Submission Load Test 3-42,text,true,,380,440,1,1,http://localhost:8004/reviews/,4,0,1
+1777221906325,3,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-43,text,true,,587,137,1,1,http://localhost:8002/restaurants/?q=ramen,3,0,1
+1777221906344,171,POST /auth/login,200,OK,Login Load Test 1-43,text,true,,316,250,1,2,http://localhost:8001/auth/login,171,0,1
+1777221906345,170,Login for Token,200,OK,Review Submission Load Test 3-43,text,true,,316,250,1,2,http://localhost:8001/auth/login,170,0,0
+1777221906516,3,POST /reviews/,201,Created,Review Submission Load Test 3-43,text,true,,380,440,1,1,http://localhost:8004/reviews/,3,0,0
+1777221906526,4,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-44,text,true,,587,137,1,1,http://localhost:8002/restaurants/?q=ramen,4,0,0
+1777221906544,174,POST /auth/login,200,OK,Login Load Test 1-44,text,true,,316,250,1,2,http://localhost:8001/auth/login,174,0,0
+1777221906544,174,Login for Token,200,OK,Review Submission Load Test 3-44,text,true,,316,250,1,2,http://localhost:8001/auth/login,174,0,0
+1777221906718,3,POST /reviews/,201,Created,Review Submission Load Test 3-44,text,true,,380,440,1,1,http://localhost:8004/reviews/,3,0,0
+1777221906725,3,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-45,text,true,,587,137,1,1,http://localhost:8002/restaurants/?q=ramen,3,0,0
+1777221906742,173,POST /auth/login,200,OK,Login Load Test 1-45,text,true,,316,250,1,2,http://localhost:8001/auth/login,173,0,0
+1777221906742,173,Login for Token,200,OK,Review Submission Load Test 3-45,text,true,,316,250,1,2,http://localhost:8001/auth/login,173,0,0
+1777221906915,3,POST /reviews/,201,Created,Review Submission Load Test 3-45,text,true,,380,440,1,1,http://localhost:8004/reviews/,3,0,0
+1777221906924,5,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-46,text,true,,587,137,1,1,http://localhost:8002/restaurants/?q=ramen,5,0,0
+1777221906946,178,POST /auth/login,200,OK,Login Load Test 1-46,text,true,,316,250,1,2,http://localhost:8001/auth/login,178,0,0
+1777221906946,178,Login for Token,200,OK,Review Submission Load Test 3-46,text,true,,316,250,1,2,http://localhost:8001/auth/login,178,0,0
+1777221907126,5,POST /reviews/,201,Created,Review Submission Load Test 3-46,text,true,,380,440,1,2,http://localhost:8004/reviews/,5,0,1
+1777221907127,4,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-47,text,true,,587,137,1,1,http://localhost:8002/restaurants/?q=ramen,4,0,0
+1777221907326,3,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-48,text,true,,587,137,1,3,http://localhost:8002/restaurants/?q=ramen,3,0,0
+1777221907143,352,Login for Token,200,OK,Review Submission Load Test 3-47,text,true,,316,250,2,4,http://localhost:8001/auth/login,352,0,1
+1777221907144,352,POST /auth/login,200,OK,Login Load Test 1-47,text,true,,316,250,2,4,http://localhost:8001/auth/login,352,0,1
+1777221907495,3,POST /reviews/,201,Created,Review Submission Load Test 3-47,text,true,,380,440,2,3,http://localhost:8004/reviews/,3,0,1
+1777221907339,187,POST /auth/login,200,OK,Login Load Test 1-48,text,true,,316,250,1,2,http://localhost:8001/auth/login,187,0,0
+1777221907528,4,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-49,text,true,,587,137,1,2,http://localhost:8002/restaurants/?q=ramen,4,0,1
+1777221907347,187,Login for Token,200,OK,Review Submission Load Test 3-48,text,true,,316,250,1,1,http://localhost:8001/auth/login,187,0,0
+1777221907534,2,POST /reviews/,201,Created,Review Submission Load Test 3-48,text,true,,380,440,1,1,http://localhost:8004/reviews/,2,0,0
+1777221907542,173,POST /auth/login,200,OK,Login Load Test 1-49,text,true,,316,250,1,2,http://localhost:8001/auth/login,173,0,0
+1777221907548,172,Login for Token,200,OK,Review Submission Load Test 3-49,text,true,,316,250,1,1,http://localhost:8001/auth/login,172,0,0
+1777221907720,4,POST /reviews/,201,Created,Review Submission Load Test 3-49,text,true,,380,440,1,1,http://localhost:8004/reviews/,4,0,1
+1777221907727,4,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-50,text,true,,587,137,1,1,http://localhost:8002/restaurants/?q=ramen,4,0,0
+1777221907742,173,POST /auth/login,200,OK,Login Load Test 1-50,text,true,,316,250,1,2,http://localhost:8001/auth/login,173,0,0
+1777221907748,172,Login for Token,200,OK,Review Submission Load Test 3-50,text,true,,316,251,1,1,http://localhost:8001/auth/login,172,0,0
+1777221907920,3,POST /reviews/,201,Created,Review Submission Load Test 3-50,text,true,,380,440,1,1,http://localhost:8004/reviews/,3,0,1
+1777221907925,2,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-51,text,true,,587,137,1,1,http://localhost:8002/restaurants/?q=ramen,2,0,0
+1777221907944,174,POST /auth/login,200,OK,Login Load Test 1-51,text,true,,316,251,1,2,http://localhost:8001/auth/login,174,0,0
+1777221907944,174,Login for Token,200,OK,Review Submission Load Test 3-51,text,true,,316,251,1,2,http://localhost:8001/auth/login,174,0,0
+1777221908118,4,POST /reviews/,201,Created,Review Submission Load Test 3-51,text,true,,380,440,1,1,http://localhost:8004/reviews/,4,0,1
+1777221908125,5,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-52,text,true,,587,137,1,1,http://localhost:8002/restaurants/?q=ramen,5,0,1
+1777221908142,172,POST /auth/login,200,OK,Login Load Test 1-52,text,true,,316,251,1,2,http://localhost:8001/auth/login,172,0,0
+1777221908146,171,Login for Token,200,OK,Review Submission Load Test 3-52,text,true,,316,251,1,1,http://localhost:8001/auth/login,171,0,0
+1777221908317,4,POST /reviews/,201,Created,Review Submission Load Test 3-52,text,true,,380,440,1,1,http://localhost:8004/reviews/,4,0,1
+1777221908325,4,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-53,text,true,,587,137,1,1,http://localhost:8002/restaurants/?q=ramen,4,0,1
+1777221908341,173,POST /auth/login,200,OK,Login Load Test 1-53,text,true,,316,251,1,2,http://localhost:8001/auth/login,173,0,0
+1777221908344,173,Login for Token,200,OK,Review Submission Load Test 3-53,text,true,,316,251,1,1,http://localhost:8001/auth/login,173,0,1
+1777221908517,4,POST /reviews/,201,Created,Review Submission Load Test 3-53,text,true,,380,440,1,1,http://localhost:8004/reviews/,4,0,1
+1777221908525,4,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-54,text,true,,587,137,1,1,http://localhost:8002/restaurants/?q=ramen,4,0,1
+1777221908540,171,POST /auth/login,200,OK,Login Load Test 1-54,text,true,,316,251,1,2,http://localhost:8001/auth/login,171,0,0
+1777221908548,170,Login for Token,200,OK,Review Submission Load Test 3-54,text,true,,316,251,1,1,http://localhost:8001/auth/login,170,0,0
+1777221908718,3,POST /reviews/,201,Created,Review Submission Load Test 3-54,text,true,,380,440,1,1,http://localhost:8004/reviews/,3,0,1
+1777221908726,4,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-55,text,true,,587,137,1,1,http://localhost:8002/restaurants/?q=ramen,4,0,0
+1777221908742,171,POST /auth/login,200,OK,Login Load Test 1-55,text,true,,316,251,1,2,http://localhost:8001/auth/login,171,0,0
+1777221908742,171,Login for Token,200,OK,Review Submission Load Test 3-55,text,true,,316,251,1,2,http://localhost:8001/auth/login,171,0,0
+1777221908914,3,POST /reviews/,201,Created,Review Submission Load Test 3-55,text,true,,380,440,1,1,http://localhost:8004/reviews/,3,0,0
+1777221908925,3,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-56,text,true,,587,137,1,1,http://localhost:8002/restaurants/?q=ramen,3,0,1
+1777221908945,174,POST /auth/login,200,OK,Login Load Test 1-56,text,true,,316,251,1,2,http://localhost:8001/auth/login,174,0,0
+1777221908948,173,Login for Token,200,OK,Review Submission Load Test 3-56,text,true,,316,251,1,1,http://localhost:8001/auth/login,173,0,0
+1777221909121,4,POST /reviews/,201,Created,Review Submission Load Test 3-56,text,true,,380,440,1,2,http://localhost:8004/reviews/,4,0,1
+1777221909122,4,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-57,text,true,,587,137,1,1,http://localhost:8002/restaurants/?q=ramen,4,0,0
+1777221909323,2,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-58,text,true,,587,137,1,3,http://localhost:8002/restaurants/?q=ramen,2,0,0
+1777221909145,182,Login for Token,200,OK,Review Submission Load Test 3-57,text,true,,316,251,1,2,http://localhost:8001/auth/login,182,0,0
+1777221909142,186,POST /auth/login,200,OK,Login Load Test 1-57,text,true,,316,251,1,2,http://localhost:8001/auth/login,186,0,0
+1777221909328,2,POST /reviews/,201,Created,Review Submission Load Test 3-57,text,true,,380,440,1,1,http://localhost:8004/reviews/,2,0,0
+1777221909339,188,POST /auth/login,200,OK,Login Load Test 1-58,text,true,,316,251,1,3,http://localhost:8001/auth/login,188,0,0
+1777221909526,2,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-59,text,true,,587,137,1,2,http://localhost:8002/restaurants/?q=ramen,2,0,0
+1777221909344,187,Login for Token,200,OK,Review Submission Load Test 3-58,text,true,,316,251,1,1,http://localhost:8001/auth/login,187,0,0
+1777221909531,2,POST /reviews/,201,Created,Review Submission Load Test 3-58,text,true,,380,440,1,1,http://localhost:8004/reviews/,2,0,1
+1777221909539,171,POST /auth/login,200,OK,Login Load Test 1-59,text,true,,316,251,1,2,http://localhost:8001/auth/login,171,0,0
+1777221909544,171,Login for Token,200,OK,Review Submission Load Test 3-59,text,true,,316,251,1,1,http://localhost:8001/auth/login,171,0,0
+1777221909716,1,POST /reviews/,201,Created,Review Submission Load Test 3-59,text,true,,380,440,1,1,http://localhost:8004/reviews/,1,0,0
+1777221909723,2,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-60,text,true,,587,137,1,1,http://localhost:8002/restaurants/?q=ramen,2,0,1
+1777221909740,182,POST /auth/login,200,OK,Login Load Test 1-60,text,true,,316,251,1,2,http://localhost:8001/auth/login,182,0,0
+1777221909745,181,Login for Token,200,OK,Review Submission Load Test 3-60,text,true,,316,251,1,2,http://localhost:8001/auth/login,181,0,0
+1777221909924,2,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-61,text,true,,587,137,1,2,http://localhost:8002/restaurants/?q=ramen,2,0,0
+1777221909926,2,POST /reviews/,201,Created,Review Submission Load Test 3-60,text,true,,380,440,1,1,http://localhost:8004/reviews/,2,0,0
+1777221910122,2,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-62,text,true,,587,137,1,3,http://localhost:8002/restaurants/?q=ramen,2,0,0
+1777221909938,188,POST /auth/login,200,OK,Login Load Test 1-61,text,true,,316,251,1,2,http://localhost:8001/auth/login,188,0,0
+1777221909944,186,Login for Token,200,OK,Review Submission Load Test 3-61,text,true,,316,251,1,1,http://localhost:8001/auth/login,186,0,0
+1777221910131,2,POST /reviews/,201,Created,Review Submission Load Test 3-61,text,true,,380,440,1,1,http://localhost:8004/reviews/,2,0,0
+1777221910144,175,POST /auth/login,200,OK,Login Load Test 1-62,text,true,,316,251,1,2,http://localhost:8001/auth/login,175,0,1
+1777221910145,174,Login for Token,200,OK,Review Submission Load Test 3-62,text,true,,316,251,1,2,http://localhost:8001/auth/login,174,0,1
+1777221910319,2,POST /reviews/,201,Created,Review Submission Load Test 3-62,text,true,,380,440,1,1,http://localhost:8004/reviews/,2,0,0
+1777221910326,1,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-63,text,true,,587,137,1,1,http://localhost:8002/restaurants/?q=ramen,1,0,0
+1777221910341,172,POST /auth/login,200,OK,Login Load Test 1-63,text,true,,316,251,1,2,http://localhost:8001/auth/login,172,0,0
+1777221910345,172,Login for Token,200,OK,Review Submission Load Test 3-63,text,true,,316,251,1,1,http://localhost:8001/auth/login,172,0,1
+1777221910517,3,POST /reviews/,201,Created,Review Submission Load Test 3-63,text,true,,380,440,1,1,http://localhost:8004/reviews/,3,0,0
+1777221910526,3,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-64,text,true,,587,137,1,1,http://localhost:8002/restaurants/?q=ramen,3,0,0
+1777221910726,2,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-65,text,true,,587,137,1,3,http://localhost:8002/restaurants/?q=ramen,2,0,0
+1777221910540,358,POST /auth/login,200,OK,Login Load Test 1-64,text,true,,316,251,2,4,http://localhost:8001/auth/login,358,0,1
+1777221910541,358,Login for Token,200,OK,Review Submission Load Test 3-64,text,true,,316,251,2,3,http://localhost:8001/auth/login,358,0,0
+1777221910899,3,POST /reviews/,201,Created,Review Submission Load Test 3-64,text,true,,380,440,2,3,http://localhost:8004/reviews/,3,0,0
+1777221910738,186,POST /auth/login,200,OK,Login Load Test 1-65,text,true,,316,251,1,2,http://localhost:8001/auth/login,186,0,0
+1777221910739,185,Login for Token,200,OK,Review Submission Load Test 3-65,text,true,,316,251,1,1,http://localhost:8001/auth/login,185,0,1
+1777221910924,2,POST /reviews/,201,Created,Review Submission Load Test 3-65,text,true,,380,440,1,2,http://localhost:8004/reviews/,2,0,0
+1777221910925,3,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-66,text,true,,587,137,1,1,http://localhost:8002/restaurants/?q=ramen,3,0,0
+1777221910941,170,POST /auth/login,200,OK,Login Load Test 1-66,text,true,,316,251,1,2,http://localhost:8001/auth/login,170,0,0
+1777221911125,4,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-67,text,true,,587,137,1,2,http://localhost:8002/restaurants/?q=ramen,4,0,1
+1777221910942,352,Login for Token,200,OK,Review Submission Load Test 3-66,text,true,,316,251,2,3,http://localhost:8001/auth/login,352,0,1
+1777221911295,2,POST /reviews/,201,Created,Review Submission Load Test 3-66,text,true,,380,440,2,3,http://localhost:8004/reviews/,2,0,0
+1777221911325,2,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-68,text,true,,587,137,1,3,http://localhost:8002/restaurants/?q=ramen,2,0,1
+1777221911142,188,POST /auth/login,200,OK,Login Load Test 1-67,text,true,,316,251,1,2,http://localhost:8001/auth/login,188,0,1
+1777221911142,189,Login for Token,200,OK,Review Submission Load Test 3-67,text,true,,316,251,1,1,http://localhost:8001/auth/login,189,0,1
+1777221911331,2,POST /reviews/,201,Created,Review Submission Load Test 3-67,text,true,,380,440,1,1,http://localhost:8004/reviews/,2,0,0
+1777221911342,174,Login for Token,200,OK,Review Submission Load Test 3-68,text,true,,316,251,1,2,http://localhost:8001/auth/login,174,0,0
+1777221911342,175,POST /auth/login,200,OK,Login Load Test 1-68,text,true,,316,251,1,2,http://localhost:8001/auth/login,175,0,1
+1777221911516,2,POST /reviews/,201,Created,Review Submission Load Test 3-68,text,true,,380,440,1,1,http://localhost:8004/reviews/,2,0,0
+1777221911527,1,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-69,text,true,,587,137,1,1,http://localhost:8002/restaurants/?q=ramen,1,0,0
+1777221911541,171,Login for Token,200,OK,Review Submission Load Test 3-69,text,true,,316,251,1,2,http://localhost:8001/auth/login,171,0,1
+1777221911712,3,POST /reviews/,201,Created,Review Submission Load Test 3-69,text,true,,380,440,1,2,http://localhost:8004/reviews/,3,0,1
+1777221911725,4,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-70,text,true,,587,137,1,2,http://localhost:8002/restaurants/?q=ramen,4,0,1
+1777221911542,352,POST /auth/login,200,OK,Login Load Test 1-69,text,true,,316,251,2,3,http://localhost:8001/auth/login,352,0,0
+1777221911741,185,POST /auth/login,200,OK,Login Load Test 1-70,text,true,,316,251,1,3,http://localhost:8001/auth/login,185,0,0
+1777221911926,2,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-71,text,true,,587,137,1,2,http://localhost:8002/restaurants/?q=ramen,2,0,0
+1777221911746,186,Login for Token,200,OK,Review Submission Load Test 3-70,text,true,,316,251,1,1,http://localhost:8001/auth/login,186,0,1
+1777221911932,2,POST /reviews/,201,Created,Review Submission Load Test 3-70,text,true,,380,440,1,1,http://localhost:8004/reviews/,2,0,0
+1777221911936,170,POST /auth/login,200,OK,Login Load Test 1-71,text,true,,316,251,1,2,http://localhost:8001/auth/login,170,0,1
+1777221912125,5,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-72,text,true,,587,137,1,2,http://localhost:8002/restaurants/?q=ramen,5,0,1
+1777221911937,353,Login for Token,200,OK,Review Submission Load Test 3-71,text,true,,316,251,2,3,http://localhost:8001/auth/login,353,0,1
+1777221912291,3,POST /reviews/,201,Created,Review Submission Load Test 3-71,text,true,,380,440,2,3,http://localhost:8004/reviews/,3,0,0
+1777221912142,187,POST /auth/login,200,OK,Login Load Test 1-72,text,true,,316,251,1,3,http://localhost:8001/auth/login,187,0,0
+1777221912142,187,Login for Token,200,OK,Review Submission Load Test 3-72,text,true,,316,251,1,3,http://localhost:8001/auth/login,187,0,1
+1777221912326,4,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-73,text,true,,587,137,1,3,http://localhost:8002/restaurants/?q=ramen,4,0,0
+1777221912330,2,POST /reviews/,201,Created,Review Submission Load Test 3-72,text,true,,380,440,1,1,http://localhost:8004/reviews/,2,0,0
+1777221912341,173,POST /auth/login,200,OK,Login Load Test 1-73,text,true,,316,251,1,2,http://localhost:8001/auth/login,173,0,0
+1777221912341,173,Login for Token,200,OK,Review Submission Load Test 3-73,text,true,,316,251,1,2,http://localhost:8001/auth/login,173,0,0
+1777221912514,3,POST /reviews/,201,Created,Review Submission Load Test 3-73,text,true,,380,440,1,1,http://localhost:8004/reviews/,3,0,0
+1777221912526,4,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-74,text,true,,587,137,1,1,http://localhost:8002/restaurants/?q=ramen,4,0,1
+1777221912541,174,POST /auth/login,200,OK,Login Load Test 1-74,text,true,,316,251,1,2,http://localhost:8001/auth/login,174,0,1
+1777221912542,173,Login for Token,200,OK,Review Submission Load Test 3-74,text,true,,316,251,1,2,http://localhost:8001/auth/login,173,0,0
+1777221912716,3,POST /reviews/,201,Created,Review Submission Load Test 3-74,text,true,,380,440,1,1,http://localhost:8004/reviews/,3,0,0
+1777221912725,4,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-75,text,true,,587,137,1,1,http://localhost:8002/restaurants/?q=ramen,4,0,0
+1777221912739,173,POST /auth/login,200,OK,Login Load Test 1-75,text,true,,316,251,1,2,http://localhost:8001/auth/login,173,0,0
+1777221912739,173,Login for Token,200,OK,Review Submission Load Test 3-75,text,true,,316,251,1,2,http://localhost:8001/auth/login,173,0,0
+1777221912913,3,POST /reviews/,201,Created,Review Submission Load Test 3-75,text,true,,380,440,1,1,http://localhost:8004/reviews/,3,0,0
+1777221912926,4,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-76,text,true,,587,137,1,1,http://localhost:8002/restaurants/?q=ramen,4,0,1
+1777221912938,175,POST /auth/login,200,OK,Login Load Test 1-76,text,true,,316,251,1,2,http://localhost:8001/auth/login,175,0,1
+1777221912938,175,Login for Token,200,OK,Review Submission Load Test 3-76,text,true,,316,251,1,2,http://localhost:8001/auth/login,175,0,1
+1777221913112,3,POST /reviews/,201,Created,Review Submission Load Test 3-76,text,true,,380,440,1,1,http://localhost:8004/reviews/,3,0,0
+1777221913124,4,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-77,text,true,,587,137,1,1,http://localhost:8002/restaurants/?q=ramen,4,0,1
+1777221913139,183,POST /auth/login,200,OK,Login Load Test 1-77,text,true,,316,251,1,2,http://localhost:8001/auth/login,183,0,0
+1777221913140,182,Login for Token,200,OK,Review Submission Load Test 3-77,text,true,,316,251,1,2,http://localhost:8001/auth/login,182,0,1
+1777221913322,2,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-78,text,true,,587,137,1,2,http://localhost:8002/restaurants/?q=ramen,2,0,0
+1777221913322,2,POST /reviews/,201,Created,Review Submission Load Test 3-77,text,true,,380,440,1,1,http://localhost:8004/reviews/,2,0,1
+1777221913335,172,POST /auth/login,200,OK,Login Load Test 1-78,text,true,,316,251,1,2,http://localhost:8001/auth/login,172,0,0
+1777221913342,171,Login for Token,200,OK,Review Submission Load Test 3-78,text,true,,316,251,1,1,http://localhost:8001/auth/login,171,0,0
+1777221913513,3,POST /reviews/,201,Created,Review Submission Load Test 3-78,text,true,,380,440,1,1,http://localhost:8004/reviews/,3,0,0
+1777221913525,4,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-79,text,true,,587,137,1,1,http://localhost:8002/restaurants/?q=ramen,4,0,1
+1777221913539,172,POST /auth/login,200,OK,Login Load Test 1-79,text,true,,316,251,1,2,http://localhost:8001/auth/login,172,0,0
+1777221913539,172,Login for Token,200,OK,Review Submission Load Test 3-79,text,true,,316,251,1,2,http://localhost:8001/auth/login,172,0,1
+1777221913711,4,POST /reviews/,201,Created,Review Submission Load Test 3-79,text,true,,380,440,1,1,http://localhost:8004/reviews/,4,0,1
+1777221913723,4,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-80,text,true,,587,137,1,1,http://localhost:8002/restaurants/?q=ramen,4,0,1
+1777221913736,175,POST /auth/login,200,OK,Login Load Test 1-80,text,true,,316,251,1,2,http://localhost:8001/auth/login,175,0,1
+1777221913736,175,Login for Token,200,OK,Review Submission Load Test 3-80,text,true,,316,251,1,2,http://localhost:8001/auth/login,175,0,1
+1777221913911,3,POST /reviews/,201,Created,Review Submission Load Test 3-80,text,true,,380,440,1,1,http://localhost:8004/reviews/,3,0,1
+1777221913920,3,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-81,text,true,,587,137,1,1,http://localhost:8002/restaurants/?q=ramen,3,0,0
+1777221913936,185,POST /auth/login,200,OK,Login Load Test 1-81,text,true,,316,251,1,2,http://localhost:8001/auth/login,185,0,1
+1777221914125,2,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-82,text,true,,587,137,1,2,http://localhost:8002/restaurants/?q=ramen,2,0,0
+1777221913941,186,Login for Token,200,OK,Review Submission Load Test 3-81,text,true,,316,251,1,1,http://localhost:8001/auth/login,186,0,1
+1777221914127,3,POST /reviews/,201,Created,Review Submission Load Test 3-81,text,true,,380,440,1,1,http://localhost:8004/reviews/,3,0,1
+1777221914135,174,Login for Token,200,OK,Review Submission Load Test 3-82,text,true,,316,251,1,2,http://localhost:8001/auth/login,174,0,1
+1777221914310,2,POST /reviews/,201,Created,Review Submission Load Test 3-82,text,true,,380,440,1,2,http://localhost:8004/reviews/,2,0,0
+1777221914139,174,POST /auth/login,200,OK,Login Load Test 1-82,text,true,,316,251,1,1,http://localhost:8001/auth/login,174,0,0
+1777221914324,2,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-83,text,true,,587,137,1,1,http://localhost:8002/restaurants/?q=ramen,2,0,1
+1777221914334,172,POST /auth/login,200,OK,Login Load Test 1-83,text,true,,316,251,1,2,http://localhost:8001/auth/login,172,0,0
+1777221914338,171,Login for Token,200,OK,Review Submission Load Test 3-83,text,true,,316,251,1,1,http://localhost:8001/auth/login,171,0,0
+1777221914509,4,POST /reviews/,201,Created,Review Submission Load Test 3-83,text,true,,380,440,1,1,http://localhost:8004/reviews/,4,0,1
+1777221914524,4,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-84,text,true,,587,137,1,1,http://localhost:8002/restaurants/?q=ramen,4,0,1
+1777221914533,172,POST /auth/login,200,OK,Login Load Test 1-84,text,true,,316,251,1,2,http://localhost:8001/auth/login,172,0,0
+1777221914539,171,Login for Token,200,OK,Review Submission Load Test 3-84,text,true,,316,251,1,1,http://localhost:8001/auth/login,171,0,0
+1777221914711,3,POST /reviews/,201,Created,Review Submission Load Test 3-84,text,true,,380,440,1,1,http://localhost:8004/reviews/,3,0,0
+1777221914725,4,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-85,text,true,,587,137,1,1,http://localhost:8002/restaurants/?q=ramen,4,0,0
+1777221914738,172,POST /auth/login,200,OK,Login Load Test 1-85,text,true,,316,251,1,2,http://localhost:8001/auth/login,172,0,0
+1777221914741,170,Login for Token,200,OK,Review Submission Load Test 3-85,text,true,,316,251,1,1,http://localhost:8001/auth/login,170,0,0
+1777221914912,3,POST /reviews/,201,Created,Review Submission Load Test 3-85,text,true,,380,440,1,1,http://localhost:8004/reviews/,3,0,0
+1777221914924,3,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-86,text,true,,587,137,1,1,http://localhost:8002/restaurants/?q=ramen,3,0,1
+1777221914940,170,POST /auth/login,200,OK,Login Load Test 1-86,text,true,,316,251,1,2,http://localhost:8001/auth/login,170,0,0
+1777221915125,4,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-87,text,true,,587,137,1,2,http://localhost:8002/restaurants/?q=ramen,4,0,1
+1777221914941,354,Login for Token,200,OK,Review Submission Load Test 3-86,text,true,,316,251,2,3,http://localhost:8001/auth/login,354,0,0
+1777221915296,3,POST /reviews/,201,Created,Review Submission Load Test 3-86,text,true,,380,440,2,3,http://localhost:8004/reviews/,3,0,0
+1777221915135,188,Login for Token,200,OK,Review Submission Load Test 3-87,text,true,,316,251,1,2,http://localhost:8001/auth/login,188,0,1
+1777221915323,2,POST /reviews/,201,Created,Review Submission Load Test 3-87,text,true,,380,440,1,3,http://localhost:8004/reviews/,2,0,0
+1777221915139,187,POST /auth/login,200,OK,Login Load Test 1-87,text,true,,316,251,1,2,http://localhost:8001/auth/login,187,0,0
+1777221915325,4,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-88,text,true,,587,137,1,1,http://localhost:8002/restaurants/?q=ramen,4,0,1
+1777221915336,171,Login for Token,200,OK,Review Submission Load Test 3-88,text,true,,316,251,1,2,http://localhost:8001/auth/login,171,0,0
+1777221915338,170,POST /auth/login,200,OK,Login Load Test 1-88,text,true,,316,251,1,2,http://localhost:8001/auth/login,170,0,0
+1777221915507,3,POST /reviews/,201,Created,Review Submission Load Test 3-88,text,true,,380,440,1,1,http://localhost:8004/reviews/,3,0,0
+1777221915524,3,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-89,text,true,,587,137,1,1,http://localhost:8002/restaurants/?q=ramen,3,0,1
+1777221915537,174,POST /auth/login,200,OK,Login Load Test 1-89,text,true,,316,251,1,2,http://localhost:8001/auth/login,174,0,0
+1777221915537,174,Login for Token,200,OK,Review Submission Load Test 3-89,text,true,,316,251,1,2,http://localhost:8001/auth/login,174,0,0
+1777221915712,3,POST /reviews/,201,Created,Review Submission Load Test 3-89,text,true,,380,440,1,1,http://localhost:8004/reviews/,3,0,0
+1777221915725,3,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-90,text,true,,587,137,1,1,http://localhost:8002/restaurants/?q=ramen,3,0,0
+1777221915923,4,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-91,text,true,,587,137,1,3,http://localhost:8002/restaurants/?q=ramen,4,0,0
+1777221915739,351,POST /auth/login,200,OK,Login Load Test 1-90,text,true,,316,251,2,4,http://localhost:8001/auth/login,351,0,0
+1777221915739,352,Login for Token,200,OK,Review Submission Load Test 3-90,text,true,,316,251,2,3,http://localhost:8001/auth/login,352,0,1
+1777221916092,2,POST /reviews/,201,Created,Review Submission Load Test 3-90,text,true,,380,440,2,3,http://localhost:8004/reviews/,2,0,0
+1777221915939,187,POST /auth/login,200,OK,Login Load Test 1-91,text,true,,316,251,1,3,http://localhost:8001/auth/login,187,0,1
+1777221915940,187,Login for Token,200,OK,Review Submission Load Test 3-91,text,true,,316,251,1,2,http://localhost:8001/auth/login,187,0,0
+1777221916125,4,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-92,text,true,,587,137,1,2,http://localhost:8002/restaurants/?q=ramen,4,0,1
+1777221916127,3,POST /reviews/,201,Created,Review Submission Load Test 3-91,text,true,,380,440,1,1,http://localhost:8004/reviews/,3,0,0
+1777221916135,173,Login for Token,200,OK,Review Submission Load Test 3-92,text,true,,316,251,1,2,http://localhost:8001/auth/login,173,0,0
+1777221916137,172,POST /auth/login,200,OK,Login Load Test 1-92,text,true,,316,251,1,2,http://localhost:8001/auth/login,172,0,0
+1777221916308,4,POST /reviews/,201,Created,Review Submission Load Test 3-92,text,true,,380,440,1,1,http://localhost:8004/reviews/,4,0,1
+1777221916324,3,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-93,text,true,,587,137,1,1,http://localhost:8002/restaurants/?q=ramen,3,0,0
+1777221916338,173,POST /auth/login,200,OK,Login Load Test 1-93,text,true,,316,251,1,2,http://localhost:8001/auth/login,173,0,0
+1777221916338,173,Login for Token,200,OK,Review Submission Load Test 3-93,text,true,,316,251,1,2,http://localhost:8001/auth/login,173,0,0
+1777221916512,3,POST /reviews/,201,Created,Review Submission Load Test 3-93,text,true,,380,440,1,1,http://localhost:8004/reviews/,3,0,0
+1777221916522,3,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-94,text,true,,587,137,1,1,http://localhost:8002/restaurants/?q=ramen,3,0,0
+1777221916537,171,POST /auth/login,200,OK,Login Load Test 1-94,text,true,,316,251,1,2,http://localhost:8001/auth/login,171,0,0
+1777221916539,170,Login for Token,200,OK,Review Submission Load Test 3-94,text,true,,316,251,1,1,http://localhost:8001/auth/login,170,0,0
+1777221916709,3,POST /reviews/,201,Created,Review Submission Load Test 3-94,text,true,,380,440,1,1,http://localhost:8004/reviews/,3,0,0
+1777221916724,3,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-95,text,true,,587,137,1,1,http://localhost:8002/restaurants/?q=ramen,3,0,1
+1777221916739,175,POST /auth/login,200,OK,Login Load Test 1-95,text,true,,316,251,1,2,http://localhost:8001/auth/login,175,0,0
+1777221916739,175,Login for Token,200,OK,Review Submission Load Test 3-95,text,true,,316,251,1,2,http://localhost:8001/auth/login,175,0,0
+1777221916914,4,POST /reviews/,201,Created,Review Submission Load Test 3-95,text,true,,380,440,1,1,http://localhost:8004/reviews/,4,0,1
+1777221916923,4,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-96,text,true,,587,137,1,1,http://localhost:8002/restaurants/?q=ramen,4,0,1
+1777221916938,173,POST /auth/login,200,OK,Login Load Test 1-96,text,true,,316,251,1,2,http://localhost:8001/auth/login,173,0,0
+1777221916938,173,Login for Token,200,OK,Review Submission Load Test 3-96,text,true,,316,251,1,2,http://localhost:8001/auth/login,173,0,0
+1777221917111,3,POST /reviews/,201,Created,Review Submission Load Test 3-96,text,true,,380,440,1,1,http://localhost:8004/reviews/,3,0,1
+1777221917125,3,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-97,text,true,,587,137,1,1,http://localhost:8002/restaurants/?q=ramen,3,0,0
+1777221917135,174,Login for Token,200,OK,Review Submission Load Test 3-97,text,true,,316,251,1,2,http://localhost:8001/auth/login,174,0,0
+1777221917135,174,POST /auth/login,200,OK,Login Load Test 1-97,text,true,,316,251,1,2,http://localhost:8001/auth/login,174,0,1
+1777221917309,4,POST /reviews/,201,Created,Review Submission Load Test 3-97,text,true,,380,440,1,1,http://localhost:8004/reviews/,4,0,1
+1777221917325,3,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-98,text,true,,587,137,1,1,http://localhost:8002/restaurants/?q=ramen,3,0,0
+1777221917338,175,POST /auth/login,200,OK,Login Load Test 1-98,text,true,,316,251,1,2,http://localhost:8001/auth/login,175,0,0
+1777221917339,174,Login for Token,200,OK,Review Submission Load Test 3-98,text,true,,316,251,1,2,http://localhost:8001/auth/login,174,0,0
+1777221917513,3,POST /reviews/,201,Created,Review Submission Load Test 3-98,text,true,,380,440,1,1,http://localhost:8004/reviews/,3,0,1
+1777221917525,3,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-99,text,true,,587,137,1,1,http://localhost:8002/restaurants/?q=ramen,3,0,0
+1777221917725,3,GET /restaurants?q=ramen,200,OK,Restaurant Search Load Test 2-100,text,true,,587,137,1,3,http://localhost:8002/restaurants/?q=ramen,3,0,0
+1777221917533,348,POST /auth/login,200,OK,Login Load Test 1-99,text,true,,316,251,2,4,http://localhost:8001/auth/login,348,0,0
+1777221917533,349,Login for Token,200,OK,Review Submission Load Test 3-99,text,true,,316,251,2,3,http://localhost:8001/auth/login,349,0,1
+1777221917882,3,POST /reviews/,201,Created,Review Submission Load Test 3-99,text,true,,380,440,2,3,http://localhost:8004/reviews/,3,0,1
+1777221917738,185,POST /auth/login,200,OK,Login Load Test 1-100,text,true,,316,251,1,2,http://localhost:8001/auth/login,185,0,0
+1777221917738,185,Login for Token,200,OK,Review Submission Load Test 3-100,text,true,,316,251,1,2,http://localhost:8001/auth/login,185,0,0
+1777221917923,3,POST /reviews/,201,Created,Review Submission Load Test 3-100,text,true,,380,440,1,1,http://localhost:8004/reviews/,3,0,1

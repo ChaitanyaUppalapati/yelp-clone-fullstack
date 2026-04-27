@@ -14,7 +14,7 @@ export const fetchFavorites = createAsyncThunk(
   async (_, { getState, rejectWithValue }) => {
     const userIdAtStart = getState().auth.user?.id ?? null;
     try {
-      const res = await api.get('/favorites/');
+      const res = await api.get('/users/me/favorites');
       const userIdAtEnd = getState().auth.user?.id ?? null;
       // If logout or user-switch happened mid-flight, drop the response so we
       // don't repopulate favorites for a different (or no) user. The reducer
@@ -34,7 +34,7 @@ export const addFavorite = createAsyncThunk(
   'favorites/add',
   async (restaurantId, { rejectWithValue }) => {
     try {
-      await api.post(`/favorites/${restaurantId}`);
+      await api.post(`/users/me/favorites/${restaurantId}`);
       return { restaurant_id: restaurantId };
     } catch (err) {
       return rejectWithValue(err.response?.data?.detail || 'Failed to add favorite');
@@ -46,7 +46,7 @@ export const removeFavorite = createAsyncThunk(
   'favorites/remove',
   async (restaurantId, { rejectWithValue }) => {
     try {
-      await api.delete(`/favorites/${restaurantId}`);
+      await api.delete(`/users/me/favorites/${restaurantId}`);
       return restaurantId;
     } catch (err) {
       return rejectWithValue(err.response?.data?.detail || 'Failed to remove favorite');

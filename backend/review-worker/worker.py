@@ -17,6 +17,7 @@ logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(mess
 log = logging.getLogger("review-worker")
 
 _producer: Producer | None = None
+_mongo_client: AsyncIOMotorClient | None = None
 
 
 def get_producer() -> Producer:
@@ -32,15 +33,20 @@ def publish_status(review_id: str, status: str, detail: str = ""):
         "status": status,   # "confirmed" | "failed"
         "detail": detail,
     }).encode("utf-8")
-    get_producer().produce("booking.status", key=review_id.encode(), value=payload)
-    get_producer().poll(0)
-    log.info("Published booking.status: review_id=%s status=%s", review_id, status)
+    try:
+        get_producer().produce("booking.status", key=review_id.encode(), value=payload)
+        get_producer().poll(0)
+        log.info("Published booking.status: review_id=%s status=%s", review_id, status)
+    except Exception as exc:
+        log.warning("Failed to publish booking.status: %s", exc)
 
 
 def get_db():
-    client = AsyncIOMotorClient(MONGO_URL)
+    global _mongo_client
+    if _mongo_client is None:
+        _mongo_client = AsyncIOMotorClient(MONGO_URL)
     db_name = MONGO_URL.rsplit("/", 1)[-1].split("?")[0] or "yelp_db"
-    return client[db_name]
+    return _mongo_client[db_name]
 
 
 async def recalculate_avg_rating(db, restaurant_id: str):

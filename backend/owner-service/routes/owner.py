@@ -91,6 +91,33 @@ async def delete_restaurant(restaurant_id: str, user_id: str = Depends(_require_
     )
 
 
+STOPWORDS = {
+    "the","a","an","and","or","but","in","on","at","to","for","of","with",
+    "is","was","it","i","we","they","this","that","my","our","very","so",
+    "be","have","had","not","by","from","are","were","its","been","their",
+    "as","if","up","out","no","just","he","she","me","him","her","would",
+    "could","did","do","get","got","all","one","more","also","too","than",
+    "there","has","will","went","even","really","then","about","can","us",
+}
+
+def _rating_to_score(rating: int) -> float:
+    return {1: -1.0, 2: -0.5, 3: 0.0, 4: 0.5, 5: 1.0}.get(rating, 0.0)
+
+def _rating_to_label(rating: int) -> str:
+    if rating >= 4: return "positive"
+    if rating <= 2: return "negative"
+    return "neutral"
+
+def _top_words(comments: list[str], n: int = 6) -> list[dict]:
+    freq: dict[str, int] = {}
+    for text in comments:
+        for word in text.lower().split():
+            w = "".join(c for c in word if c.isalpha())
+            if len(w) > 3 and w not in STOPWORDS:
+                freq[w] = freq.get(w, 0) + 1
+    return [{"term": t, "count": c} for t, c in sorted(freq.items(), key=lambda x: -x[1])[:n]]
+
+
 @router.get("/analytics")
 async def owner_analytics(user_id: str = Depends(_require_owner)):
     db = get_db()
@@ -99,7 +126,7 @@ async def owner_analytics(user_id: str = Depends(_require_owner)):
         return {
             "total_restaurants": 0, "total_reviews": 0, "avg_rating": 0.0,
             "ratings_distribution": {str(i): 0 for i in range(1, 6)},
-            "recent_reviews": [],
+            "recent_reviews": [], "sentiment_analysis": None,
         }
 
     rest_ids = [str(r["_id"]) for r in restaurants]
@@ -129,12 +156,71 @@ async def owner_analytics(user_id: str = Depends(_require_owner)):
             "created_at": rev.get("created_at"),
         })
 
+    # Sentiment analysis
+    pos_comments, neg_comments = [], []
+    sentiment_dist = {"positive": 0, "neutral": 0, "negative": 0}
+    scores = []
+    per_restaurant: dict[str, dict] = {rid: {"scores": [], "comments_pos": [], "comments_neg": []} for rid in rest_ids}
+
+    for rev in all_reviews:
+        rating = int(rev.get("rating", 3))
+        score = _rating_to_score(rating)
+        label = _rating_to_label(rating)
+        comment = rev.get("comment") or ""
+        rid = rev.get("restaurant_id", "")
+
+        scores.append(score)
+        sentiment_dist[label] += 1
+        if label == "positive" and comment:
+            pos_comments.append(comment)
+        elif label == "negative" and comment:
+            neg_comments.append(comment)
+
+        if rid in per_restaurant:
+            per_restaurant[rid]["scores"].append(score)
+            if label == "positive" and comment:
+                per_restaurant[rid]["comments_pos"].append(comment)
+            elif label == "negative" and comment:
+                per_restaurant[rid]["comments_neg"].append(comment)
+
+    avg_score = round(sum(scores) / len(scores), 2) if scores else 0.0
+    if avg_score >= 0.2:
+        overall_label = "positive"
+    elif avg_score <= -0.2:
+        overall_label = "negative"
+    else:
+        overall_label = "neutral"
+
+    restaurant_breakdown = []
+    for rid, data in per_restaurant.items():
+        if not data["scores"]:
+            continue
+        rs = round(sum(data["scores"]) / len(data["scores"]), 2)
+        restaurant_breakdown.append({
+            "restaurant_id": rid,
+            "restaurant_name": rest_name_map.get(rid, "Unknown"),
+            "label": "positive" if rs >= 0.2 else ("negative" if rs <= -0.2 else "neutral"),
+            "average_score": rs,
+            "review_count": len(data["scores"]),
+        })
+
+    sentiment_analysis = {
+        "overall_label": overall_label,
+        "average_score": avg_score,
+        "total_reviews_analyzed": total,
+        "distribution": sentiment_dist,
+        "top_positive_themes": _top_words(pos_comments),
+        "top_negative_themes": _top_words(neg_comments),
+        "restaurant_breakdown": sorted(restaurant_breakdown, key=lambda x: -x["average_score"]),
+    }
+
     return {
         "total_restaurants": len(restaurants),
         "total_reviews": total,
         "avg_rating": avg,
         "ratings_distribution": distribution,
         "recent_reviews": recent,
+        "sentiment_analysis": sentiment_analysis,
     }
 
 

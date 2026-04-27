@@ -47,7 +47,8 @@ export default function OwnerManagePage() {
       setMsg('Restaurant updated!');
       setTimeout(() => setMsg(''), 3000);
     } catch (err) {
-      setMsg(err.response?.data?.detail || 'Failed to update.');
+      const detail = err.response?.data?.detail;
+      setMsg(Array.isArray(detail) ? detail.map((e) => e.msg).join(', ') : detail || 'Failed to update.');
     } finally {
       setSaving(false);
     }

@@ -22,13 +22,26 @@ router = APIRouter()
 @router.get("/restaurant/{restaurant_id}", response_model=List[ReviewOut])
 async def get_reviews(restaurant_id: str, skip: int = 0, limit: int = 20):
     db = get_db()
-    cursor = (
-        db.reviews.find({"restaurant_id": restaurant_id})
-        .sort("created_at", -1)
-        .skip(skip)
-        .limit(limit)
-    )
-    return [ReviewOut.from_doc(r) async for r in cursor]
+    pipeline = [
+        {"$match": {"restaurant_id": restaurant_id}},
+        {"$sort": {"created_at": -1}},
+        {"$skip": skip},
+        {"$limit": limit},
+        {
+            "$lookup": {
+                "from": "users",
+                "let": {"uid": "$user_id"},
+                "pipeline": [
+                    {"$match": {"$expr": {"$eq": [{"$toString": "$_id"}, "$$uid"]}}},
+                    {"$project": {"name": 1}},
+                ],
+                "as": "user_doc",
+            }
+        },
+        {"$addFields": {"user_name": {"$arrayElemAt": ["$user_doc.name", 0]}}},
+    ]
+    docs = await db.reviews.aggregate(pipeline).to_list(length=limit)
+    return [ReviewOut.from_doc(r) for r in docs]
 
 
 @router.post("/", response_model=ReviewOut, status_code=201)

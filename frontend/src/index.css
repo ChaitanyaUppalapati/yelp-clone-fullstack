@@ -940,6 +940,8 @@ h5 { font-size: 1rem; }
   border-radius: var(--radius-full);
   color: var(--clr-text-secondary);
   transition: all var(--transition-fast);
+  cursor: pointer;
+  pointer-events: auto;
 }
 .chat-quick-btn:hover {
   background: rgba(211, 35, 35, 0.1);

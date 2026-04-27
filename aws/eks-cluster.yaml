@@ -4,7 +4,7 @@ kind: ClusterConfig
 metadata:
   name: yelp-cluster
   region: us-west-2
-  version: "1.29"
+  version: "1.32"
   tags:
     project: yelp-clone
     owner: dipin

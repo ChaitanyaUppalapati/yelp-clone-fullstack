@@ -48,12 +48,17 @@ A full-stack Yelp-like restaurant discovery platform built with **FastAPI** (bac
 
 | Layer | Technology |
 |---|---|
-| Backend | FastAPI, SQLAlchemy, MySQL (PyMySQL) |
+| Backend (microservices) | FastAPI, Motor (async MongoDB), Python 3.13 |
+| Message broker | Apache Kafka + Zookeeper (confluent-kafka) |
+| Database | MongoDB 7 |
 | Auth | JWT (python-jose), bcrypt |
-| Frontend | React 18, Vite, React Router v6 |
+| Frontend | React 18, Vite, React Router v6, Redux Toolkit |
 | HTTP Client | Axios |
 | AI | LangGraph, OpenAI GPT-4o-mini, Tavily Search |
 | Styling | Custom CSS (dark theme) |
+| Containerization | Docker, Docker Compose |
+| Orchestration | Kubernetes (k8s/ manifests), AWS EKS |
+| Load testing | Apache JMeter |
 
 ---
 
@@ -114,42 +119,163 @@ yelp-clone-fullstack/
 
 ## Getting Started
 
-### Prerequisites
+### Option A — Docker Compose (recommended, runs everything)
 
-- Python 3.11+
-- Node.js 18+
-- MySQL 8.0+
-
-### Backend Setup
+**Prerequisites:** Docker Desktop, Docker Compose
 
 ```bash
+# From the project root
+docker compose up --build
+```
+
+This starts all services:
+
+| Service | URL |
+|---|---|
+| User Service (auth, profiles, favorites) | http://localhost:8001 |
+| Restaurant Service (CRUD, search) | http://localhost:8002 |
+| Owner Service (dashboard, analytics) | http://localhost:8003 |
+| Review Service (reviews, ratings) | http://localhost:8004 |
+| Frontend | http://localhost:5173 |
+| MongoDB | localhost:27017 |
+| Kafka | localhost:29092 (external) |
+
+Seed data into MongoDB after the stack is up:
+
+```bash
+docker exec -it mongodb mongosh yelp_db --eval "load('/docker-entrypoint-initdb.d/seed.js')"
+# Or run the Python seed script against port 27017:
+cd backend && python seed_restaurants.py
+```
+
+---
+
+### Option B — Local development (monolithic backend + Vite frontend)
+
+**Prerequisites:** Python 3.11+, Node.js 18+, MySQL 8.0+
+
+```bash
+# Backend
 cd backend
 python -m venv venv
 source venv/bin/activate        # Windows: venv\Scripts\activate
 pip install -r requirements.txt
 
-# Create .env from example
 cp .env.example .env
-# Fill in: DATABASE_URL, SECRET_KEY, OPENAI_API_KEY, TAVILY_API_KEY
+# Fill in: SECRET_KEY, OPENAI_API_KEY, TAVILY_API_KEY
+# DB_HOST=localhost, DB_NAME=yelp_clone, DB_USER=root
 
-# Run schema + seed data
 mysql -u root -p < schema.sql
 
-# Start server
 uvicorn app.main:app --reload --port 8000
 ```
 
-API docs available at: `http://localhost:8000/docs`
-
-### Frontend Setup
+API docs: `http://localhost:8000/docs`
 
 ```bash
+# Frontend
 cd frontend
 npm install
 npm run dev
 ```
 
-Frontend runs at: `http://localhost:5173`
+Frontend: `http://localhost:5173`
+
+---
+
+## Lab 2 — Docker, Kubernetes, Kafka, MongoDB & Redux
+
+### Architecture (Lab 2)
+
+The monolithic FastAPI backend was split into **4 microservices** connected via **Kafka async messaging** and backed by **MongoDB**:
+
+```
+Frontend (React + Redux)
+    │
+    ├── POST /auth/login  ──►  User Service (8001)   ──► Kafka: user.created/updated
+    ├── GET  /restaurants ──►  Restaurant Service (8002) ──► Kafka: restaurant.*
+    ├── POST /reviews/    ──►  Review Service (8004)  ──► Kafka: review.created/updated/deleted
+    └── GET  /owner/dash  ──►  Owner Service (8003)
+                                    │
+                         Kafka topics consumed by:
+                         ├── user-worker       (logs, welcome emails)
+                         ├── restaurant-worker (logging, notifications)
+                         └── review-worker     (recalculates avg_rating in MongoDB)
+```
+
+### Kafka Topics
+
+| Topic | Producer | Consumer |
+|---|---|---|
+| `review.created` | Review Service | Review Worker |
+| `review.updated` | Review Service | Review Worker |
+| `review.deleted` | Review Service | Review Worker |
+| `restaurant.created` | Restaurant Service | Restaurant Worker |
+| `restaurant.updated` | Restaurant Service | Restaurant Worker |
+| `restaurant.claimed` | Restaurant/Owner Service | Restaurant Worker |
+| `user.created` | User Service | User Worker |
+| `user.updated` | User Service | User Worker |
+| `booking.status` | Review Worker | (frontend polling) |
+
+### Redux Store (Frontend)
+
+State management was migrated from React Context to Redux Toolkit with 4 slices:
+
+| Slice | State | Thunks |
+|---|---|---|
+| `authSlice` | `token, user, isAuthenticated, loading` | `loginUser`, `registerUser`, `logoutUser` |
+| `restaurantSlice` | `restaurants[], currentRestaurant, searchFilters` | `fetchRestaurants`, `fetchRestaurantById` |
+| `reviewSlice` | `reviews[], loading` | `fetchReviews`, `createReview`, `updateReview`, `deleteReview` |
+| `favoritesSlice` | `favorites[], loading` | `fetchFavorites`, `addFavorite`, `removeFavorite` |
+
+### Kubernetes
+
+All manifests are in `k8s/`:
+
+```bash
+# Apply to a cluster (EKS or minikube)
+kubectl apply -f k8s/namespace.yaml
+kubectl apply -f k8s/configmap.yaml
+kubectl apply -f k8s/secret.yaml
+kubectl apply -f k8s/mongodb.yaml
+kubectl apply -f k8s/kafka.yaml
+kubectl apply -f k8s/
+kubectl get pods -n yelp
+kubectl get services -n yelp
+```
+
+### AWS EKS Deployment
+
+```bash
+cd aws
+# Create EKS cluster
+eksctl create cluster -f eks-cluster.yaml
+
+# Push images to ECR
+./ecr-push.sh
+
+# Deploy to EKS
+./deploy-to-eks.sh
+```
+
+### JMeter Load Testing
+
+Test results are in `jmeter/results.csv`. Graphs are in `jmeter/graph_dashboard.png`.
+
+Tests ran at 100 / 200 / 300 / 400 / 500 concurrent users against 3 endpoints:
+
+| Endpoint | Avg RT (100 users) | Avg RT (500 users) | Error Rate |
+|---|---|---|---|
+| GET /restaurants | ~1ms | ~1ms | 0% |
+| POST /auth/login | requires user-service running | — | — |
+| POST /reviews/ | requires auth token | — | — |
+
+To regenerate graphs from results:
+
+```bash
+cd jmeter
+python3 generate_graphs.py
+```
 
 ---
 

@@ -26,7 +26,11 @@ export const createReview = createAsyncThunk(
       const res = await api.post('/reviews/', data);
       return { status: res.status, data: res.data };
     } catch (err) {
-      return rejectWithValue(err.response?.data?.detail || 'Failed to submit review');
+      const detail = err.response?.data?.detail;
+      const msg = Array.isArray(detail)
+        ? detail.map((e) => e.msg).join(', ')
+        : detail || 'Failed to submit review';
+      return rejectWithValue(msg);
     }
   }
 );

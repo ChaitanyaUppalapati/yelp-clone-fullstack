@@ -27,7 +27,8 @@ export default function RestaurantCard({ restaurant }) {
     photos,
   } = restaurant;
 
-  const imgSrc = photos?.[0] || PLACEHOLDER_IMAGES[id % PLACEHOLDER_IMAGES.length];
+  const idx = name ? name.charCodeAt(0) % PLACEHOLDER_IMAGES.length : 0;
+  const imgSrc = photos?.[0] || PLACEHOLDER_IMAGES[idx];
 
   return (
     <div

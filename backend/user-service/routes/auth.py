@@ -19,15 +19,10 @@ router = APIRouter()
 SESSION_TTL_MINUTES = ACCESS_TOKEN_EXPIRE_MINUTES
 
 
-async def _ensure_session_ttl_index():
+async def ensure_session_ttl_index():
     """Create TTL index on sessions.expires_at once at startup."""
     db = get_db()
     await db.sessions.create_index("expires_at", expireAfterSeconds=0)
-
-
-@router.on_event("startup")
-async def startup():
-    await _ensure_session_ttl_index()
 
 
 @router.post("/register", response_model=UserOut, status_code=201)

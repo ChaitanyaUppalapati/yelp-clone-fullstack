@@ -1,0 +1,167 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nginx-config
+  namespace: yelp
+data:
+  default.conf: |
+    server {
+      listen 80;
+
+      location / {
+        if ($request_method = OPTIONS) {
+          add_header Access-Control-Allow-Origin *;
+          add_header Access-Control-Allow-Methods "GET,POST,PUT,DELETE,OPTIONS";
+          add_header Access-Control-Allow-Headers "Authorization,Content-Type";
+          add_header Content-Length 0;
+          return 204;
+        }
+        return 302 http://aa7538e3ee5a143c4b315886ec6a670d-13735ddfe63a4543.elb.us-west-2.amazonaws.com$request_uri;
+      }
+
+      location /auth/ {
+        if ($request_method = OPTIONS) {
+          add_header Access-Control-Allow-Origin *;
+          add_header Access-Control-Allow-Methods "GET,POST,PUT,DELETE,OPTIONS";
+          add_header Access-Control-Allow-Headers "Authorization,Content-Type";
+          add_header Content-Length 0;
+          return 204;
+        }
+        proxy_pass http://user-service:8001;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_hide_header Access-Control-Allow-Origin;
+        proxy_hide_header Access-Control-Allow-Methods;
+        proxy_hide_header Access-Control-Allow-Headers;
+        add_header Access-Control-Allow-Origin * always;
+      }
+
+      location /users/ {
+        if ($request_method = OPTIONS) {
+          add_header Access-Control-Allow-Origin *;
+          add_header Access-Control-Allow-Methods "GET,POST,PUT,DELETE,OPTIONS";
+          add_header Access-Control-Allow-Headers "Authorization,Content-Type";
+          add_header Content-Length 0;
+          return 204;
+        }
+        proxy_pass http://user-service:8001;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_hide_header Access-Control-Allow-Origin;
+        proxy_hide_header Access-Control-Allow-Methods;
+        proxy_hide_header Access-Control-Allow-Headers;
+        add_header Access-Control-Allow-Origin * always;
+      }
+
+      location /ai/ {
+        if ($request_method = OPTIONS) {
+          add_header Access-Control-Allow-Origin *;
+          add_header Access-Control-Allow-Methods "GET,POST,PUT,DELETE,OPTIONS";
+          add_header Access-Control-Allow-Headers "Authorization,Content-Type";
+          add_header Content-Length 0;
+          return 204;
+        }
+        proxy_pass http://user-service:8001;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_hide_header Access-Control-Allow-Origin;
+        proxy_hide_header Access-Control-Allow-Methods;
+        proxy_hide_header Access-Control-Allow-Headers;
+        add_header Access-Control-Allow-Origin * always;
+      }
+
+      location /restaurants/ {
+        if ($request_method = OPTIONS) {
+          add_header Access-Control-Allow-Origin *;
+          add_header Access-Control-Allow-Methods "GET,POST,PUT,DELETE,OPTIONS";
+          add_header Access-Control-Allow-Headers "Authorization,Content-Type";
+          add_header Content-Length 0;
+          return 204;
+        }
+        proxy_pass http://restaurant-service:8002;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_hide_header Access-Control-Allow-Origin;
+        proxy_hide_header Access-Control-Allow-Methods;
+        proxy_hide_header Access-Control-Allow-Headers;
+        add_header Access-Control-Allow-Origin * always;
+      }
+
+      location /owner/ {
+        if ($request_method = OPTIONS) {
+          add_header Access-Control-Allow-Origin *;
+          add_header Access-Control-Allow-Methods "GET,POST,PUT,DELETE,OPTIONS";
+          add_header Access-Control-Allow-Headers "Authorization,Content-Type";
+          add_header Content-Length 0;
+          return 204;
+        }
+        proxy_pass http://owner-service:8003;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_hide_header Access-Control-Allow-Origin;
+        proxy_hide_header Access-Control-Allow-Methods;
+        proxy_hide_header Access-Control-Allow-Headers;
+        add_header Access-Control-Allow-Origin * always;
+      }
+
+      location /reviews/ {
+        if ($request_method = OPTIONS) {
+          add_header Access-Control-Allow-Origin *;
+          add_header Access-Control-Allow-Methods "GET,POST,PUT,DELETE,OPTIONS";
+          add_header Access-Control-Allow-Headers "Authorization,Content-Type";
+          add_header Content-Length 0;
+          return 204;
+        }
+        proxy_pass http://review-service:8004;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_hide_header Access-Control-Allow-Origin;
+        proxy_hide_header Access-Control-Allow-Methods;
+        proxy_hide_header Access-Control-Allow-Headers;
+        add_header Access-Control-Allow-Origin * always;
+      }
+    }
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx
+  namespace: yelp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+        - name: nginx
+          image: nginx:alpine
+          ports:
+            - containerPort: 80
+          volumeMounts:
+            - name: config
+              mountPath: /etc/nginx/conf.d
+      volumes:
+        - name: config
+          configMap:
+            name: nginx-config
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-service
+  namespace: yelp
+  annotations:
+    service.beta.kubernetes.io/aws-load-balancer-type: nlb
+    service.beta.kubernetes.io/aws-load-balancer-scheme: internet-facing
+spec:
+  selector:
+    app: nginx
+  ports:
+    - port: 80
+      targetPort: 80
+  type: LoadBalancer

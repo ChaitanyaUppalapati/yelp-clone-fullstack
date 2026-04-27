@@ -1,3 +1,4 @@
+// pages/WriteReviewPage.jsx
 import { useState, useEffect, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
@@ -17,8 +18,8 @@ export default function WriteReviewPage() {
   const [restaurant, setRestaurant] = useState(null);
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState('');
-  const [photos, setPhotos] = useState([]);
-  const [previews, setPreviews] = useState([]);
+  const [photos, setPhotos] = useState([]);        // File objects
+  const [previews, setPreviews] = useState([]);     // Object URLs for preview
   const [error, setError] = useState('');
   const photoInputRef = useRef(null);
   const navTimeoutRef = useRef(null);
@@ -29,6 +30,8 @@ export default function WriteReviewPage() {
       .catch(() => setError('Restaurant not found'));
   }, [restaurantId]);
 
+  // Clear any stale review status/error from a prior submission so revisiting
+  // the page doesn't immediately show a success banner from before.
   useEffect(() => {
     dispatch(clearReviewStatus());
     dispatch(clearReviewError());
@@ -38,10 +41,12 @@ export default function WriteReviewPage() {
     };
   }, [dispatch]);
 
+  // Clear pending navigation timer if user leaves the page early.
   useEffect(() => () => {
     if (navTimeoutRef.current) clearTimeout(navTimeoutRef.current);
   }, []);
 
+  // Cleanup preview object URLs on unmount
   useEffect(() => {
     return () => previews.forEach((url) => URL.revokeObjectURL(url));
   }, [previews]);
@@ -53,7 +58,7 @@ export default function WriteReviewPage() {
       return;
     }
     setPhotos((prev) => [...prev, ...files]);
-    setPreviews((prev) => [...prev, ...files.map((file) => URL.createObjectURL(file))]);
+    setPreviews((prev) => [...prev, ...files.map((f) => URL.createObjectURL(f))]);
     e.target.value = '';
   };
 
@@ -65,18 +70,12 @@ export default function WriteReviewPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (isOwner) {
-      setError('Owner accounts cannot submit reviews.');
-      return;
-    }
-    if (rating === 0) {
-      setError('Please select a rating.');
-      return;
-    }
+    if (isOwner) { setError('Owner accounts cannot submit reviews.'); return; }
+    if (rating === 0) { setError('Please select a rating.'); return; }
     setError('');
 
     const result = await dispatch(createReview({
-      restaurant_id: parseInt(restaurantId),
+      restaurant_id: restaurantId,
       rating,
       comment: comment.trim() || null,
     }));
@@ -85,7 +84,12 @@ export default function WriteReviewPage() {
 
     const { status, data } = result.payload;
 
+    // Photos can only be attached once the review row exists. When Kafka
+    // returns 202 we don't have an id yet, so skip photo upload and inform
+    // the user — they can add photos later from the detail page.
     if (status === 202) {
+      // Show the async notice briefly, then navigate back. The ref + cleanup
+      // above cancels this timer if the user navigates away first.
       navTimeoutRef.current = setTimeout(
         () => navigate(`/restaurants/${restaurantId}`),
         1500,
@@ -96,7 +100,7 @@ export default function WriteReviewPage() {
     if (photos.length > 0 && data?.id) {
       try {
         const formData = new FormData();
-        photos.forEach((photo) => formData.append('files', photo));
+        photos.forEach((p) => formData.append('files', p));
         await api.post(`/reviews/${data.id}/photos`, formData, {
           headers: { 'Content-Type': 'multipart/form-data' },
         });
@@ -105,7 +109,6 @@ export default function WriteReviewPage() {
         return;
       }
     }
-
     navigate(`/restaurants/${restaurantId}`);
   };
 
@@ -125,7 +128,7 @@ export default function WriteReviewPage() {
           {displayError && <div className="alert alert-error">{displayError}</div>}
           {reviewStatus === 'accepted' && (
             <div className="alert alert-success">
-              Your review was submitted - it&apos;ll appear shortly.
+              Your review was submitted — it'll appear shortly.
             </div>
           )}
 
@@ -144,86 +147,87 @@ export default function WriteReviewPage() {
               </div>
             </div>
           ) : (
-            <form onSubmit={handleSubmit}>
-              <div className="form-group" style={{ marginBottom: 'var(--sp-xl)' }}>
-                <label className="form-label">Your Rating</label>
-                <StarRating
-                  rating={rating}
-                  interactive
-                  onChange={setRating}
-                  size="2rem"
-                />
-                {rating > 0 && (
-                  <span className="text-muted" style={{ fontSize: '0.875rem', marginTop: '4px' }}>
-                    {['', 'Not good', 'Could be better', 'OK', 'Great', 'Outstanding'][rating]}
-                  </span>
-                )}
-              </div>
+          <form onSubmit={handleSubmit}>
+            <div className="form-group" style={{ marginBottom: 'var(--sp-xl)' }}>
+              <label className="form-label">Your Rating</label>
+              <StarRating
+                rating={rating}
+                interactive
+                onChange={setRating}
+                size="2rem"
+              />
+              {rating > 0 && (
+                <span className="text-muted" style={{ fontSize: '0.875rem', marginTop: '4px' }}>
+                  {['', 'Not good', 'Could be better', 'OK', 'Great', 'Outstanding'][rating]}
+                </span>
+              )}
+            </div>
 
-              <div className="form-group">
-                <label className="form-label" htmlFor="review-comment">Your Review</label>
-                <textarea
-                  id="review-comment"
-                  className="form-textarea"
-                  placeholder="Share your experience - What did you order? How was the service and atmosphere?"
-                  value={comment}
-                  onChange={(e) => setComment(e.target.value)}
-                  rows={6}
-                />
-              </div>
+            <div className="form-group">
+              <label className="form-label" htmlFor="review-comment">Your Review</label>
+              <textarea
+                id="review-comment"
+                className="form-textarea"
+                placeholder="Share your experience — What did you order? How was the service and atmosphere?"
+                value={comment}
+                onChange={(e) => setComment(e.target.value)}
+                rows={6}
+              />
+            </div>
 
-              <div className="form-group" style={{ marginTop: 'var(--sp-md)' }}>
-                <label className="form-label">Photos (optional, max 5)</label>
-                {previews.length > 0 && (
-                  <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', marginBottom: '12px' }}>
-                    {previews.map((src, i) => (
-                      <div key={i} style={{ position: 'relative' }}>
-                        <img
-                          src={src}
-                          alt={`preview ${i + 1}`}
-                          style={{ width: '80px', height: '80px', objectFit: 'cover', borderRadius: '8px', border: '1px solid var(--clr-border)' }}
-                        />
-                        <button
-                          type="button"
-                          onClick={() => removePhoto(i)}
-                          style={{ position: 'absolute', top: '-6px', right: '-6px', background: 'var(--clr-primary)', color: '#fff', border: 'none', borderRadius: '50%', width: '20px', height: '20px', cursor: 'pointer', fontSize: '0.75rem', lineHeight: 1 }}
-                        >
-                          <X size={12} />
-                        </button>
-                      </div>
-                    ))}
-                  </div>
-                )}
-                {photos.length < 5 && (
-                  <>
-                    <button
-                      type="button"
-                      className="btn btn-ghost btn-sm"
-                      onClick={() => photoInputRef.current?.click()}
-                    >
-                      <Camera size={15} /> Add Photos
-                    </button>
-                    <input
-                      ref={photoInputRef}
-                      type="file"
-                      accept="image/*"
-                      multiple
-                      style={{ display: 'none' }}
-                      onChange={handlePhotoSelect}
-                    />
-                  </>
-                )}
-              </div>
+            {/* Photo Upload */}
+            <div className="form-group" style={{ marginTop: 'var(--sp-md)' }}>
+              <label className="form-label">Photos (optional, max 5)</label>
+              {previews.length > 0 && (
+                <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', marginBottom: '12px' }}>
+                  {previews.map((src, i) => (
+                    <div key={i} style={{ position: 'relative' }}>
+                      <img
+                        src={src}
+                        alt={`preview ${i + 1}`}
+                        style={{ width: '80px', height: '80px', objectFit: 'cover', borderRadius: '8px', border: '1px solid var(--clr-border)' }}
+                      />
+                      <button
+                        type="button"
+                        onClick={() => removePhoto(i)}
+                        style={{ position: 'absolute', top: '-6px', right: '-6px', background: 'var(--clr-primary)', color: '#fff', border: 'none', borderRadius: '50%', width: '20px', height: '20px', cursor: 'pointer', fontSize: '0.75rem', lineHeight: 1 }}
+                      >
+                        <X size={12} />
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              )}
+              {photos.length < 5 && (
+                <>
+                  <button
+                    type="button"
+                    className="btn btn-ghost btn-sm"
+                    onClick={() => photoInputRef.current?.click()}
+                  >
+                    <Camera size={15} /> Add Photos
+                  </button>
+                  <input
+                    ref={photoInputRef}
+                    type="file"
+                    accept="image/*"
+                    multiple
+                    style={{ display: 'none' }}
+                    onChange={handlePhotoSelect}
+                  />
+                </>
+              )}
+            </div>
 
-              <div style={{ display: 'flex', gap: 'var(--sp-md)', marginTop: 'var(--sp-lg)' }}>
-                <button type="submit" className="btn btn-primary btn-lg" disabled={submitting} id="review-submit">
-                  {submitting ? 'Submitting...' : <><PenLine size={15} /> Submit Review</>}
-                </button>
-                <button type="button" className="btn btn-ghost btn-lg" onClick={() => navigate(-1)}>
-                  Cancel
-                </button>
-              </div>
-            </form>
+            <div style={{ display: 'flex', gap: 'var(--sp-md)', marginTop: 'var(--sp-lg)' }}>
+              <button type="submit" className="btn btn-primary btn-lg" disabled={submitting} id="review-submit">
+                {submitting ? 'Submitting…' : <><PenLine size={15} /> Submit Review</>}
+              </button>
+              <button type="button" className="btn btn-ghost btn-lg" onClick={() => navigate(-1)}>
+                Cancel
+              </button>
+            </div>
+          </form>
           )}
         </div>
       </div>

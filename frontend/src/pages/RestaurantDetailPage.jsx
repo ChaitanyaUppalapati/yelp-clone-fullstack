@@ -25,7 +25,7 @@ export default function RestaurantDetailPage() {
   const { isAuthenticated, user } = useSelector((state) => state.auth);
   const { favorites, loading: favoritesLoading, loadedForUserId } = useSelector((state) => state.favorites);
   const isOwner = user?.role === 'owner';
-  const isFavorited = favorites.some((f) => f.restaurant_id === parseInt(id));
+  const isFavorited = favorites.some((f) => f.restaurant_id === id);
 
   const [restaurant, setRestaurant] = useState(null);
   const [reviews, setReviews] = useState([]);
@@ -35,26 +35,28 @@ export default function RestaurantDetailPage() {
   const [claimMsg, setClaimMsg] = useState('');
   const [deletingReviewId, setDeletingReviewId] = useState(null);
   const [reviewActionError, setReviewActionError] = useState('');
-
-  const loadRestaurantData = async () => {
-    setLoading(true);
-    try {
-      const [restRes, revRes] = await Promise.all([
-        api.get(`/restaurants/${id}`),
-        api.get(`/reviews/restaurant/${id}`),
-      ]);
-      setRestaurant(restRes.data);
-      setReviews(revRes.data);
-      setError('');
-    } catch {
-      setError('Restaurant not found.');
-    } finally {
-      setLoading(false);
-    }
-  };
+  const canWriteReview = isAuthenticated && !isOwner;
 
   useEffect(() => {
-    loadRestaurantData();
+    const fetchData = async () => {
+      setLoading(true);
+      try {
+        const restRes = await api.get(`/restaurants/${id}`);
+        setRestaurant(restRes.data);
+      } catch {
+        setError('Restaurant not found.');
+        setLoading(false);
+        return;
+      }
+      try {
+        const revRes = await api.get(`/reviews/restaurant/${id}`);
+        setReviews(revRes.data);
+      } catch {
+        // reviews failing shouldn't hide the restaurant
+      }
+      setLoading(false);
+    };
+    fetchData();
   }, [id]);
 
   // Hydrate favorites once per session so the heart icon reflects real state.
@@ -78,28 +80,27 @@ export default function RestaurantDetailPage() {
     }
   };
 
-  const toggleFavorite = () => {
-    if (!isAuthenticated) { navigate('/login'); return; }
-    if (favoritesLoading) return;
-    if (isFavorited) {
-      dispatch(removeFavorite(parseInt(id)));
-    } else {
-      dispatch(addFavorite(parseInt(id)));
-    }
-  };
-
   const handleDeleteReview = async (reviewId) => {
     if (!window.confirm('Delete this review?')) return;
-
     setDeletingReviewId(reviewId);
     setReviewActionError('');
     try {
       await api.delete(`/reviews/${reviewId}`);
-      await loadRestaurantData();
+      setReviews((prev) => prev.filter((r) => r.id !== reviewId));
     } catch (err) {
       setReviewActionError(err.response?.data?.detail || 'Failed to delete review.');
     } finally {
       setDeletingReviewId(null);
+    }
+  };
+
+  const toggleFavorite = () => {
+    if (!isAuthenticated) { navigate('/login'); return; }
+    if (favoritesLoading) return;
+    if (isFavorited) {
+      dispatch(removeFavorite(id));
+    } else {
+      dispatch(addFavorite(id));
     }
   };
 
@@ -126,8 +127,8 @@ export default function RestaurantDetailPage() {
     </div>
   );
 
-  const imgSrc = restaurant.photos?.[0] || PLACEHOLDER_IMAGES[restaurant.id % PLACEHOLDER_IMAGES.length];
-  const canWriteReview = !isOwner;
+  const _idx = restaurant.name ? restaurant.name.charCodeAt(0) % PLACEHOLDER_IMAGES.length : 0;
+  const imgSrc = restaurant.photos?.[0] || PLACEHOLDER_IMAGES[_idx];
 
   return (
     <div className="page fade-in">
@@ -173,7 +174,7 @@ export default function RestaurantDetailPage() {
                   disabled={claiming}
                   style={{ whiteSpace: 'nowrap' }}
                 >
-                  {claiming ? 'Claiming...' : <><Store size={14} /> Claim Restaurant</>}
+                  {claiming ? 'Claiming…' : <><Store size={14} /> Claim Restaurant</>}
                 </button>
               </div>
             )}
@@ -205,30 +206,29 @@ export default function RestaurantDetailPage() {
             <div>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 'var(--sp-md)' }}>
                 <h2 style={{ fontSize: '1.25rem' }}>Reviews ({reviews.length})</h2>
-                {canWriteReview ? (
+                {canWriteReview && (
                   <Link to={`/restaurants/${id}/review`} className="btn btn-primary btn-sm">
                     <PenLine size={14} /> Write a Review
                   </Link>
-                ) : (
-                  <span className="text-muted" style={{ fontSize: '0.875rem' }}>
-                    Owner accounts can&apos;t submit reviews
-                  </span>
                 )}
               </div>
-              {reviewActionError && <div className="alert alert-error">{reviewActionError}</div>}
+
+              {reviewActionError && (
+                <div className="alert alert-error" style={{ marginBottom: 'var(--sp-sm)' }}>{reviewActionError}</div>
+              )}
 
               {reviews.length === 0 ? (
                 <div className="empty-state" style={{ padding: 'var(--sp-xl)' }}>
-                  <p>{canWriteReview ? 'No reviews yet. Be the first!' : 'No customer reviews yet.'}</p>
+                  <p>No reviews yet. Be the first!</p>
                 </div>
               ) : (
                 reviews.map((rev) => (
                   <ReviewCard
                     key={rev.id}
                     review={rev}
-                    canDelete={isAuthenticated && rev.user_id === user?.id}
-                    deleting={deletingReviewId === rev.id}
+                    canDelete={isAuthenticated && user?.id === rev.user_id}
                     onDelete={() => handleDeleteReview(rev.id)}
+                    deleting={deletingReviewId === rev.id}
                   />
                 ))
               )}

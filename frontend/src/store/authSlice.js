@@ -56,7 +56,10 @@ export const loginUser = createAsyncThunk(
     } catch (err) {
       localStorage.removeItem('token');
       localStorage.removeItem('user');
-      return rejectWithValue(err.response?.data?.detail || 'Login failed');
+      const detail = err.response?.data?.detail;
+      return rejectWithValue(
+        Array.isArray(detail) ? detail.map((e) => e.msg).join(', ') : detail || 'Login failed'
+      );
     }
   }
 );
@@ -68,7 +71,10 @@ export const registerUser = createAsyncThunk(
       const res = await api.post('/auth/register', data);
       return res.data;
     } catch (err) {
-      return rejectWithValue(err.response?.data?.detail || 'Registration failed');
+      const detail = err.response?.data?.detail;
+      return rejectWithValue(
+        Array.isArray(detail) ? detail.map((e) => e.msg).join(', ') : detail || 'Registration failed'
+      );
     }
   }
 );

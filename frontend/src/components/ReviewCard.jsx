@@ -4,13 +4,11 @@ import { MEDIA_BASE_URL } from '../services/api';
 import { Trash2 } from 'lucide-react';
 
 export default function ReviewCard({ review, canDelete = false, onDelete, deleting = false }) {
-  const displayName = review.user_name || `User #${review.user_id}`;
+  const displayName = review.user_name || 'Anonymous';
   const initial = displayName.charAt(0).toUpperCase();
-  const date = new Date(review.created_at).toLocaleDateString('en-US', {
-    year: 'numeric',
-    month: 'short',
-    day: 'numeric',
-  });
+  const date = review.created_at
+    ? new Date(review.created_at).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })
+    : '';
 
   return (
     <div className="review-card fade-in">

@@ -8,3 +8,5 @@ bcrypt>=4.0.0
 python-multipart>=0.0.9
 confluent-kafka>=2.3.0
 python-dotenv>=1.0.0
+openai>=1.0.0
+tavily-python>=0.3.0
